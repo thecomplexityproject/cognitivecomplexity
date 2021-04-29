@@ -16,9 +16,36 @@ In the definition above, the set of characters `s` is supposed to be written in 
 >
 > A ***module*** is the code snippet containing all the characters of a given file.
 
+Assuming that every computer language integrates the concept of "line break", we can give the following definition :
+
 > **Definition**
 >
-> We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, D some data.
+> The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
+
+
+> **Definition**
+>
+> We call **S** the couple `(S, +)` where `S` is the set of all the possible code snippets of a given language and the additional operation `+` is defined by the concatenation operation.
+>
+> We call call **V** the subset of `(S, +)` defined by all the possible valid code snippets of a given language.
+
+**Remark**
+
+The concatenation of two code snippets is a code snippet, so the operation `+` is a function from (**S** x **S**) to **S**.
+```
++ : (S x S)              ->    S
+    'Hello' + ' world'   =     'Hello world'
+```
+
+> **Proposition**
+>
+> The operation `+` is an internal operation of **V**. In other words, if `s` and `t` are two valid code snippets, then `s + t` is a valid code snippet.
+>
+$\sum_{i=1}^n X_i$
+
+> **Definition**
+>
+> We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, and D some data.
 
 
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
@@ -29,7 +56,7 @@ In the definition above, the set of characters `s` is supposed to be written in 
 >
 > The term ***software*** refers to computer programs defined as the machine-readable instructions that direct the circuitry within the hardware parts of the system to function in ways that produce useful information from data.
 >
-> Thereafter, we will simply call ***program*** the set of machine-readable instructions of a given system.
+> Thereafter, we will simply call ***program*** the set of machine-readable instructions of a given system. In other words, the program is the set of the modules of the software.
 
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
