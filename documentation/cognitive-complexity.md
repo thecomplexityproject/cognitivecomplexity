@@ -15,12 +15,12 @@ This definition is simple to understand and clarifies what we should measure: a 
 These questions are studied in specific pages :
 
 * [The set of code snippets](code-snippets.md)
-* [The mean developer]
-* [The understanding]
+* [The mean developer](mean-developer.md)
+* [The understanding](understanding.md)
 
-With the help of these clarified concepts, we will be able to define experimental protocols which could be enough consensual to be used by the entire scientific community in the aim to collect comparable data.
+Thanks to the clarification of these concepts, we will be able to define experimental protocols which could be enough consensual to be used by the entire scientific community in the aim to collect comparable data.
 
-* [Experimental protocols]
+* [Experimental protocols](experimental-protocols.md)
 
 ## Propositions and conjectures
 
