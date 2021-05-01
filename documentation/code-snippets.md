@@ -25,9 +25,9 @@ Assuming that every computer language integrates the concept of "line break", we
 
 > **Definition**
 >
-> We call **S** the couple `(S, +)` where `S` is the set of all the possible code snippets of a given language and the additional operation `+` is defined by the concatenation operation.
+> We call **S** the couple `(S, +)` where `S` is the set of all the possible code snippets of a given language, and `+` is defined by the concatenation operation.
 >
-> We call call **V** the subset of `(S, +)` defined by all the possible valid code snippets of a given language.
+> We call **V** the subset of `(S, +)` defined by all the possible valid code snippets of a given language.
 
 **Remark**
 
@@ -39,8 +39,52 @@ The concatenation of two code snippets is a code snippet, so the operation `+` i
 
 > **Proposition**
 >
-> The operation `+` is an internal operation of **V**. In other words, if `s` and `t` are two valid code snippets, then `s + t` is a valid code snippet.
+> The operation `+` is not an internal operation of **V**. In other words, if `s` and `t` are two valid code snippets, then `s + t` may be a non-valid code snippet.
 >
+**Demonstration**
+
+In TypeScript, assume that we have the code snippets `s` and `t` below :
+
+```ts
+// Code snippet "s"
+let a = 2;
+
+// Code snippet "t"
+let a = 3;
+```
+
+The code snippet `s + t` is not valid :
+```ts
+// Code snippet "s + t"
+let a = 2;
+let a = 3;
+```
+**Remark**
+
+By contrast, the sum of two non-valid code snippets may be a valid code snippet.
+
+*Example in TypeScript*
+
+```ts
+// Code snippet "s"
+let a: number;
+let b: number;
+if (a > 0) {
+
+// Code snippet "t"
+b = 2; }
+```
+`s` and `t` are not valid TypeScript code, but `s + t` is valid :
+
+```ts
+// Code snippet "s + t"
+let a: number;
+let b: number;
+if (a > 0) { b = 2; }
+```
+
+
+
 
 > **Definition**
 >

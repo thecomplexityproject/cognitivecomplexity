@@ -14,7 +14,7 @@ The final goal of @TheComplexityProject is to develop an open-source module whic
 
 To be able to give some coherent values, we need at first define accurately the meaning of each word or concept we are using. These definitions must be enough consensual to be able to be used by everyone which wants to compare its experimental results with the other results obtained by the scientific community. When these concepts will be enough consensual, we will be able to collect massive data which will be able to be compared and obtain statistical results with high precision.
 
-The definitions and the results displayed in our [documentation](./documentation/README.md) are only the most consensual at this date and may be modified or detailed later, when more consensual definitions or more precise results will be provided by the different experiences.
+The definitions and the results displayed in our [documentation](./documentation/README.md) are only propositions which may be modified or detailed later, when more consensual definitions or more precise results will be provided by the different experiences.
 
 ## Articles
 
@@ -26,5 +26,5 @@ You will find here [the scientific articles](./articles/scientific/README.md) an
 
 The final goal of @TheComplexityProject is to develop an open-source module which will be able to audit any kind of code to analyze its cognitive complexity and its maintainability.
 
-This module already exists and was developed as part of the [@genese](https://github.com/geneseframework) project, which is an open-source project which is a tool suite providing the possibility to developers to increase their development speed and the quality of their code. The @genese module specific to the Cognitive Complexity is [@genese/complexity](https://github.com/geneseframework/complexity).
+This module already exists and was developed as part of the [@genese](https://github.com/geneseframework) project, which is an open-source tool suite providing the possibility to developers to increase their development speed and the quality of their code. The @genese module specific to the Cognitive Complexity is [@genese/complexity](https://github.com/geneseframework/complexity).
 
