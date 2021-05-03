@@ -1,88 +1,121 @@
+# Temp
+
 # The set of code snippets
 
 In the [cognitive complexity's definition](.cognitive-complexity.md), the concept which is the most well-defined seems to be the notion of *code snippet*. That's probably true, but that doesn't mean that we can neglect to define it accurately. To be able to obtain scientific results, we need at first define precisely each word that we use. What is a *code snippet* ? A *valid code snippet* ? A *program* ? A *system* ? The *state of a system* ? All of these notions are defined more or less accurately in many scientific articles, and their definitions are more or less consensual.
 
-In this project, we will explicit our own definitions of simple or complex notions. That doesn't mean that we think that they will be better than the others, but simply that everyone should know accurately what *we* talk about when we use one of these definitions.
+In this project, we will specify our own definitions of simple or complex notions. That doesn't mean that we think that they will be better than the others, but simply that everyone should know accurately what *we* talk about when we use one of these definitions.
 
 ## Table of contents
 
-* [Computer language](#computer-language)
+* [Programming language](#programming-language)
 * [Code snippets](#code-snippets)
+* [Addition of two code snippets](#addition-of-two-code-snippets)
+* [Propositions and conjectures](#propositions-and-conjectures)
+* [Systems](#systems)
 
 
+## Programming language
 
+In theoretical computer science, we usually start by defining what is a computer language. In our case, it is not enough general. Our aim goal is to measure the time required for a developer to understand a code snippet, but we also have in mind the idea to measure the time that he will need to debug some program.
 
-## Computer language
+How to debug a program, in the real world ? At first, simply by opening files, read them, and try to understand them. Each file is a document containing a text which may have different parts written in different languages. For example, a file may include some `html`, `javascript` and `php` code. That's why, when we'll need to define what is a bug and how to measure the debugging time, we will need a concept larger than a *programming language*. 
 
-Let's start by the beginning: the definition of a computer language :
+In fact, the reality is simple: when a developer opens a file, we only know he that a *text* to read. 
 
 > **Definition**
 >
-> A ***computer language*** is defined by an alphabet, a vocabulary, [syntactic rules](https://en.wikipedia.org/wiki/Programming_language#Syntax) and [semantic rules](https://en.wikipedia.org/wiki/Programming_language#Semantics).
+> A ***text*** is a finite set of ordered individual elements, which are the ***characters*** of the text.
 
-Now, we can define what is a *code snippet*.
+* Example
+
+In the text below, `a`, `b` and `c` are characters, but not `ab`, which is not individual: it can be split in `a` + `b`.
+
+```ts
+ab c
+```
+
+Now, let's remind the main concepts of theoretical computer science :
+
+> **Definition**
+>
+> A ***programming language*** is a formal language comprising a set of instructions that produce various kinds of output.
+
+The ***alphabet*** of a formal language consists of symbols, letters, or tokens that concatenate into strings of the language. Each string concatenated from symbols of this alphabet is called a ***word***, and the words that belong to a particular formal language are sometimes called ***well-formed words*** or well-formed formulas. 
+
+A formal language is often defined by means of a formal grammar:
+
+> **Definition**
+>
+> A ***formal language*** describes how to form strings from a language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form. 
+> 
+> A formal grammar is defined as a set of production rules for strings in a formal language.
+
+> **Definition**
+>
+> The ***syntax*** of a computer language is the set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language.
+
+Now, we can define what is a *code snippet*:
 
 
 
 
 
-
+[-> Top](#the-set-of-code-snippets)
 ## Code snippets
 
 > **Definition**
 >
-> A ***code snippet*** is a couple `(s, L)` where `s` is a set of ordered characters of the alphabet of a given computer language `L`.
+> A ***code snippet*** is a couple `(s, L)` where `s` is a [text](#programming-language) and `L` a given [programming language](#programming-language).
 
-Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)`. It will be implicit that a code snippet refers to some computer language `L`.
-
-* Example
-
-The code below is written in the TypeScript alphabet, so it is a code snippet with the definition above.
-```ts
-// Code snippet s
-ab!z"{-a] =(r|x
-```
+Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)`. It will be implicit that a code snippet refers to some computer language `L`. Furthermore, a code snippet is supposed to be written in a single file.
 
 **Remark**
 
-In the definition above, the set of characters `s` is supposed to be written in only one document (a file).
-
-> **Definition**
->
-> A ***valid code snippet*** is a code snippet `(s, L)` where `s` respects the vocabulary and the syntactic rules of `L`.
+A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`.
 
 * Example
 
-The code below is written in the TypeScript vocabulary and respects its syntax, so it is a valid code snippet.
+With the definition above, this is a TypeScript code snippet.
+```ts
+// Code snippet s
+ab!z"{-a] =(r|€x
+```
+
+Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
+
+> **Definition**
+>
+> A ***file*** is a quadruplet (p, n, t, L) where `p` represents its path, `n` its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
+
+**Remark**
+
+Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
+
+
+> **Definition**
+>
+> A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`.
+>
+> A ***context-free valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`.
+
+* Example
+
 ```ts
 // Code snippet t
 if (a > 0) {
     a = a + 1;
 }
 ```
+`t` is a *context-free valid code snippet*, but not a *context-sensitive valid code snippet*, because `a` is not defined in `t`.
 
 > **Definition**
 >
-> An ***executable code snippet*** is a valid code snippet `(s, L)` where `s` respects the semantic rules of `L`.
-
-* Example
-
-The code below is written in the TypeScript vocabulary and respects its syntax, so it is a valid code snippet.
-```ts
-// Code snippet u
-let a: number;
-if (a > 0) {
-    a = a + 1;
-}
-```
-
-**Remark**
-
-The code snippet `t` above is not an executable code snippet because the variable `a` was not defined before the line `if (a > 0)`.
+> For the sake of simplification, we will simply call ***valid code snippet*** a *context-free valid code snippet*.
 
 > **Definition**
 >
-> A ***module*** is the code snippet containing all the characters of a given file.
+> Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
 
 Assuming that every computer language integrates the concept of "line break", we can give the following definition :
 
@@ -96,6 +129,7 @@ Assuming that every computer language integrates the concept of "line break", we
 
 
 
+[-> Top](#the-set-of-code-snippets)
 ## Addition of two code snippets
 
 > **Definition**
@@ -174,6 +208,7 @@ if (a > 0) { b = 2; }
 
 
 
+[-> Top](#the-set-of-code-snippets)
 ## Propositions and conjectures
 
 
@@ -235,6 +270,7 @@ This result is probably non-demonstrable without experiences in the real world, 
 
 
 
+[-> Top](#the-set-of-code-snippets)
 ## Systems
 
 > **Definition**
@@ -267,5 +303,5 @@ By nature, a system evolves over time as a result of the current processes runni
 >
 > The ***state of the system*** `S` is the couple `(D, P)` where `D` represents the data of the system and `P` the set of processes running at a time `t`.
 
-
+With this definition, we are now able to accurate what is the *[understanding](understanding.md)* in our definition of the [cognitive complexity](cognitive-complexity.md)
 
