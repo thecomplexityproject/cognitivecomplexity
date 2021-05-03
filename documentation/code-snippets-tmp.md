@@ -66,9 +66,13 @@ Now, we can define what is a *code snippet*:
 
 > **Definition**
 >
-> A ***code snippet*** is a couple `(s, L)` where `s` is a [text](#programming-language) and `L` a given [programming language](#programming-language).
+> A ***code snippet*** is a couple `(s, L)` where `s` is a [text](#programming-language) and `L` a [programming language](#programming-language).
 
 Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)`. It will be implicit that a code snippet refers to some computer language `L`. Furthermore, a code snippet is supposed to be written in a single file.
+
+**Remark**
+
+By convention, even if `s` is the empty string `''`, the couple `(s, L)` is also a code snippet.
 
 **Remark**
 
@@ -76,11 +80,11 @@ A code snippet may be valid or not. It even may contains characters which are no
 
 * Example
 
-With the definition above, this is a TypeScript code snippet.
 ```ts
 // Code snippet s
 ab!z"{-a] =(r|€x
 ```
+With the definition above, the couple (`s`, `TypeScript`) is a code snippet, even if it's not a valid TypeScript code.
 
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
 
@@ -130,15 +134,17 @@ Assuming that every computer language integrates the concept of "line break", we
 
 
 [-> Top](#the-set-of-code-snippets)
-## Addition of two code snippets
+## Operations on code snippets
+
+### Addition
 
 > **Definition**
 >
-> We call **S** the couple `(S, +)` where `S` is the set of all the possible code snippets of a given language, and `+` is defined by the concatenation operation.
+> We call **S<sub>L</sub>** the set of the code snippets of a given formal language `L` with the concatenation operation noted `+`.
 >
-> We call **V** the subset of `(S, +)` defined by all the possible valid code snippets of a given language.
+> We call **V<sub>L</sub>** the subset of **S<sub>L</sub>** defined by the set of the code snippets of a given formal language `L` with the concatenation operation noted `+`.
 >
-> We call **E** the subset of `(V, +)` defined by all the possible executable code snippets of a given language.
+> We call **V<sub>L</sub>**<sup>*</sup> the subset of **V<sub>L</sub>** defined by the set of the context-sensitive code snippets of a given formal language `L` with the concatenation operation noted `+`.
 
 **Remark**
 
