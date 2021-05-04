@@ -4,6 +4,15 @@ The definition of the [cognitive complexity](./cognitive-complexity.md) uses the
 
 At first, our goal is not to define what is *understanding* in all the situations where this word can be used, but only in the context of the *software understanding*. Our aim is to define the *understanding* relatively to a [code snippet](code-snippets.md), not in other situations.
 
+## Table of contents
+
+* [Where is the problem ?](#where-is-the-problem-)
+* [Definition of *understanding*](#definition-of-understanding)
+* [Minimal cognitive complexity](#minimal-cognitive-complexity)
+* [Refactoring](#refactoring)
+    * [Definition of refactoring](#definition-of-refactoring)
+    * [Refactoring methods to decrease the cognitive complexity](#refactoring-methods-to-decrease-the-cognitive-complexity)    
+
 ## Where is the problem ?
 
 Let's begin by a simple example. 
@@ -20,23 +29,14 @@ What means exactly to *understand* this code snippet ? Is it to understand what 
 
 In reality, the two kinds of definitions are interesting. In the first one, we say that a developer understands the ***signified*** of the written instructions, and in the other case we say that he understands the ***significant*** of these instructions, *i.e.* what means every word of the code snippet.
 
-## Roles and features
+## Definition of *understanding*
+
 
 > **Definition**
 >
-> A ***role*** is a description of a possible modification of the [state of the system](code-snippets.md).
+> A developer ***understands the role of a code snippet*** `s` if he is able to predict what will be the modifications to the [state of the system](systems.md#definitions) when some part of `s` will be executed by a given [process](systems.md#definitions) `p`. We say that `s` is an ***implementation*** of ÷≠its role.
 > 
-> The ***role of a code snippet*** is a description of its possible impact on the state of the system.
-
-The *role of a code snippet* `s` could be interpreted as the ***signified*** of `s`.
-
-**Remark**
-
-Multiple code snippets may have the same role.
-
-> **Definition**
->
-> A developer ***understands the role of a code snippet*** `s` if he is able to predict what will be the modifications to the [state of the system](code-snippets.md#systems) when some part of `s` will be executed by a given [process](code-snippets.md#systems) `p`.
+> We note ***c<sub>r</sub>*** the cognitive complexity metric which assigns to a given code snippet the time needed to understand its role. 
 
 With the previous example, this definition means that a developer understands that when the function `multiplyByTwo` will be called, the piece of code of the system which called this function with a parameter `a` will receive in return the double of `a`.
 
@@ -96,27 +96,17 @@ The comments and the names of the identifiers are probably the most important pa
 In conclusion, we just need to remember that the understanding of the role of the code is important in the aim to understand *other* code snippets (and debug them easier).
 
 > **Definition**
-> 
-> A ***feature*** is a functionality provided by the [system](code-snippets.md) to the users.
+>
+> A developer ***understands*** a code snippet `s` if he understands the role of each code snippet included in `s` (including `s` itself).
 
+**Remark**
 
+A code snippet containing more than one [string](code-snippets-tmp.md#code-snippets)
 
-## Implementation
 
 > **Definition**
 >
-> An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are mandatory to provide this feature to the user.
->
-> By extension, we say that a code snippet implements a given role when the modification of the [state of the system](code-snippets.md) is described by this role.
-
-**Trivial remarks**
-
-* The set of the implementations of a given role is infinite. 
-* The set of the implementations of a given feature is infinite.
-
-> **Definition**
->
-> A developer ***understands the implementation*** of a code snippet `s` if he is able to understand the role of each code snippet included in `s`.
+> A developer ***understands*** a code snippet `s` if he is able to understand the role of each code snippet included in `s`.
 
 Now, we are able to define exactly what the verb *understand* means in the definition of the [cognitive complexity](cognitive-complexity.md):
 
@@ -131,25 +121,63 @@ function f(a: number): number {
 
 When the developer reads the first line, he can't understand its role. After reading the second and the third line, he will understand the role of these two lines, but also the role of the first one (the function itself). At the end, he will understand everything: the role of `s` and the role of each of its parts.
 
-> **Definition**
-> 
-> A developer ***understands*** a code snippet if he understands its role and its implementation.
+**Remark**
 
+This definition doesn't imply that the cognitive complexity of a code snippet is the sum of the duration needed to understand its role, and the duration needed to understand its implementation. In the example above, 
+
+[-> Top](#the-understanding)
 ## Minimal cognitive complexity
 
 > **Definition**
 > 
-> The ***minimal cognitive complexity*** of a role `r` is the lower limit of the cognitive complexities of the set of code snippets implementing `r`.
+> Let `s` a valid code snippet and `b` its behavior.
+> The ***minimal cognitive complexity*** of `b` is the lower limit of the cognitive complexities of the set of code snippets having this behavior.
 
 
-
+[-> Top](#the-understanding)
 ## Refactoring
 
+### Definition of refactoring
 
 > **Definition**
-> The ***refactoring*** is the action to transform a code snippet `s` in a code snippet `t` which has the same role as `s`.
+> 
+> The ***refactoring*** is the action to transform a valid code snippet `s` in one or multiple valid code snippets *t<sub>1</sub>, ... t<sub>n</sub>* which collectively have the same behavior as `s`. The refactoring is an operation from **[V](code-snippets-tmp.md#valid-code-snippets)** to **V**<sup>n</sup>.
+> 
+> *r: (s ∈ V) -> (t<sub>1</sub>, ... t<sub>n</sub> ∈ V<sup>n</sup>)*
 > 
 > By extension, the refactoring of a feature is the action to transform a feature `f` in a feature `g` which provides the same functionalities to the users.
+
+
+### Simplifications
+
+> **Definition**
 >
+> A ***simplification*** of a valid code snippet `s` is a refactoring `r` as `c(r(s)) < c(s)`, where `c` is the cognitive complexity metric. We say that `s` was ***simplified***.
+
+> **Proposition**
+> 
+> Some code snippets may be simplified.
+
+**Demonstration**
+
+Let `s` the code snippet below:
+
+```ts
+// Code snippet s
+if (a > 0) { return; }
+if (a > 0) { return; }
+```
+The second line is a dead code, so we can remove it without changing the behavior of the program.
+
+```ts
+// Code snippet s'
+if (a > 0) { return; }
+```
+
+The role of `s'` is the same as `s`, so the operation `r: s -> s'` is a refactoring. The second line of `s` was not empty, and any non-empty code snippet is strictly higher than 0. Thus, by removing the second line of `s`, we decreased its cognitive complexity. If we call `c` the cognitive complexity metric, we have
+
+`c(r(s)) < c(s)`
+
+This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. We can now try to find useful [simplification technics](simplifications.md)
 
 
