@@ -9,6 +9,10 @@ In this project, we will specify our own definitions of simple or complex notion
 
 * [Programming language](#programming-language)
 * [Code snippets](#code-snippets)
+  * [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
+  * [Roles](#roles)
+  * [Bugs](#bugs)
+  * [Features](#features)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#addition)
 
@@ -53,6 +57,10 @@ A formal language is often defined by means of a formal grammar:
 >
 > The ***syntax*** of a computer language is the set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language.
 
+**Remark**
+
+There is a usual debate about the belonging of the markup languages -like HTML- in the set of the formal languages. We will not enter this debate, but as the markup files must be red and understood by developers, they are relevant for the cognitive complexity theory. Thus, we will include them in this set.
+
 Now, we can define what is a *code snippet*:
 
 
@@ -62,6 +70,8 @@ Now, we can define what is a *code snippet*:
 [-> Top](#the-set-of-code-snippets)
 ## Code snippets
 
+### Basic definitions around code snippets
+
 > **Definition**
 >
 > A ***code snippet*** is a couple `(s, L)` where `s` is a [text](#programming-language) and `L` a [programming language](#programming-language).
@@ -70,7 +80,7 @@ Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)
 
 **Remark**
 
-By convention, even if `s` is the empty string `''`, the couple `(s, L)` is also a code snippet.
+By convention, if `s` is an empty string, the couple `(s, L)` is considered as a code snippet and noted `''`.
 
 **Remark**
 
@@ -85,6 +95,36 @@ ab!z"{-a] =(r|€x
 With the definition above, the couple (`s`, `TypeScript`) is a code snippet, even if it's not a valid TypeScript code.
 
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
+
+> **Definition**
+>
+> A ***separator*** is an invisible character. Tha characters which are not separators are called the ***visible characters***.
+
+For example, whitespaces, tabulations and line breaks are separators.
+
+**Remark**
+
+The separators are usually not included in the formal language itself.
+
+> **Proposition**
+> 
+> The cognitive complexity of a separator may be null or non-null. 
+
+**Demonstration**
+
+* *May be null:* 
+  
+In Javascript, a whitespace at the end of a line of code is not visible and has no effect on the behavior due to the code snippet. Consequently, the developer will not need it to understand the code snippet. Thus, the cognitive complexity of this whitespace is equal to 0.
+
+* *May be non-null:* 
+  
+The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.  
+
+> **Definition**
+>
+> A ***string*** is an ordered set of visible characters of a given code snippet.
+
+
 
 > **Definition**
 >
@@ -126,7 +166,56 @@ Assuming that every computer language integrates the concept of "line break", we
 >
 > The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
 
+[-> Top](#the-set-of-code-snippets)
+### Roles
 
+> **Definition**
+>
+> A ***behavior of a system*** is a description of a modification of its [state](code-snippets.md).
+>
+> The ***behavior*** of a code snippet `s` is the real behavior of the system when a process reads some instructions of `s`.
+
+
+> **Definition**
+>
+> The ***role of a code snippet*** is a description of its supposed behavior.
+
+The *role of a code snippet* `s` could be interpreted as the ***signified*** of `s`.
+
+The *supposed behavior* of a code snippet is usually composed by the comments relative to it, and by the name of the identifiers accessibles to other code snippets.
+
+**Remark**
+
+Multiple code snippets may have the same role.
+
+[-> Top](#the-set-of-code-snippets)
+### Bugs
+
+> **Definition**
+>
+> A code snippet has a ***bug*** when its supposed behavior is different from its role.
+
+
+[-> Top](#the-set-of-code-snippets)
+### Features
+
+> **Definition**
+>
+> A ***feature*** is a set of functionalities provided by the [system](code-snippets.md) to the users.
+
+
+> **Definition**
+>
+> An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are mandatory to provide this feature to the user.
+>
+> We note ***c<sub>i</sub>*** the cognitive complexity metric which assigns to a given code snippet the time needed to understand its implementation.
+>
+> By extension, we say that a code snippet implements a given role when the modification of the [state of the system](code-snippets.md) is described by this role.
+
+**Trivial remarks**
+
+* The set of the implementations of a given role is infinite.
+* The set of the implementations of a given feature is infinite.
 
 
 
@@ -136,7 +225,7 @@ Assuming that every computer language integrates the concept of "line break", we
 
 ### Addition
 
-#### Definitions
+#### Definition of the addition
 > **Definition**
 >
 > We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.

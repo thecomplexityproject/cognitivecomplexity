@@ -35,10 +35,11 @@ Other results are probably true, but must be calculated or measured in the real 
 
 * [Where is the problem ?](understanding.md#where-is-the-problem-)
 * [Roles and features](understanding.md#roles-and-features)
-  * [Definitions](understanding.md#definitions)
+  * [Definitions](understanding.md#definitions-of-roles-and-features)
   * [Implementation](understanding.md#implementation)
 * [Minimal cognitive complexity](understanding.md#minimal-cognitive-complexity)
 * [Refactoring](understanding.md#refactoring)
+  * [Definition of refactoring](understanding.md#definition-of-refactoring)   
 
 ### The mean developer
 
