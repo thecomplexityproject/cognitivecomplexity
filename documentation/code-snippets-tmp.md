@@ -74,9 +74,9 @@ Now, we can define what is a *code snippet*:
 
 > **Definition**
 >
-> A ***code snippet*** is a couple `(s, L)` where `s` is a [text](#programming-language) and `L` a [programming language](#programming-language).
+> A ***code snippet*** is a triplet `(s, L, S)` where `s` is a [text](#programming-language), `L` a [programming language](#programming-language) and `S` a given [system](systems.md).
 
-Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)`. It will be implicit that a code snippet refers to some computer language `L`. Furthermore, a code snippet is supposed to be written in a single file.
+Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L, S)`. It will be implicit that a code snippet refers to some computer language `L` and to the system containing `s`. Furthermore, a code snippet is supposed to be written in a single file.
 
 **Remark**
 
@@ -125,7 +125,6 @@ The tabulations are visually not distinguishable with a set of whitespaces (usua
 > A ***string*** is an ordered set of visible characters of a given code snippet.
 
 
-
 > **Definition**
 >
 > A ***file*** is a quadruplet (p, n, t, L) where `p` represents its path, `n` its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
@@ -134,6 +133,7 @@ The tabulations are visually not distinguishable with a set of whitespaces (usua
 
 Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
 
+### Valid code snippets
 
 > **Definition**
 >
@@ -170,19 +170,15 @@ Assuming that every computer language integrates the concept of "line break", we
 ### Roles
 
 > **Definition**
->
-> A ***behavior of a system*** is a description of a modification of its [state](code-snippets.md).
->
-> The ***behavior*** of a code snippet `s` is the real behavior of the system when a process reads some instructions of `s`.
+> 
+> The ***behavior*** of a code snippet `s` is the [behavior of the system](systems.md) when a process executes some instructions of `s`.
 
 
 > **Definition**
 >
 > The ***role of a code snippet*** is a description of its supposed behavior.
 
-The *role of a code snippet* `s` could be interpreted as the ***signified*** of `s`.
-
-The *supposed behavior* of a code snippet is usually composed by the comments relative to it, and by the name of the identifiers accessibles to other code snippets.
+The *supposed behavior* of a code snippet is usually composed by the comments relative to it, and by the name of its [public elements].
 
 **Remark**
 
@@ -193,8 +189,15 @@ Multiple code snippets may have the same role.
 
 > **Definition**
 >
-> A code snippet has a ***bug*** when its supposed behavior is different from its role.
+> A code snippet has a ***bug*** when its supposed behavior is different from its real behavior.
 
+**Remark**
+
+By convention, we will suppose that any non-valid code snippet has a bug.
+
+> **Definition**
+>
+> A ***bug fix*** is an operation from **S** to **V** which transforms a code snippet `s` having some bug in a code snippet `s'` which has a behavior equal to the supposed behavior of `s`.
 
 [-> Top](#the-set-of-code-snippets)
 ### Features
@@ -207,10 +210,6 @@ Multiple code snippets may have the same role.
 > **Definition**
 >
 > An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are mandatory to provide this feature to the user.
->
-> We note ***c<sub>i</sub>*** the cognitive complexity metric which assigns to a given code snippet the time needed to understand its implementation.
->
-> By extension, we say that a code snippet implements a given role when the modification of the [state of the system](code-snippets.md) is described by this role.
 
 **Trivial remarks**
 

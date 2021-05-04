@@ -33,5 +33,8 @@ By nature, a system evolves over time as a result of the current processes runni
 >
 > The ***state of the system*** `S` is the couple `(D, P)` where `D` represents the data of the system and `P` the set of processes running at a time `t`.
 
-With this definition, we are now able to accurate what is the *[understanding](understanding.md)* in our definition of the [cognitive complexity](cognitive-complexity.md)
 
+> **Definition**
+>
+> The ***behavior of a system*** is a description of a modification of its state during the execution of a given process.
+ 

@@ -130,7 +130,8 @@ This definition doesn't imply that the cognitive complexity of a code snippet is
 
 > **Definition**
 > 
-> The ***minimal cognitive complexity*** of a role `r` is the lower limit of the cognitive complexities of the set of code snippets implementing `r`.
+> Let `s` a valid code snippet and `b` its behavior.
+> The ***minimal cognitive complexity*** of `b` is the lower limit of the cognitive complexities of the set of code snippets having this behavior.
 
 
 [-> Top](#the-understanding)
@@ -140,19 +141,22 @@ This definition doesn't imply that the cognitive complexity of a code snippet is
 
 > **Definition**
 > 
-> The ***refactoring*** is the action to transform a code snippet `s` in a code snippet `t` which has the same role as `s`. The refactoring is an internal operation on the set **S** of the code snippets.
+> The ***refactoring*** is the action to transform a valid code snippet `s` in one or multiple valid code snippets *t<sub>1</sub>, ... t<sub>n</sub>* which collectively have the same behavior as `s`. The refactoring is an operation from **[V](code-snippets-tmp.md#valid-code-snippets)** to **V**<sup>n</sup>.
+> 
+> *r: (s ∈ V) -> (t<sub>1</sub>, ... t<sub>n</sub> ∈ V<sup>n</sup>)*
 > 
 > By extension, the refactoring of a feature is the action to transform a feature `f` in a feature `g` which provides the same functionalities to the users.
 
-**Remark**
 
+### Simplifications
 
-
-### Refactoring methods to decrease the cognitive complexity
+> **Definition**
+>
+> A ***simplification*** of a valid code snippet `s` is a refactoring `r` as `c(r(s)) < c(s)`, where `c` is the cognitive complexity metric. We say that `s` was ***simplified***.
 
 > **Proposition**
 > 
-> A refactoring may decrease the cognitive complexity of a code snippet.
+> Some code snippets may be simplified.
 
 **Demonstration**
 
@@ -174,7 +178,6 @@ The role of `s'` is the same as `s`, so the operation `r: s -> s'` is a refactor
 
 `c(r(s)) < c(s)`
 
-This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet.
+This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. We can now try to find useful [simplification technics](simplifications.md)
 
-#### Explicit the role of a code snippet
 
