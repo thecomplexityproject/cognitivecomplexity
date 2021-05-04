@@ -22,6 +22,8 @@ In reality, the two kinds of definitions are interesting. In the first one, we s
 
 ## Roles and features
 
+### Definitions
+
 > **Definition**
 >
 > A ***role*** is a description of a possible modification of the [state of the system](code-snippets.md).
@@ -101,7 +103,7 @@ In conclusion, we just need to remember that the understanding of the role of th
 
 
 
-## Implementation
+### Implementation
 
 > **Definition**
 >

@@ -10,8 +10,7 @@ In this project, we will specify our own definitions of simple or complex notion
 * [Programming language](#programming-language)
 * [Code snippets](#code-snippets)
 * [Operations on code snippets](#operations-on-code-snippets)
-* [Propositions and conjectures](#propositions-and-conjectures)
-* [Systems](#systems)
+  * [Addition](#addition)
 
 
 ## Programming language
@@ -137,6 +136,7 @@ Assuming that every computer language integrates the concept of "line break", we
 
 ### Addition
 
+#### Definitions
 > **Definition**
 >
 > We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
@@ -202,7 +202,7 @@ let a: number;
 // Code snippet "t"
 if (a > 0) { a = a + 1; }
 ```
-`s` is valid and `t` is not context-sensitive valid, and `s + t` is context-sensitive valid :
+`s` is valid and `t` is not context-sensitive valid, but `s + t` is context-sensitive valid :
 
 ```ts
 // Code snippet "s + t"
@@ -212,10 +212,8 @@ if (a > 0) { a = a + 1; }
 
 
 
-
-
 [-> Top](#the-set-of-code-snippets)
-## Propositions and conjectures
+#### Propositions and conjectures
 
 
 > **Conjecture**
@@ -267,47 +265,10 @@ let a = 2;
 let b = 3;
 ```
 
-In this case, the second line is independent of the first one, so we maybe have `c(s + t) = c(s) + c(t)`, but we could also think that when you read the second line, even if there is no dependance with the first one, you must *remember* that there is no dependence... And so, we could again have `c(s + t) > c(s) + c(t)`.
+In this case, the second line is independent of the first one, so we maybe have `c(s + t) = c(s) + c(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `c(s + t) > c(s) + c(t)`.
 
-This result is probably non-demonstrable without experiences in the real world, with enough statistical data to obtain a highly accurate result. That's why we call it a *conjecture* and not a *proposition*.
-
-
+This result is probably non-demonstrable without experiences in the real world, with enough statistical data to obtain a highly accurate result. It is a *conjecture* and not a *proposition*.
 
 
 
-
-[-> Top](#the-set-of-code-snippets)
-## Systems
-
-> **Definition**
->
-> We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, and D some data.
-
-
-> **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
->
-> The term ***hardware*** refers to machinery and equipment. In a modern information system, this category includes the computer itself and all of its support equipment. The support equipment includes input and output devices, storage devices and communications devices.
-
-> **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
->
-> The term ***software*** refers to computer programs defined as the machine-readable instructions that direct the circuitry within the hardware parts of the system to function in ways that produce useful information from data.
->
-> Thereafter, we will simply call ***program*** the set of machine-readable instructions of a given system. In other words, the program is the set of the modules of the software.
-
-> **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
->
-> ***Data*** are facts that are used by systems to produce useful information. In modern information systems, data are generally stored in machine-readable form on disk until the computer needs them.
-
-By nature, a system evolves over time as a result of the current processes running on it, and because of the eventual inputs received from out of the system.
-
-> **Definition**
->
-> A ***process*** is a triplet `(S, l, p)` where `l` is the instruction currently executed by a processor `p` in a given system `S`.
-
-
-> **Definition**
->
-> The ***state of the system*** `S` is the couple `(D, P)` where `D` represents the data of the system and `P` the set of processes running at a time `t`.
-
-With this definition, we are now able to accurate what is the *[understanding](understanding.md)* in our definition of the [cognitive complexity](cognitive-complexity.md)
 
