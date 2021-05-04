@@ -1,8 +1,7 @@
-# Temp
 
 # The set of code snippets
 
-In the [cognitive complexity's definition](.cognitive-complexity.md), the concept which is the most well-defined seems to be the notion of *code snippet*. That's probably true, but that doesn't mean that we can neglect to define it accurately. To be able to obtain scientific results, we need at first define precisely each word that we use. What is a *code snippet* ? A *valid code snippet* ? A *program* ? A *system* ? The *state of a system* ? All of these notions are defined more or less accurately in many scientific articles, and their definitions are more or less consensual.
+In the [cognitive complexity's definition](cognitive-complexity.md), the concept which is the most well-defined seems to be the notion of *code snippet*. That's probably true, but that doesn't mean that we can neglect to define it accurately. To be able to obtain scientific results, we need at first define precisely each word that we use. What is a *code snippet* ? A *valid code snippet* ? A *program* ? A *system* ? The *state of a system* ? All of these notions are defined more or less accurately in many scientific articles, and their definitions are more or less consensual.
 
 In this project, we will specify our own definitions of simple or complex notions. That doesn't mean that we think that they will be better than the others, but simply that everyone should know accurately what *we* talk about when we use one of these definitions.
 
@@ -10,7 +9,7 @@ In this project, we will specify our own definitions of simple or complex notion
 
 * [Programming language](#programming-language)
 * [Code snippets](#code-snippets)
-* [Addition of two code snippets](#addition-of-two-code-snippets)
+* [Operations on code snippets](#operations-on-code-snippets)
 * [Propositions and conjectures](#propositions-and-conjectures)
 * [Systems](#systems)
 
@@ -140,15 +139,19 @@ Assuming that every computer language integrates the concept of "line break", we
 
 > **Definition**
 >
-> We call **S<sub>L</sub>** the set of the code snippets of a given formal language `L` with the concatenation operation noted `+`.
+> We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>** the subset of **S<sub>L</sub>** defined by the set of the code snippets of a given formal language `L` with the concatenation operation noted `+`.
+> We call **V<sub>L</sub>** the subset of **S<sub>L</sub>** defined by the set of the *valid code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>**<sup>*</sup> the subset of **V<sub>L</sub>** defined by the set of the context-sensitive code snippets of a given formal language `L` with the concatenation operation noted `+`.
+> We call **V<sub>L</sub>**<sup>*</sup> the subset of **V<sub>L</sub>** defined by the set of the *context-sensitive code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+
+**Notation**
+
+For the sake of simplification, when the specification of the language is not needed, we will simply note **S**, **V** and **V**<sup>*</sup> the sets of code snippets, valid code snippets and context-sensitive code snippets of an implicit programming language **L**. 
 
 **Remark**
 
-The concatenation of two code snippets is a code snippet, so the operation `+` is a function from (**S** x **S**) to **S**.
+The concatenation of two code snippets is a code snippet, so the operation `+` is an internal operation of **S**.
 ```
 + : (S x S)              ->    S
     'Hello' + ' world'   =     'Hello world'
@@ -165,7 +168,7 @@ This result is trivial : if `s` and `t` are two code snippets respecting syntact
 
 > **Proposition**
 >
-> The operation `+` is not an internal operation of **E**: if `s` and `t` are two executable code snippets, then `s + t` may not be executable.
+> The operation `+` is not an internal operation of **V**<sup>*</sup>: if `s` and `t` are two executable code snippets, then `s + t` may not be executable.
 >
 **Demonstration**
 
@@ -179,7 +182,7 @@ let a = 2;
 let a = 3;
 ```
 
-The code snippet `s + t` is not valid, because the variable `a` will be declared two times :
+The code snippet `s + t` is not context-sensitive valid, because the variable `a` is declared two times :
 ```ts
 // Code snippet s + t
 let a = 2;
@@ -188,26 +191,23 @@ let a = 3;
 
 **Remark**
 
-By contrast, the sum of two non-executable code snippets may be an executable code snippet.
+By contrast, the sum of a valid code snippet with a non-context-sensitive valid code snippet may be a valid code snippet.
 
 *Example in TypeScript*
 
 ```ts
 // Code snippet "s"
 let a: number;
-let b: number;
-if (a > 0) {
 
 // Code snippet "t"
-b = 2; }
+if (a > 0) { a = a + 1; }
 ```
-`s` and `t` are valid but not executable, and `s + t` is valid :
+`s` is valid and `t` is not context-sensitive valid, and `s + t` is context-sensitive valid :
 
 ```ts
 // Code snippet "s + t"
 let a: number;
-let b: number;
-if (a > 0) { b = 2; }
+if (a > 0) { a = a + 1; }
 ```
 
 
