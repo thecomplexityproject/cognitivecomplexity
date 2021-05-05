@@ -7,11 +7,12 @@ At first, our goal is not to define what is *understanding* in all the situation
 ## Table of contents
 
 * [Where is the problem ?](#where-is-the-problem-)
-* [Definition of *understanding*](#definition-of-understanding)
+* [Understanding of external references](#understanding-of-external-references)
+* [Understanding of valid code snippets](#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](#minimal-cognitive-complexity)
 * [Refactoring](#refactoring)
     * [Definition of refactoring](#definition-of-refactoring)
-    * [Refactoring methods to decrease the cognitive complexity](#refactoring-methods-to-decrease-the-cognitive-complexity)    
+    * [Refactoring methods to decrease the cognitive complexity](#simplifications)    
 
 ## Where is the problem ?
 
@@ -47,7 +48,7 @@ This definition doesn't mean that a developer understands an external reference 
 
 > **Definition**
 >
-> A developer ***understands a valid code snippet*** `s` if he understands the role of each [external reference](code-snippets-tmp.md#roles) located in `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the external references are correct.
+> A developer ***understands a context-sensitive valid code snippet*** `s` if he understands the role of each [external reference](code-snippets-tmp.md#roles) located in `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the external references are correct.
 
 * Example
 
@@ -60,20 +61,20 @@ function getBill(article: Article): number {
 }
 ```
 
-A developer *understands* `s` if he understands that:
+A developer *understands* `s` if he understands that
 
-- it is a function called `getBill` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
+- `s` represents a function called `getBill` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
 - `getPrice()` is a method of the class `Article` which will return the price of the article.
 - `VAT_RATE` is the vat rate to use
 - the returned value is the price of the article including the vat
 
-*AND* if the author of `Article`, `getPrice()` and `VAT_RATE` thought that:
+**AND** if the author of the implementation of `Article`, `getPrice()` and `VAT_RATE` thought that:
 
 - the role of `Article` is to represent an article
 - the role of `getPrice()` is to return the price of an article without vat
 - the role of `VAT_RATE` is to give the value of the vat rate.
 
-What kind of errors could happen when a developer reads this code snippet ?
+What kind of errors may happen when a developer reads this code snippet ?
 
 * There is a difference between the role thought by the author of the external references, and the role imagined by the reader (misunderstanding between the author and the reader, maybe because of a *low quality level of the description* of the references)
 * The reader understands correctly the role of the external references as thought by their author, but these references have a behavior in contradiction with their supposed role (the *author* made an error)
@@ -132,6 +133,8 @@ The role of `s'` is the same as `s`, so the operation `r: s -> s'` is a refactor
 
 `c(r(s)) < c(s)`
 
-This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. We can now try to find useful [simplification technics](simplifications.md).
+This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. 
+
+We can now try to find useful [simplification technics](simplifications.md).
 
 

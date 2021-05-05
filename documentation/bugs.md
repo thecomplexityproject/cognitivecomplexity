@@ -2,9 +2,11 @@
 
 If we are so interested in the concept of cognitive complexity, it's because of its correlation with the software maintainability. A software is easier to maintain if the bugs are easy to fix than if they are difficult to find and to resolve.
 
+## Definition of a bug
+
 > **Definition**
 >
-> A code snippet has a ***bug*** when its supposed behavior is different from its real behavior.
+> A context-sensitive valid code snippet has a ***bug*** when its role is different from its behavior.
 
 **Remark**
 

@@ -8,9 +8,11 @@ In this project, we will specify our own definitions of simple or complex notion
 ## Table of contents
 
 * [Programming language](#programming-language)
-* [Code snippets](#code-snippets)
-  * [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
+* [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
+* [References, roles, descriptions and features](#references-roles-and-descriptions)
+  * [References](#references)
   * [Roles](#roles)
+  * [Descriptions](#description)
   * [Features](#features)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#addition)
@@ -67,9 +69,7 @@ Now, we can define what is a *code snippet*:
 
 
 [-> Top](#the-set-of-code-snippets)
-## Code snippets
-
-### Basic definitions around code snippets
+## Basic definitions around code snippets
 
 > **Definition**
 >
@@ -132,7 +132,7 @@ The tabulations are visually not distinguishable with a set of whitespaces (usua
 
 Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
 
-### Valid code snippets
+## Valid code snippets
 
 > **Definition**
 >
@@ -172,28 +172,28 @@ if (a > 0) {
 
 The concatenation of the two code snippets must not have a letter on the both sides of the merge, like `va` + `r a = 2;`.
 
-
-> **Definition**
+> **Proposition**
 >
-> Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
+> Each subset of a valid code snippet is a validatable code snippet
+
+This result ensues directly from the definitions of valid and validatable code snippets.
 
 Assuming that every computer language integrates the concept of "line break", we can give the following definition :
-
 
 > **Definition**
 >
 > The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
 
+By definition, each line of code of a valid code snippet is a validatable code snippet.
+
+> **Definition**
+>
+> Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
+
 [-> Top](#the-set-of-code-snippets)
-### Roles
+## References, roles and descriptions
 
-[comment]: <> (> **Definition**)
-
-[comment]: <> (> )
-
-[comment]: <> (> The ***behavior*** of a code snippet `s` is the [behavior of the system]&#40;systems.md&#41; when a process executes some instructions of `s`. We say that `s` is an ***implementation*** of its behavior.)
-
-[comment]: <> (> ***entry point*** / ***public element*** / ***outside element*** / ***signature*** / ***external reference***)
+### References
 
 > **Definition**
 >
@@ -205,9 +205,25 @@ Assuming that every computer language integrates the concept of "line break", we
   
 Variables, constants, functions, classes, interfaces, enums, types, ...
 
+### Roles
+
 > **Definition**
 >
 > The ***role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
+
+> **Definition**
+>
+> The ***role of a context-sensitive valid code snippet*** `s` is the expected [behavior of the system](systems.md) when an external process calls one of the public references of `s`, in terms of the author of the implementation of `s`.
+
+**Remark**
+
+When `s` is a module, `s` is considered itself as one of its public references. In other words, if `s` is a module, its role is the expected behavior of the system when `s`is directly executed, or when one of its public references is called by an external process.
+
+> **Definition**
+>
+> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the public references of `s`. We say that `s` is an ***implementation*** of its behavior.
+
+### Description
 
 > **Definition**
 >
@@ -227,7 +243,6 @@ The quality of the description of a reference `r` is measured by the relation of
 > * ***high*** if a mean developer is able to understand the role of `r` with only its name (and its signature for functions)
 > * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
-
 
 [-> Top](#the-set-of-code-snippets)
 ### Features
@@ -267,7 +282,7 @@ The quality of the description of a reference `r` is measured by the relation of
 
 **Notation**
 
-For the sake of simplification, when the specification of the language is not needed, we will simply note **S**, **V** and **V**<sup>*</sup> the sets of code snippets, valid code snippets and context-sensitive code snippets of an implicit programming language **L**. 
+For the sake of simplification, when the specification of the language is not needed, we will simply note **S**, **V**<sup>-</sup>, **V** and **V**<sup>+</sup> the sets of code snippets, validatable code snippets, valid code snippets and context-sensitive code snippets of an implicit programming language **L**. 
 
 **Remark**
 
@@ -279,20 +294,18 @@ The concatenation of two code snippets is a code snippet, so the operation `+` i
 
 > **Proposition**
 >
-> The operation `+` is an internal operation of **V**. In other words, if `s` and `t` are two valid code snippets, then `s + t` is a valid code snippet.
->
-**Demonstration**
+> The operation `+` is an internal operation of **S**. In other words, if `s` and `t` are two code snippets, then `s + t` is a code snippet.
 
-This result is trivial : if `s` and `t` are two code snippets respecting syntactic rules of a given language `L`, then `s + t` will respect them too.
+This result is trivial: the concatenation of two texts is a text.  
 
 
 > **Proposition**
 >
-> The operation `+` is not an internal operation of **V**<sup>*</sup>: if `s` and `t` are two executable code snippets, then `s + t` may not be executable.
+> The operation `+` is not an internal operation of **V**<sup>-</sup>, **V** or **V**<sup>+</sup>.
 >
 **Demonstration**
 
-In TypeScript, assume that we have the code snippets `s` and `t` below :
+In TypeScript, assume that we have the valid code snippets `s` and `t` below :
 
 ```ts
 // Code snippet s
@@ -302,7 +315,7 @@ let a = 2;
 let a = 3;
 ```
 
-The code snippet `s + t` is not context-sensitive valid, because the variable `a` is declared two times :
+The code snippet `s + t` is not valid, because the variable `a` is declared two times :
 ```ts
 // Code snippet s + t
 let a = 2;
@@ -343,7 +356,7 @@ if (a > 0) { a = a + 1; }
 > c(s + t) > c(s) + c(t)
 > ```
 
-The main reason of this result is that when you read the second snippet, you must remember what happened in the first one, so the time that you need to understand it is strictly higher than the time that would need if this code snippet was alone.
+The main reason of this result is that when the developer reads the second snippet, he must remember what happened in the first one, so the time that he needs to understand it is strictly higher than the time that he would need if this code snippet was alone.
 
 * Example
 
