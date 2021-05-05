@@ -34,7 +34,17 @@ In reality, the two kinds of definitions are interesting. In the first one, we s
 
 > **Definition**
 >
-> A developer ***understands the role of a code snippet*** `s` if he is able to predict what will be the modifications to the [state of the system](systems.md#definitions) when some part of `s` will be executed by a given [process](systems.md#definitions) `p`. We say that `s` is an ***implementation*** of ÷≠its role.
+> * If `s` is a code snippet reduced to a terminal or non-terminal symbol of a given programming language `L`, a developer ***understands*** `s` if he understands his role.
+> 
+> * If `s` is a code snippet reduced to an identifier defined inside `s`, a developer ***understands*** `s` if he understands his supposed role.
+> 
+> * If `s` is a code snippet reduced to an identifier, a developer ***understands*** `s` if he understands his supposed role.
+> 
+> A developer ***understands a code snippet*** `s` if he understands the supposed role of each identifier located inside `s` and defined outside `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the outside identifiers are correct.
+> 
+> A developer ***understands the role of a code snippet*** `s` if he understands the role of each of its terminal or non-terminal symbols and if he understands the supposed role of each identifier defined outside of `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p` according to the supposed roles of the outside identifiers.
+> 
+> A developer ***understands the role of a code snippet*** `s` if he is able to predict the supposed [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p`.
 > 
 > We note ***c<sub>r</sub>*** the cognitive complexity metric which assigns to a given code snippet the time needed to understand its role. 
 
@@ -93,20 +103,15 @@ function someFunction(a: number): number {
 
 The comments and the names of the identifiers are probably the most important parameters correlating the cognitive complexity with the understanding of the role of the code snippets, but are not the only ones. Moreover, we could discuss of the real efficiency of the documentation in some specific cases: do we really need documentation for very trivial cases, like for the function `multiplyByTwo` ? Or for the getters and the setters ? If not, in which cases should we add some documentation, and what should we write inside ? We could debate hours and hours about it, without having objective and indiscutable results: we would only have different expert opinions. We need scientific experiments, measures and statistics to be able to say one day: "yes, you should write documentation here, because it is proven that it will reduce the cognitive complexity".
 
-In conclusion, we just need to remember that the understanding of the role of the code is important in the aim to understand *other* code snippets (and debug them easier).
+In conclusion, we just need to remember that the understanding of the *role* of the code is important in the aim to understand *other* code snippets (and debug them easier).
 
 > **Definition**
 >
-> A developer ***understands*** a code snippet `s` if he understands the role of each code snippet included in `s` (including `s` itself).
+> A developer ***understands*** a valid code snippet `s` if he understands the role of each code snippet included in `s` (including `s` itself).
 
 **Remark**
 
 A code snippet containing more than one [string](code-snippets-tmp.md#code-snippets)
-
-
-> **Definition**
->
-> A developer ***understands*** a code snippet `s` if he is able to understand the role of each code snippet included in `s`.
 
 Now, we are able to define exactly what the verb *understand* means in the definition of the [cognitive complexity](cognitive-complexity.md):
 
@@ -178,6 +183,6 @@ The role of `s'` is the same as `s`, so the operation `r: s -> s'` is a refactor
 
 `c(r(s)) < c(s)`
 
-This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. We can now try to find useful [simplification technics](simplifications.md)
+This example demonstrates that a refactoring may decrease the cognitive complexity of a code snippet. We can now try to find useful [simplification technics](simplifications.md).
 
 
