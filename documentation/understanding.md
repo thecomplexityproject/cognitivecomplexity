@@ -31,39 +31,53 @@ In reality, the two kinds of definitions are interesting. In the first one, we s
 
 ## Definition of *understanding*
 
+> **Definition**
+>
+> A developer ***understands the role of an external reference*** `r` located in a code snippet `s` if he is able to predict, when a process calls `r`, the same [behavior of the system](systems.md) than the developer which *wrote* the implementation of `r`.
 
 > **Definition**
 >
-> * If `s` is a code snippet reduced to a terminal or non-terminal symbol of a given programming language `L`, a developer ***understands*** `s` if he understands his role.
-> 
-> * If `s` is a code snippet reduced to an identifier defined inside `s`, a developer ***understands*** `s` if he understands his supposed role.
-> 
-> * If `s` is a code snippet reduced to an identifier, a developer ***understands*** `s` if he understands his supposed role.
-> 
-> A developer ***understands a code snippet*** `s` if he understands the supposed role of each identifier located inside `s` and defined outside `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the outside identifiers are correct.
-> 
-> A developer ***understands the role of a code snippet*** `s` if he understands the role of each of its terminal or non-terminal symbols and if he understands the supposed role of each identifier defined outside of `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p` according to the supposed roles of the outside identifiers.
-> 
-> A developer ***understands the role of a code snippet*** `s` if he is able to predict the supposed [behavior of the system](systems.md#definitions) when some part of `s` is executed by a given [process](systems.md#definitions) `p`.
-> 
-> We note ***c<sub>r</sub>*** the cognitive complexity metric which assigns to a given code snippet the time needed to understand its role. 
+> The ***cognitive complexity of an external reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
 
-With the previous example, this definition means that a developer understands that when the function `multiplyByTwo` will be called, the piece of code of the system which called this function with a parameter `a` will receive in return the double of `a`.
+> **Definition**
+>
+> A developer ***understands a code snippet*** `s` if he understands the role of each [external reference](code-snippets-tmp.md#roles) located in `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the external references are correct.
 
-In which cases this definition could be interesting ? It seems to be too simple to have a real utility, but that's not so sure.
+**Remark**
+
+This definition doesn't mean that a developer understands a code snippet when he is able to predict the behavior of the system when a process calls the code snippet, but that he is able to do the *same predictions* that the authors of the external references would do. 
 
 * Example
 
 ```ts
-// Code snippet t
-
-function multiplyBySix(a: number): number {
-	const b: number = multiplyByTwo(a);
-	return b * 3;
+// Code snippet s
+function getBill(article: Article): number {
+	const price: number = article.getPrice();
+	const vat: number = VAT_RATE * price;
+	return price + vat;
 }
 ```
 
-When a developer reads the code snippet `t`, he doesn't need to know *how* the function *multiplyByTwo* will really multiply `a` by 2. He only needs to understand what will be the value of `b` when the function `multiplyByTwo` will be called. In other words, he needs to understand the *role* of this function, not its *implementation*.
+A developer *understands* `s` if he understands that:
+
+- it is a function called `getBill` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
+- `getPrice()` is a method of the class `Article` which will return the price of the article.
+- `VAT_RATE` is the vat rate to use
+- the returned value is the price of the article including the vat
+
+*AND* if the author of `Article`, `getPrice()` and `VAT_RATE` thought that:
+
+- the role of `Article` is to represent an article
+- the role of `getPrice()` is to return the price of an article without vat
+- the role of `VAT_RATE` is to give the value of the vat rate.
+
+What kind of errors could happen when a developer reads this code snippet ?
+
+* There is a difference between the role thought by the author of the external references, and the role imagined by the reader (misunderstanding between the author and the reader, maybe because of a *low quality level of the description* of the references)
+* The reader understands correctly the role of the external references as thought by their author, but these references have a behavior in contradiction with their supposed role (the *author* made an error)
+* The reader understands correctly the role of the external references as thought by their author, these roles were correctly implemented, but the reader misunderstands the implementation of `getBill()` itself (the *reader* made an error)
+
+With the previous example, this definition means that a developer understands that when the function `multiplyByTwo` will be called, the piece of code of the system which called this function with a parameter `a` will receive in return the double of `a`.
 
 Remember that if we are so interested in the cognitive complexity, it's because of its correlation with the software maintainability. A software is easier to maintain if the bugs are easy to fix than if they are difficult to find and to resolve. 
 

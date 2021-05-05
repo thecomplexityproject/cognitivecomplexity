@@ -180,6 +180,8 @@ Assuming that every computer language integrates the concept of "line break", we
 > **Definition**
 >
 > A ***reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
+> 
+> An ***external reference*** is a reference located in `s` but declared outside of `s`.
 
 * Examples
   
@@ -187,34 +189,26 @@ Variables, constants, functions, classes, interfaces, enums, types, ...
 
 > **Definition**
 >
-> The ***writer-role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
-> 
-> The ***reader-role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *reads* the implementation of `r`.
-
+> The ***role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
 
 > **Definition**
 >
-> A ***description*** of a reference `r` is the set of elements describing its role. Some of these elements are :
+> The ***description*** of a reference `r` is the set of elements written by the author of the implementation of `r` which are describing its role. Some of these elements are :
 >
 > * the name of `r`
 > * the signature relative to `r` (for functions and methods)
 > * the comments relative to `r`
 
-> **Definition**
->
-> The ***clarity level*** of a reference `r` in a given snippet `s` is said to be:
-> * ***high*** if a mean developer is able to understand the role of `r` with only its name and its signature (for functions)
-> * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
-> * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
-
-
 **Remark**
 
-The quality of a description is the relation of correlation between the equality of the role and the supposed role of the reference.
+The quality of the description of a reference `r` is measured by the relation of correlation between its role, and the role predicted by other developers calling `r`.
 
 > **Definition**
-> 
-> The ***cognitive complexity of a reference*** `r` called in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
+>
+> The ***quality level*** of a description of a reference `r` is said to be:
+> * ***high*** if a mean developer is able to understand the role of `r` with only its name (and its signature for functions)
+> * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
+> * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
 
 [-> Top](#the-set-of-code-snippets)
 ### Bugs
