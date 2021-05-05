@@ -41,17 +41,17 @@ Now, let's remind the main concepts of theoretical computer science :
 
 > **Definition**
 >
-> A ***programming language*** is a formal language comprising a set of instructions that produce various kinds of output.
+> A ***programming language*** is a [formal language](https://en.wikipedia.org/wiki/Formal_language) comprising a set of instructions that produce various kinds of output.
 
 The ***alphabet*** of a formal language consists of symbols, letters, or tokens that concatenate into strings of the language. Each string concatenated from symbols of this alphabet is called a ***word***, and the words that belong to a particular formal language are sometimes called ***well-formed words*** or well-formed formulas. 
 
-A formal language is often defined by means of a formal grammar:
+A formal language is often defined by means of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar):
 
 > **Definition**
 >
 > A ***formal language*** describes how to form strings from a language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form. 
 > 
-> A formal grammar is defined as a set of production rules for strings in a formal language.
+> A ***formal grammar*** is defined as a set of production rules for strings in a formal language.
 
 > **Definition**
 >
@@ -169,20 +169,52 @@ Assuming that every computer language integrates the concept of "line break", we
 [-> Top](#the-set-of-code-snippets)
 ### Roles
 
+[comment]: <> (> **Definition**)
+
+[comment]: <> (> )
+
+[comment]: <> (> The ***behavior*** of a code snippet `s` is the [behavior of the system]&#40;systems.md&#41; when a process executes some instructions of `s`. We say that `s` is an ***implementation*** of its behavior.)
+
+[comment]: <> (> ***entry point*** / ***public element*** / ***outside element*** / ***signature*** / ***external reference***)
+
 > **Definition**
+>
+> A ***reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
+
+* Examples
+  
+Variables, constants, functions, classes, interfaces, enums, types, ...
+
+> **Definition**
+>
+> The ***writer-role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
 > 
-> The ***behavior*** of a code snippet `s` is the [behavior of the system](systems.md) when a process executes some instructions of `s`.
+> The ***reader-role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *reads* the implementation of `r`.
 
 
 > **Definition**
 >
-> The ***role of a code snippet*** is a description of its supposed behavior.
+> A ***description*** of a reference `r` is the set of elements describing its role. Some of these elements are :
+>
+> * the name of `r`
+> * the signature relative to `r` (for functions and methods)
+> * the comments relative to `r`
 
-The *supposed behavior* of a code snippet is usually composed by the comments relative to it, and by the name of its [public elements].
+> **Definition**
+>
+> The ***clarity level*** of a reference `r` in a given snippet `s` is said to be:
+> * ***high*** if a mean developer is able to understand the role of `r` with only its name and its signature (for functions)
+> * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
+> * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
+
 
 **Remark**
 
-Multiple code snippets may have the same role.
+The quality of a description is the relation of correlation between the equality of the role and the supposed role of the reference.
+
+> **Definition**
+> 
+> The ***cognitive complexity of a reference*** `r` called in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
 
 [-> Top](#the-set-of-code-snippets)
 ### Bugs
