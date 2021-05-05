@@ -11,7 +11,6 @@ In this project, we will specify our own definitions of simple or complex notion
 * [Code snippets](#code-snippets)
   * [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
   * [Roles](#roles)
-  * [Bugs](#bugs)
   * [Features](#features)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#addition)
@@ -137,23 +136,42 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 
 > **Definition**
 >
-> A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`.
+> A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>.
 >
-> A ***context-free valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`.
+> A ***valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`. The set of the valid code snippets of a given language `L` is noted **V**.
+>
+> A ***validatable code snippet*** is a code snippet `(s, L)` which can be concatenated with another code snippet to give a valid code snippet. The set of the validatable code snippets of a given language `L` is noted **V**<sup>-</sup>.
 
-* Example
+
+
+* Example 1
+
+```ts
+// Code snippet s
+if (a > 0) {
+  a = a + 1;
+}
+```
+`s` is a *valid code snippet*, but not a *context-sensitive valid code snippet*, because `a` is not defined in `s`.
+
+* Example 2
+
+```ts
+// Code snippet s
+if (a > 0) {
+```
+`s` is not a *valid code snippet*, but is a *validatable code snippet*, because the concatenation of `s` with the code snippet `t` below is a valid code snippet.
 
 ```ts
 // Code snippet t
-if (a > 0) {
-    a = a + 1;
+  a = a + 1;
 }
 ```
-`t` is a *context-free valid code snippet*, but not a *context-sensitive valid code snippet*, because `a` is not defined in `t`.
 
-> **Definition**
->
-> For the sake of simplification, we will simply call ***valid code snippet*** a *context-free valid code snippet*.
+**Remark**
+
+The concatenation of the two code snippets must not have a letter on the both sides of the merge, like `va` + `r a = 2;`.
+
 
 > **Definition**
 >
@@ -210,20 +228,6 @@ The quality of the description of a reference `r` is measured by the relation of
 > * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
 
-[-> Top](#the-set-of-code-snippets)
-### Bugs
-
-> **Definition**
->
-> A code snippet has a ***bug*** when its supposed behavior is different from its real behavior.
-
-**Remark**
-
-By convention, we will suppose that any non-valid code snippet has a bug.
-
-> **Definition**
->
-> A ***bug fix*** is an operation from **S** to **V** which transforms a code snippet `s` having some bug in a code snippet `s'` which has a behavior equal to the supposed behavior of `s`.
 
 [-> Top](#the-set-of-code-snippets)
 ### Features
@@ -255,9 +259,11 @@ By convention, we will suppose that any non-valid code snippet has a bug.
 >
 > We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>** the subset of **S<sub>L</sub>** defined by the set of the *valid code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We call **V<sub>L</sub>**<sup>-</sup> the subset of **S<sub>L</sub>** defined by the set of the *validatable code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>**<sup>*</sup> the subset of **V<sub>L</sub>** defined by the set of the *context-sensitive code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We call **V<sub>L</sub>** the subset of **V<sub>L</sub>**<sup>-</sup> defined by the set of the *valid code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+>
+> We call **V<sub>L</sub>**<sup>+</sup> the subset of **V<sub>L</sub>** defined by the set of the *context-sensitive code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
 
 **Notation**
 
