@@ -126,7 +126,7 @@ The tabulations are visually not distinguishable with a set of whitespaces (usua
 
 > **Definition**
 >
-> A ***file*** is a quadruplet (p, n, t, L) where `p` represents its path, `n` its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
+> A ***file*** is a quadruplet (p, n, t, L) where `p` is a string which represents its path, `n` is a string which represents its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
 
 **Remark**
 

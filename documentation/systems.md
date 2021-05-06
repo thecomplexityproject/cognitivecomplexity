@@ -18,6 +18,10 @@
 >
 > Thereafter, we will simply call ***program*** the set of machine-readable instructions of a given system. In other words, the program is the set of the modules of the software.
 
+**Remark**
+
+In terms of functionalities, we can also say that the aim of a software is to provide a set of [features](code-snippets-tmp.md#features) to the users. 
+
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
 > ***Data*** are facts that are used by systems to produce useful information. In modern information systems, data are generally stored in machine-readable form on disk until the computer needs them.
