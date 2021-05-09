@@ -9,3 +9,5 @@ The definition of the [cognitive complexity](./cognitive-complexity.md) uses the
 > A ***developer*** is defined by a couple `(H, S)` where `H` represents a human being and `S` the set of skills correlated to the cognitive complexity.
 
 
+
+***Work in progress...***
