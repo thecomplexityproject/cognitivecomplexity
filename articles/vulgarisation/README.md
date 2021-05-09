@@ -74,3 +74,6 @@ Articles talking about the tool [TeamScale©](https://www.cqse.eu/en/teamscale/o
 #### CodeClimate©
 
 Articles talking about the tool [CodeClimate©](https://docs.codeclimate.com/):
+
+
+***Work in progress...***

@@ -20,7 +20,7 @@ These questions are studied in specific pages :
 
 ## Definition of the cognitive complexity metric
 
-We should also define the cognitive complexity metric :
+The cognitive complexity metric could be defined like this :
 
 > **Definition**
 >

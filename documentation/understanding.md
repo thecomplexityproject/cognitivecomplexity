@@ -272,3 +272,6 @@ return a > 0 ? 1 : 2;
 ```
 
 The ternary operations which are short are usually written in one line, for questions of readability. If it is true (and that's probably the case), `r` is a simplification.
+
+
+***Work in progress...***

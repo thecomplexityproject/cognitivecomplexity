@@ -41,4 +41,6 @@ By nature, a system evolves over time as a result of the current processes runni
 > **Definition**
 >
 > The ***behavior of a system*** is a description of a modification of its state during the execution of a given process.
- 
+
+
+***Work in progress...***
