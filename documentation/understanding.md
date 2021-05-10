@@ -42,15 +42,17 @@ This definition doesn't mean that a developer understands an imported reference 
 
 > **Definition**
 >
-> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
+> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference will be called by a given process `p`.
+> 
+> The ***cognitive complexity of an exported reference*** `r` located in a given snippet `s` is the time needed by a mean developer which will import this reference to predict the behavior of the system when this reference will be called by a given process `p`.
 
 ## Understanding of valid code snippets
 
 > **Definition**
 >
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
-> 1. he understands the role of each of the [exported references](code-snippets-tmp.md#roles) of `s`.
-> 2. he understands the role of each of its [imported references](code-snippets-tmp.md#roles) located in `s`.
+> 1. he understands the role of each of the [exported references](code-snippets-tmp.md#behaviors-roles-and-descriptions) of `s`.
+> 2. he understands the role of each of its [imported references](code-snippets-tmp.md#basic-definitions-around-code-snippets) located in `s`.
 > 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.
 
 * Example
