@@ -25095,9 +25095,9 @@
 											"font": "Arial;13;1",
 											"left": 300,
 											"top": 374,
-											"width": 113.45166015625,
+											"width": 118.49169921875,
 											"height": 13,
-											"text": "External reference"
+											"text": "Exported reference"
 										},
 										{
 											"_type": "LabelView",
@@ -25133,7 +25133,7 @@
 									"font": "Arial;13;0",
 									"left": 295,
 									"top": 367,
-									"width": 123.45166015625,
+									"width": 128.49169921875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF5Rs6U4jsWjdw="
@@ -25154,7 +25154,7 @@
 							"containerChangeable": true,
 							"left": 295,
 							"top": 367,
-							"width": 123.45166015625,
+							"width": 128.49169921875,
 							"height": 41,
 							"nameCompartment": {
 								"$ref": "AAAAAAF5Rs6U4jsVa74="
@@ -26447,7 +26447,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 341,
+									"left": 342,
 									"top": 472,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -26468,7 +26468,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 326,
+									"left": 327,
 									"top": 472,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -26489,7 +26489,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 370,
+									"left": 371,
 									"top": 473,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -26509,7 +26509,7 @@
 								"$ref": "AAAAAAF5Rs6U4jreSRE="
 							},
 							"lineStyle": 1,
-							"points": "356:551;356:408",
+							"points": "356:551;358:408",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF5Rs6U4jtZ6dI="
@@ -32295,7 +32295,7 @@
 								"$ref": "AAAAAAF5Rs6U4jtsNA4="
 							},
 							"lineStyle": 1,
-							"points": "58:210;321:366"
+							"points": "58:210;322:366"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -33374,7 +33374,7 @@
 								"$ref": "AAAAAAF5Rs6U4jsUtkg="
 							},
 							"lineStyle": 1,
-							"points": "356:366;356:316"
+							"points": "357:366;356:316"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -34268,7 +34268,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF5Rs6U4TpWDp4="
 					},
-					"name": "External reference"
+					"name": "Exported reference"
 				},
 				{
 					"_type": "UMLAction",

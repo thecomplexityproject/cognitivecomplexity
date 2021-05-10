@@ -195,9 +195,9 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> An ***exported reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
+> An ***exported reference*** is an object declared in a code snippet `s` which is accessible outside of `s`.
 > 
-> An ***imported reference*** is an object located in `s` referring to an external reference declared in another code snippet `t`.
+> An ***imported reference*** located in a code snippet `s` is an object referring to an external reference of another code snippet `t`.
 
 **Examples**
   
@@ -209,11 +209,11 @@ Assuming that each file may be called by some other part of the program, a [modu
 
 > **Definition**
 >
-> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the public references of `s`. We say that `s` is an ***implementation*** of its behavior.
+> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
 
 > **Definition**
 >
-> The ***role of a context-sensitive valid code snippet*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the public references of `s`.
+> The ***role of a context-sensitive valid code snippet*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the exported references of `s`.
 
 **Remark**
 
@@ -424,7 +424,7 @@ if (a > 0) { a = a + 1; }
 >
 > The cognitive complexity of the sum of two code snippets is strictly higher than the sum of the cognitive complexity of each of them.
 > ```ts
-> c(s + t) > c(s) + c(t)
+> Cc(s + t) > c(s) + c(t)
 > ```
 
 The main reason of this result is that when the developer reads the second snippet, he must remember what happened in the first one, so the time that he needs to understand it is strictly higher than the time that he would need if this code snippet was alone.
@@ -452,7 +452,7 @@ if (a < 5) {
 ```
 In the example above, when you read the code snippet `s + t`, the cognitive complexity of the three first lines is the same as the complexity of `s`, because you have exactly the same information to understand. At the opposite, the three last lines will take more time to understand than the code snippet `t` alone, because you also must remember that `a` can't be equal to 0, and so you can be sure that the expression `1 / a` will not crash. The cognitive complexity of the three first lines is equal to `c(s)`, but the cognitive complexity of the three last lines is strictly higher than `c(t)`. So, in this example, we have `c(s + t) > c(s) + c(t)`.
 
-Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have `c(s + t) = c(s) + c(t)`.
+Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have `Cc(s + t) = Cc(s) + Cc(t)`.
 
 
 * Example
@@ -469,7 +469,7 @@ let a = 2;
 let b = 3;
 ```
 
-In this case, the second line is independent of the first one, so we maybe have `c(s + t) = c(s) + c(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `c(s + t) > c(s) + c(t)`.
+In this case, the second line is independent of the first one, so we maybe have `Cc(s + t) = Cc(s) + Cc(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `Cc(s + t) > Cc(s) + Cc(t)`.
 
 This result is probably non-demonstrable without experiences in the real world, with enough statistical data to obtain a highly accurate result. It is a *conjecture* and not a *proposition*.
 
