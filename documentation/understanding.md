@@ -30,25 +30,28 @@ What means exactly to *understand* this code snippet ? Is it to understand what 
 
 In reality, the two kinds of definitions are interesting. In the first one, we say that a developer understands the ***signified*** of the written instructions, and in the other case we say that he understands the ***significant*** of these instructions, *i.e.* what means every word of the code snippet.
 
-## Understanding of external references
+## Understanding of imported references
 
 > **Definition**
 >
-> A developer ***understands the role of an external reference*** `r` located in a code snippet `s` if he is able to predict, when a process calls `r`, the same [behavior of the system](systems.md) than the author of the implementation of `r` would predict.
+> A developer ***understands the role of an imported reference*** `r` located in a code snippet `s` if he is able to predict, when a process calls `r`, the same [behavior of the system](systems.md) than the author of the implementation of `r` would predict.
 
 **Remark**
 
-This definition doesn't mean that a developer understands an external reference `r` when he is able to predict the behavior of the system when a process calls `r`, but that he is able to do the *same predictions* that the author of the external references would do in the same circumstances.
+This definition doesn't mean that a developer understands an imported reference `r` when he is able to predict the behavior of the system when a process calls `r`, but that he is able to do the *same predictions* that the author of the imported references would do in the same circumstances.
 
 > **Definition**
 >
-> The ***cognitive complexity of an external reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
+> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference is called by a given process `p`.
 
 ## Understanding of valid code snippets
 
 > **Definition**
 >
-> A developer ***understands a context-sensitive valid code snippet*** `s` if he understands the role of each [external reference](code-snippets-tmp.md#roles) located in `s`, and if he is able to predict the [behavior of the system](systems.md#definitions) when `s` is executed by a given [process](systems.md#definitions) `p`, assuming that the supposed roles of the external references are correct.
+> A developer ***understands a context-sensitive valid code snippet*** `s` if :
+> 1. he understands the role of each of the [exported references](code-snippets-tmp.md#roles) of `s`.
+> 2. he understands the role of each of its [imported references](code-snippets-tmp.md#roles) located in `s`.
+> 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.
 
 * Example
 
@@ -61,33 +64,66 @@ function getBill(article: Article): number {
 }
 ```
 
-A developer *understands* `s` if he understands that
+A developer *understands* `s` if :
 
-- `s` represents a function called `getBill` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
-- `getPrice()` is a method of the class `Article` which will return the price of the article.
-- `VAT_RATE` is the vat rate to use
-- the returned value is the price of the article including the vat
+*1. Role of exported references*
 
-**AND** if the author of the implementation of `Article`, `getPrice()` and `VAT_RATE` thought that:
+- he understands that `s` represents a function called `getBill()` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
+    
+*2. Role of imported references*
 
-- the role of `Article` is to represent an article
-- the role of `getPrice()` is to return the price of an article without vat
-- the role of `VAT_RATE` is to give the value of the vat rate.
+- he understands that `getPrice()` is a method of the class `Article` which will return the price of the article.
+- he understands that `VAT_RATE` is the vat rate to use.
+  
+*3. Behavior of the external references*
 
-What kind of errors may happen when a developer reads this code snippet ?
+- he predicts that the behavior of `getBill()` is correct, *i.e.* that its returned value will really be the price of the article including the vat.
 
-* There is a difference between the role thought by the author of the external references, and the role imagined by the reader (misunderstanding between the author and the reader, maybe because of a *low quality level of the description* of the references)
-* The reader understands correctly the role of the external references as thought by their author, but these references have a behavior in contradiction with their supposed role (the *author* made an error)
-* The reader understands correctly the role of the external references as thought by their author, these roles were correctly implemented, but the reader misunderstands the implementation of `getBill()` itself (the *reader* made an error)
+**Remark**
+
+With this definition, a developer may understand `s` even if `getBill()` will return a value which will not be correct, *i.e.* which will not be the price including VAT of a given article. He is only able to predict that *if there is no bug in the implementation of the imported references of `s`*, *i.e.* if their behavior corresponds to their role. 
+
+This is not in contradiction with the intuitive notion of code understanding: with the definition above, if a developer understands `s`, he will be able to detect that its real behavior is not what he expected, *i.e.* he will detect a bug, which is probably what we mean when we say that a developer understands a code snippet: he is able to debug it.
 
 [-> Top](#the-understanding)
 ## Minimal cognitive complexity
 
 > **Definition**
 > 
-> Let `s` a valid code snippet and `b` its behavior.
-> The ***minimal cognitive complexity*** of `b` is the lower limit of the cognitive complexities of the set of code snippets having this behavior.
+> Let `s` a context-sensitive valid code snippet and `b` its behavior.
+> The ***minimal cognitive complexity*** of `b` is the lower limit of the cognitive complexities of the set of code snippets having collectively the same behavior as `b`.
+> 
+> We note it `minCc(s)`.
 
+* Example
+
+```ts
+// Code snippet s
+function getProfile(id: number): Profile {
+  if(isClientId(id)) {
+    // Do some long stuff returning the profile of the client corresponding to the given id
+  } else {
+    // Do some long stuff returning the profile of a company corresponding to the given id
+  }
+}
+```
+
+```ts
+// Code snippet t
+function getProfile(id: number): Profile {
+  return isClientId(id) ? getClientProfile(id) : getCompanyProfile(id);
+}
+
+function getClientProfile(id: number): Profile {
+  // Do some long stuff returning the profile of the client corresponding to the given id
+}
+
+function getCompanyProfile(id: number): Profile {
+	// Do some long stuff returning the profile of a company corresponding to the given id
+}
+```
+
+`s` and `t` are two different elements of **V**<sup>+</sup> having the same behavior. Assuming that `Cc(t) < Cc(s)` we have `minCc(s) < Cc(t) < Cc(s)`. Please note that, by construction, `minCc(s) = minCc(t)`.
 
 [-> Top](#the-understanding)
 ## Refactoring

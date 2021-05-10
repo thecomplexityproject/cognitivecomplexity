@@ -24,10 +24,10 @@ The cognitive complexity metric could be defined like this :
 
 > **Definition**
 >
-> We call ***cognitive complexity metric*** the function which assigns to each code snippet its cognitive complexity. This metric is noted ***c***.
+> We call ***cognitive complexity metric*** the function which assigns to each code snippet its cognitive complexity. This metric is noted ***Cc***.
 >
 > If ***S*** is the set of code snippets and ***R<sup>+</sup>*** the set of the real positive numbers, we have
 > ```ts
-> c:  S   ->   R+
+> Cc:  S   ->   R+
 >     s   ->   cognitiveComplexity(s)
 > ```
