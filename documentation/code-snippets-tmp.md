@@ -195,9 +195,9 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> An ***exported reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
+> An ***exported reference*** is an object declared in a code snippet `s` which is accessible outside of `s`.
 > 
-> An ***imported reference*** is an object located in `s` referring to an external reference declared in another code snippet `t`.
+> An ***imported reference*** located in a code snippet `s` is an object referring to an external reference of another code snippet `t`.
 
 **Examples**
   
@@ -205,19 +205,95 @@ Variables, constants, functions, classes, interfaces, enums, types... may be exp
 
 Assuming that each file may be called by some other part of the program, a [module](#valid-code-snippets) is by definition an exported reference. 
 
-### Roles
+### Behaviors, roles and descriptions
 
 > **Definition**
 >
-> The ***role of a context-sensitive valid code snippet*** `s` is the expected [behavior of the system](systems.md) when an external process calls one of the public references of `s`, in terms of the author of the implementation of `s`.
+> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
+
+> **Definition**
+>
+> The ***role of a context-sensitive valid code snippet*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the exported references of `s`.
 
 **Remark**
 
-A **role** is clearly defined as a subjective notion. It is something which is in the real world, not in the theoretical world. A *role* is in the *world of measurability*, a behavior is in the *world of computability* The border between these two worlds is located between the concept of *role* and the concept of *behavior*.
+With this definition, a *role* is clearly a subjective notion. It is something which is in the real world, not in the theoretical world. A *role* is in the *world of measurability*, a behavior is in the *world of computability*. The border between these two worlds is located between the concepts of *role* and *behavior*.
+
+
+> **Definition**
+>
+> The ***description*** of the role `r` of a code snippet `s` is the set of elements written by the author of `s` which are describing its role.
+
+Examples of kinds of descriptions of a role `r` :
+* the name of `r`
+* the signature relative to `r` (for functions and methods)
+* the comments relative to `r`
 
 **Example**
 
-// TODO
+```ts
+// Code snippet s
+interface Profile {
+	address?: string;
+	firstName: string;
+	lastName: string;
+}
+
+/**
+ * Returns the profile corresponding to a given id
+ * @param id
+ */
+function getProfile(id: number): Profile {
+	const data: ProfileEntity = getProfileFromDataBase(id);
+	const profile = {
+		firstName: data.firstName,
+        lastName: data.lastName
+    };
+}
+```
+
+Let `d` the developer which wrote `s`, and assume that for him, the role of the function `getProfile()` is to return the profile located in database corresponding to the given `id`. The description of this role is specified by the name of the function (`getProfile`) and by the comments above this function.
+
+Now, let `d'` another developer which will use `getProfile()`. He thinks that the role of this function is to return the profile located in database corresponding to the given `id`.
+
+```ts
+// Code snippet t
+function getProfileAddress(idProfile: number): string {
+	const profile: Profile = getProfile(id);
+	return profile.address;
+}
+```
+
+And... there is a bug ! Why ? Because in the mind of `d`, `getProfile()` returns only the firstname and lastName fields, not the address. On the other side, `d'` thought that the field *address* will be included. Thus, the code snippet written by `d'` will have a behavior which not corresponds to the role ha wants to give to its function `getProfileAddress()`. It is the exact definition of a [bug](bugs.md#definition-of-a-bug).
+
+But who is guilty ? `d` or `d'` ? It is not so clear.
+
+Assume that `d` wrote its code six months ago, at a time when it was clear for everyone that his function `getProfile()` will return only the firstname and lastName. At that time, the program was running correctly, there was no bug. Today, someone asked `d'` to write a code returning the address of a given profile. At this moment, `d'` will create a bug, because he will write a code snippet with a behavior which does not correspond to the role he wants to give to its function. 
+
+`d'` is he the only one which is guilty ? In reality, `d` has its part of responsibility, because he wrote a *description* which was not exactly describing the behavior of `getProfile()`. He misled `d'`. Consequently, he increased unnecessarily the cognitive complexity of `getProfile()`: with its bad quality definition, `getProfile()` was more difficult to understand. In other words,the cognitive complexity of the exported reference `getProfile()` could be reduced with a refactor `r` like this:
+
+
+```ts
+// Code snippet r(s)
+interface Profile {
+	address?: string;
+	firstName: string;
+	lastName: string;
+}
+
+/**
+ * Returns the firstName and the lastName of a Profile corresponding to a given id
+ * @param id
+ */
+function getProfile(id: number): Profile {
+	const data: ProfileEntity = getProfileFromDataBase(id);
+	const profile = {
+		firstName: data.firstName,
+        lastName: data.lastName
+    };
+}
+```
+
 
 > **Definition**
 >
@@ -226,21 +302,7 @@ A **role** is clearly defined as a subjective notion. It is something which is i
 
 **Remark**
 
-When `s` is a module, `s` is considered itself as one of its public references. In other words, if `s` is a module, its role is the expected behavior of the system when `s` is directly executed, or when one of its public references is called by an external process.
-
-> **Definition**
->
-> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the public references of `s`. We say that `s` is an ***implementation*** of its behavior.
-
-### Description
-
-> **Definition**
->
-> The ***description*** of a reference `r` is the set of elements written by the author of the implementation of `r` which are describing its role. Some of these elements are :
->
-> * the name of `r`
-> * the signature relative to `r` (for functions and methods)
-> * the comments relative to `r`
+When `s` is a module, `s` is considered itself as one of its exported references.
 
 **Remark**
 
@@ -248,10 +310,10 @@ The quality of the description of a reference `r` is measured by the relation of
 
 > **Definition**
 >
-> The ***quality level*** of a description of a reference `r` is said to be:
-> * ***high*** if a mean developer is able to understand the role of `r` with only its name (and its signature for functions)
-> * ***medium*** if a mean developer is able to understand the role of `r` with its name, its signature and its comments
-> * ***low*** if a mean developer is able to understand the role of `r` with its name, its signature, its comments and its implementation
+> The ***quality level*** of a description of an exported reference `r` is said to be:
+> * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
+> * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
+> * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
 
 [-> Top](#the-set-of-code-snippets)
 ### Features
@@ -362,7 +424,7 @@ if (a > 0) { a = a + 1; }
 >
 > The cognitive complexity of the sum of two code snippets is strictly higher than the sum of the cognitive complexity of each of them.
 > ```ts
-> c(s + t) > c(s) + c(t)
+> Cc(s + t) > c(s) + c(t)
 > ```
 
 The main reason of this result is that when the developer reads the second snippet, he must remember what happened in the first one, so the time that he needs to understand it is strictly higher than the time that he would need if this code snippet was alone.
@@ -390,7 +452,7 @@ if (a < 5) {
 ```
 In the example above, when you read the code snippet `s + t`, the cognitive complexity of the three first lines is the same as the complexity of `s`, because you have exactly the same information to understand. At the opposite, the three last lines will take more time to understand than the code snippet `t` alone, because you also must remember that `a` can't be equal to 0, and so you can be sure that the expression `1 / a` will not crash. The cognitive complexity of the three first lines is equal to `c(s)`, but the cognitive complexity of the three last lines is strictly higher than `c(t)`. So, in this example, we have `c(s + t) > c(s) + c(t)`.
 
-Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have `c(s + t) = c(s) + c(t)`.
+Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have `Cc(s + t) = Cc(s) + Cc(t)`.
 
 
 * Example
@@ -407,7 +469,7 @@ let a = 2;
 let b = 3;
 ```
 
-In this case, the second line is independent of the first one, so we maybe have `c(s + t) = c(s) + c(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `c(s + t) > c(s) + c(t)`.
+In this case, the second line is independent of the first one, so we maybe have `Cc(s + t) = Cc(s) + Cc(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `Cc(s + t) > Cc(s) + Cc(t)`.
 
 This result is probably non-demonstrable without experiences in the real world, with enough statistical data to obtain a highly accurate result. It is a *conjecture* and not a *proposition*.
 
