@@ -66,8 +66,6 @@ Now, we can define what is a *code snippet*:
 
 
 
-
-
 [-> Top](#the-set-of-code-snippets)
 ## Basic definitions around code snippets
 
@@ -197,19 +195,17 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> A ***reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
+> An ***exported reference*** is an object declared in a given code snippet `s` which is accessible outside of `s`.
 > 
-> An ***external reference*** is a reference located in `s` but declared outside of `s`.
+> An ***imported reference*** is an object located in `s` referring to an external reference declared in another code snippet `t`.
 
-* Examples
+**Examples**
   
-Variables, constants, functions, classes, interfaces, enums, types, ...
+Variables, constants, functions, classes, interfaces, enums, types... may be exported or imported references.
+
+Assuming that each file may be called by some other part of the program, a [module](#valid-code-snippets) is by definition an exported reference. 
 
 ### Roles
-
-> **Definition**
->
-> The ***role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
 
 > **Definition**
 >
@@ -217,7 +213,20 @@ Variables, constants, functions, classes, interfaces, enums, types, ...
 
 **Remark**
 
-When `s` is a module, `s` is considered itself as one of its public references. In other words, if `s` is a module, its role is the expected behavior of the system when `s`is directly executed, or when one of its public references is called by an external process.
+A **role** is clearly defined as a subjective notion. It is something which is in the real world, not in the theoretical world. A *role* is in the *world of measurability*, a behavior is in the *world of computability* The border between these two worlds is located between the concept of *role* and the concept of *behavior*.
+
+**Example**
+
+// TODO
+
+> **Definition**
+>
+> The ***role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
+
+
+**Remark**
+
+When `s` is a module, `s` is considered itself as one of its public references. In other words, if `s` is a module, its role is the expected behavior of the system when `s` is directly executed, or when one of its public references is called by an external process.
 
 > **Definition**
 >
