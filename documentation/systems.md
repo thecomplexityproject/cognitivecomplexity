@@ -24,7 +24,7 @@ In terms of functionalities, we can also say that the aim of a software is to pr
 
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
-> ***Data*** are facts that are used by systems to produce useful information. In modern information systems, data are generally stored in machine-readable form on disk until the computer needs them.
+> ***data*** are facts that are used by systems to produce useful information. In modern information systems, data are generally stored in machine-readable form on disk until the computer needs them.
 
 By nature, a system evolves over time as a result of the current processes running on it, and because of the eventual inputs received from out of the system.
 
@@ -40,7 +40,11 @@ By nature, a system evolves over time as a result of the current processes runni
 
 > **Definition**
 >
-> The ***behavior of a system*** is a description of a modification of its state during the execution of a given process.
+> The ***behavior of a system*** is the evolution of its state during the execution of a given process.
 
+**Remarks**
+
+* *system* and *hardware* are in the *world of measurability*, *i.e.* are referring to objects located in the real world.
+* *software*, *data*, *process*, *state of the system*, *behavior of a system* are in the *world of the computability*, *i.e.* are referring to theoretical objects.
 
 ***Work in progress...***

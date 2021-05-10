@@ -7,7 +7,7 @@ At first, our goal is not to define what is *understanding* in all the situation
 ## Table of contents
 
 * [Where is the problem ?](#where-is-the-problem-)
-* [Understanding of external references](#understanding-of-external-references)
+* [Understanding of imported references](#understanding-of-imported-references)
 * [Understanding of valid code snippets](#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](#minimal-cognitive-complexity)
 * [Refactoring](#refactoring)
