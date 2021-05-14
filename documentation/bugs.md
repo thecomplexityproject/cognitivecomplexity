@@ -8,6 +8,47 @@ If we are so interested in the concept of cognitive complexity, it's because of 
 >
 > A context-sensitive valid code snippet has a ***bug*** when its role is different from its behavior.
 
+**Caution**
+
+The [role](code-snippets-tmp.md#behaviors-roles-and-descriptions) of a code snippet `s` is a subjective notion, which is relative to the author of `s` (*The role of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the exported references of `s`*).
+
+Consequently, by definition, a *bug* is also a subjective notion relative to the author of `s`. A bug is not something which is absolute, independent of the context.
+
+* *Example 1: bug caused by a misunderstanding*
+
+Assume that a client ask a developer to create a function which will return the price of an object of type `Article`.
+
+```ts
+// Code snippet s
+function getPrice(article: Article): number {
+	return article.price;
+}
+```
+
+For the developer, there is no bug. However, if the client asked to return the price *including the VAT*, there is a bug.
+
+* Example 2: bug caused by a reuse
+
+Assume now that the developer fixed the first bug like this:
+
+```ts
+// Code snippet s
+function getPriceWithVat(article: Article): number {
+	return article.priceWithVat;
+}
+```
+
+Now, assume that 6 months later, another developer reuse this method on a new feature, which must return the price 
+
+```ts
+// Code snippet t
+function getPriceWithVat(articleName: string): number {
+	const article: Article = getArticleInDatabase(articleName);
+	return getPriceWithVat(article);
+}
+```
+
+
 **Remark**
 
 By convention, we will suppose that any non-valid code snippet has a bug.
