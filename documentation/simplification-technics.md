@@ -119,7 +119,7 @@ if (a > 0) {
 if (a > 0) { return 1; } else { return 2; }
 ```
 
-It is usually recommended implementing this algorithm by using the form of `s` instead of the form of `r(s)`, for questions of readability. It is probably true that the initial form of `s` is more easy to read, and so easier to understand. We can conjecture that `cc(s) < cc(r(s))`, thus `r` is probably not a simplification.
+It is usually recommended implementing this algorithm by using the form of `s` instead of the form of `r(s)`, for questions of readability. It is probably true that the initial form of `s` is more easy to read, and so easier to understand. We can conjecture that `Cc(s) < Cc(r(s))`, thus `r` is probably not a simplification.
 
 * Example 2
 
