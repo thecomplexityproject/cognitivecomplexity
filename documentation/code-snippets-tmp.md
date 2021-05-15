@@ -219,7 +219,7 @@ Subcontractor companies, product managers, architects and lead developers are in
 >
 > The ***specs*** are the set or instructions describing the expected [behavior of the system](systems.md) for a given feature, which are transmitted by the prime contractor.  
 
-
+By extension, we also call ***specs*** the instructions transmitted by an intermediate contractor to one of its subordinates. For example, a lead developer may define some specs and ask a developer to write some code snippet respecting them.
 
 [-> Top](#the-set-of-code-snippets)
 ## References, roles and descriptions

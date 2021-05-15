@@ -32,6 +32,12 @@ If it is absolutely sure that the parameter `article` will never be undefined, *
 
 This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
 
+> **Definition**
+>
+> A ***bug fix*** is a [modification](understanding.md#refactoring) which transforms a program `p` having some bug in a program `p'` without bug which respects the specs specified by the prime contractor.
+
+
+[Top](#bugs)
 ## Causes of bugs
 
 The causes of bugs are multiple, and the "wrongdoer" may not be the developer... Let's try to clarify it :
@@ -71,11 +77,12 @@ In case of wrong implementation, the wrongdoer may not be the developer. For exa
 ### Wrong reuse
 
 > **Definition**
-> A ***reuse*** of a program, a feature or a code snippet, is its use in a context defined by different specs. 
+> 
+> A ***reuse*** of a program, a feature or a code snippet `s`, is the usage of `s` in a context defined by specs which are different from the original specs. 
 
 **Example**
 
-Assume that a client asked to develop a web page displaying the pre-tax of a some articles. Assume that there is no bug, and that the code snippet below returns the correct value :
+Assume that a client asked to develop a web page for professionals displaying the pre-tax of some articles. Assume that there is no bug, and that the code snippet below returns the correct value :
 
 ```ts
 // Code snippet s
@@ -84,59 +91,86 @@ function getPrice(article: Article): number {
 }
 ```
 
-Now, assume that the client wants a second page displaying the pre-tax of other articles. If the implementation of this new feature uses `s`, it is a reuse of `s`.
+Now, assume that the client wants a second page for individuals displaying the articles including the VAT. If the implementation of this new feature uses `s`, it is a reuse of `s`. 
+
+If it is a new developer which is implementing this new feature, he will maybe not understand that the function `getPrice()` will return the *pre-tax* price. In this case, there will be an implementation bug. This bug happens because the new developer don't [understand](understanding.md#understanding-of-valid-code-snippets) the role of `s`.
 
 
+[Top](#bugs)
+## Debugging process
 
-> **Definition**
->
-> A context-sensitive valid code snippet has a ***bug*** when its role is different from its behavior.
+### Bug discovering
 
-**Caution**
+A bug may be detected by two kinds of actors:
+* The prime contractor or the users, which may detect that for a given feature, the behavior of the system is not as expected.
+* Other links of the chain of responsibilities, which may detect that the behavior of the system is not respecting the specs specified by one of its superiors.
 
-The [role](code-snippets-tmp.md#behaviors-roles-and-descriptions) of a code snippet `s` is a subjective notion, which is relative to the author of `s` (*The role of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the exported references of `s`*).
+Of course, the second case is preferable to the first.
 
-Consequently, by definition, a *bug* is also a subjective notion relative to the author of `s`. A bug is not something which is absolute, independent of the context.
+### Bug understanding
 
-* *Example 1: bug caused by a misunderstanding*
+A bug is discovered by someone which is able to understand the specs specified by the prime contractor or by one of its superiors. When this bug is discovered, he may fix the bug himself (if he is a developer), or ask one of his subordinates to do it. To be able to do that, the developer must find the set of code snippets causing this bug. Please note that for now, its only information is provided by the behavior of the system, not by the code itself.
 
-Assume that a client ask a developer to create a function which will return the price of an object of type `Article`.
+Then, the developer must understand *why* the behavior of the system is not correct. We can mention two ways of debugging
 
+#### Reverse debugging
 
-For the developer, there is no bug. However, if the client asked to return the price *including the VAT*, there is a bug.
+Assume that a client ask a developer to debug its Angular application, which should display the pre-tax price of some articles, but which displays the price including the VAT. What will do the developer ?
 
-* Example 2: bug caused by a reuse
+* Find and analyze the HTML component
 
-Assume now that the developer fixed the first bug like this:
+The developer knows the *consequence* of the bug: the displayed price is wrong. He will try to find its *cause*. His first step is to find the HTML component displaying the price. The *cause* of the bug is relative to this HTML file. Now, he needs to find in the HTML file the method which is called to display the price. This method is usually located in the TypeScript component relative to the HTML file. Assume that this function is called `displayPrice()`.
+
+* Find and analyze the TypeScript component
+
+The method `displayPrice()` is probably the *cause* of the wrong value displayed by the HTML file. Its *consequence* is the wrong behavior of the HTML file. Let's look at its implementation:
 
 ```ts
-// Code snippet s
-function getPriceWithVat(article: Article): number {
-	return article.priceWithVat;
+@Component(...)
+export class ArticlesComponent {
+	
+	price: number;
+	
+	// ....
+    
+    constructor(articlesService: ArticlesService) {
+    	
+    }
+    
+	displayPrice(article: Article): number {
+		this.price = article.price;
+	}
+	
 }
 ```
 
-Now, assume that 6 months later, another developer reuse this method on a new feature, which must return the price 
+The implementation of `displayPrice()` seems to be correct, it is not the root cause of the bug. The developer must continue to search by reverse order, from the consequences to the causes.
+
+* Find and analyze the TypeScript service
 
 ```ts
-// Code snippet t
-function getPriceWithVat(articleName: string): number {
-	const article: Article = getArticleInDatabase(articleName);
-	return getPriceWithVat(article);
+@Injectable()
+export class ArticlesService {
+
+	getArticleUrl: string = 'someUrl';
+	
+	constructor(private http: HttpClient) { }
+	
+	getArticle(idArticle: number): Article {
+		const url = `${this.getArticleUrl}?id=${idArticle}`;
+		return this.http.get(url);
+    }
 }
 ```
 
+-----
+// TODO: clean
 
+-----
 
-> **Definition**
->
-> A ***bug fix*** is an operation from **S** to **V** which transforms a code snippet `s` having some bug in a code snippet `s'` which has a behavior equal to the supposed behavior of `s`.
+### Bug resolution
 
-Bugs are difficult to find if the code is difficult to understand, and the code will be difficult to understand if the *meaning* of some parts of the code are not clear. The code snippet `t` is simple and easy to debug because the role of the function `multiplyByTwo` is trivial. We don't need to read the code snippet `s` to understand `t`.
-
-All of this simply means what every good developer already knows: the names of the variables, classes, functions or methods must be as clear as possible. It is a problem of *readability*, which will be studied in details later.
-
-Now, assume that the name of the function of the code snippet `s` was not correctly defined and that we try to use it in another code snippet `t`:
+Assume that the name of the function of a code snippet `s` was not correctly defined and that we try to use it in another code snippet `t`:
 
 ```ts
 // Code snippet s
