@@ -187,6 +187,40 @@ By definition, each line of code of a valid code snippet is a validatable code s
 >
 > Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
 
+
+
+[-> Top](#the-set-of-code-snippets)
+### Features
+
+> **Definition**
+>
+> A ***feature*** is a set of functionalities provided by the [system](code-snippets.md) to the users.
+
+> **Definition**
+>
+> An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are able to provide this feature to the users.
+
+> **Definition**
+>
+> A ***prime contractor*** is a natural or legal person which is asking a natural or legal person to program a given set of features.
+> 
+> An ***intermediate contractor*** is a natural or legal person which is working under the orders of a prime contractor or another intermediate contractor in the aim to develop a code snippet, a feature or a set of features wanted by the prime contractor.
+
+**Examples**
+
+Subcontractor companies, product managers, architects and lead developers are intermediate contractors.
+
+
+> **Definition**
+>
+> The ordered set of natural or legal persons between the prime contractor and a given developer, including them, is called a ***chain of responsibilities***.
+
+> **Definition**
+>
+> The ***specs*** are the set or instructions describing the expected [behavior of the system](systems.md) for a given feature, which are transmitted by the prime contractor.  
+
+
+
 [-> Top](#the-set-of-code-snippets)
 ## References, roles and descriptions
 
@@ -313,26 +347,6 @@ The quality of the description of a reference `r` is measured by the relation of
 > * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
 > * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
-
-[-> Top](#the-set-of-code-snippets)
-### Features
-
-> **Definition**
->
-> A ***feature*** is a set of functionalities provided by the [system](code-snippets.md) to the users.
-
-
-> **Definition**
->
-> An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are mandatory to provide this feature to the user.
-
-**Trivial remarks**
-
-* The set of the implementations of a given role is infinite.
-* The set of the implementations of a given feature is infinite.
-
-
-
 
 [-> Top](#the-set-of-code-snippets)
 ## Operations on code snippets
