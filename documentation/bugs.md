@@ -2,7 +2,91 @@
 
 If we are so interested in the concept of cognitive complexity, it's because of its correlation with the software maintainability. A software is easier to maintain if the bugs are easy to fix than if they are difficult to find and to resolve.
 
+Bugs may be caused by the program or by the system itself (hardware, connections, etc.). When we will use the word *bug*, it will be supposed that the problem is caused by the program, not by the hardware or something else.
+
 ## Definition of a bug
+
+> **Definition**
+>
+> A program has a ***bug*** when the [behavior of the system](systems.md) does not respect the [specs](code-snippets-tmp.md#features) asked by the [prime contractor](code-snippets-tmp.md#features).
+
+**Remark**
+
+Assuming that no one prime contractor will ask to develop a feature which will make crash the app, we will suppose that any program which may crash in a real execution has a bug.
+
+**Example**
+
+Assume that the prime contractor asked to display the price of some articles on a web page. Assume now that a lead developer, as intermediate contractor, asks a developer to code a function which will return the price of a given article : 
+
+Here is his code snippet: 
+```ts
+// Code snippet s
+function getPrice(article: Article): number {
+	return article.price;
+}
+```
+
+If it is absolutely sure that the parameter `article` will never be undefined, *and* that the property `price` corresponds to the value expected by the client, there is no bug. If the parameter `article` may be undefined, there is a bug, because the app will crash when `article` will be undefined.
+
+**Remark**
+
+This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
+
+## Causes of bugs
+
+The causes of bugs are multiple, and the "wrongdoer" may not be the developer... Let's try to clarify it :
+
+### Misunderstanding
+
+The main cause of bugs is probably a misunderstanding between two consecutive links of the [chain of responsibilities](code-snippets-tmp.md#features).
+
+> **Definition**
+> 
+> A ***misunderstanding*** between two consecutive element of a chain of responsibilities happens when there is a difference between what thinks the superior element and what the inferior element thinks that his superior thinks.
+
+**Example 1**
+
+Assume that a client asks a developer to code a function which will return the price of a given article, in the aim to display its price on a web page. If it was clear in the mind of the client that the displayed price must be the pre-tax price, and if the developer thought that it should be the price including the VAT, there is a misunderstanding between the client and the developer.
+
+If it was not explicitly specified that the price must be without VAT, *it is not a bug*, because the developer respected the specs explicitly given by the client. It is a lack of specs. In this case, the client is the wrongdoer. If it was explicitly specified, it is a bug, and the developer is the wrongdoer.
+
+**Example 2**
+
+Assume now that we add a link to the chain of responsibilities: a lead developer. If the client explicitly specified that the price must be without VAT, and if the lead developer didn't give this information to the developer, there will be a bug, but the wrondoer will be the lead developer.
+
+### Wrong implementation
+
+> **Definition**
+>
+> A program has a ***wrong implementation*** when there is no misunderstanding, and when the behavior of the system does not respect the specs of the different features asked by the prime contractor.
+
+**Example**
+
+In the example above, assume that the client wanted to display the pre-tax price, and there was no misunderstanding in the chain of responsibilities. If the displayed value is not the pre-tax price of the article, there is a wrong implementation. 
+
+**Remark**
+
+In case of wrong implementation, the wrongdoer may not be the developer. For example, an architect may ask developers to implement some functionalities. All the code snippets may respect the specs asked by the architect, but the combination of all these code snippets may not provide the behavior expected by the client. In this case, the wrongdoer is the architect.
+
+### Wrong reuse
+
+> **Definition**
+> A ***reuse*** of a program, a feature or a code snippet, is its use in a context defined by different specs. 
+
+**Example**
+
+Assume that a client asked to develop a web page displaying the pre-tax of a some articles. Assume that there is no bug, and that the code snippet below returns the correct value :
+
+```ts
+// Code snippet s
+function getPrice(article: Article): number {
+	return article.price;
+}
+```
+
+Now, assume that the client wants a second page displaying the pre-tax of other articles. If the implementation of this new feature uses `s`, it is a reuse of `s`.
+
+
 
 > **Definition**
 >
@@ -18,12 +102,6 @@ Consequently, by definition, a *bug* is also a subjective notion relative to the
 
 Assume that a client ask a developer to create a function which will return the price of an object of type `Article`.
 
-```ts
-// Code snippet s
-function getPrice(article: Article): number {
-	return article.price;
-}
-```
 
 For the developer, there is no bug. However, if the client asked to return the price *including the VAT*, there is a bug.
 
@@ -49,9 +127,6 @@ function getPriceWithVat(articleName: string): number {
 ```
 
 
-**Remark**
-
-By convention, we will suppose that any non-valid code snippet has a bug.
 
 > **Definition**
 >
