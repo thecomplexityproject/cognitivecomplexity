@@ -111,19 +111,19 @@ Of course, the second case is preferable to the first.
 
 A bug is discovered by someone which is able to understand the specs specified by the prime contractor or by one of its superiors. When this bug is discovered, he may fix the bug himself (if he is a developer), or ask one of his subordinates to do it. To be able to do that, the developer must find the set of code snippets causing this bug. Please note that for now, its only information is provided by the behavior of the system, not by the code itself.
 
-Then, the developer must understand *why* the behavior of the system is not correct. We can mention two ways of debugging
+Then, the developer must understand *why* the behavior of the system is not correct.
 
-#### Reverse debugging
+**Example**
 
-Assume that a client ask a developer to debug its Angular application, which should display the pre-tax price of some articles, but which displays the price including the VAT. What will do the developer ?
+Assume that a client ask a developer `d` to debug its Angular application, which should display the price including VAT of some articles, but which displays the pre-tax prices. This application was developed 6 months ago by a frontend developer `f` and a backend developer `b`, which had the same superior in the chain of responsibilities: a lead developer `l`. What will do our developer `d` to find the bug ?
 
 * Find and analyze the HTML component
 
-The developer knows the *consequence* of the bug: the displayed price is wrong. He will try to find its *cause*. His first step is to find the HTML component displaying the price. The *cause* of the bug is relative to this HTML file. Now, he needs to find in the HTML file the method which is called to display the price. This method is usually located in the TypeScript component relative to the HTML file. Assume that this function is called `displayPrice()`.
+His first step is to find the HTML component displaying the price. After that, he needs to find in the HTML file the property name which is displaying the price. This property is located in the TypeScript component relative to the HTML file. Assume that this property is called `price`.
 
 * Find and analyze the TypeScript component
 
-The method `displayPrice()` is probably the *cause* of the wrong value displayed by the HTML file. Its *consequence* is the wrong behavior of the HTML file. Let's look at its implementation:
+The property `price` is provided by the method `displayPrice()`, which is calling a service returning an article with a given `idArticle`.
 
 ```ts
 @Component(...)
@@ -137,16 +137,18 @@ export class ArticlesComponent {
     	
     }
     
-	displayPrice(article: Article): number {
-		this.price = article.price;
+	displayPrice(idArticle: number): void {
+		this.price = articlesService.getArticle(idArticle).subscribe(article => this.price = article.price);
 	}
 	
 }
 ```
 
-The implementation of `displayPrice()` seems to be correct, it is not the root cause of the bug. The developer must continue to search by reverse order, from the consequences to the causes.
+The implementation of `displayPrice()` seems to be correct, it is not the root cause of the bug.
 
 * Find and analyze the TypeScript service
+
+The service `getArticle()` simply calls an `http` GET request and returns its response:
 
 ```ts
 @Injectable()
@@ -156,52 +158,48 @@ export class ArticlesService {
 	
 	constructor(private http: HttpClient) { }
 	
-	getArticle(idArticle: number): Article {
+	getArticle(idArticle: number): Observable<Article> {
 		const url = `${this.getArticleUrl}?id=${idArticle}`;
-		return this.http.get(url);
+		const article = this.http.get(url) as Article; // Here, the `as Article`is a bad practice. We use it to simplify the reasoning.
+        return article; 
     }
 }
 ```
 
------
-// TODO: clean
+Assume that the developer adds a `console.log()` before the `return` line, and that the displayed value is the price including the VAT instead of the pre-tax price. Should he deduce that the method `getArticle()` has a wrong implementation ? That's not so sure.
 
------
+The problem is that `d` can't understand two things: the `role` of the property `price` of the data returned by the `http` request, and the role of the method `getPrice()`. The role of the property `price` was defined by the backend developer `b`, and the role of `getPrice()` was defined by the frontend developer `f`. Where is the mistake, and who is the wrongdoer ?
 
-### Bug resolution
+  * First case: the lead developer `l` specified that the property `price` returned by the `http` request must be the pre-tax price
 
-Assume that the name of the function of a code snippet `s` was not correctly defined and that we try to use it in another code snippet `t`:
+    In this case, `f` is the wrongdoer. He should add the VAT to the value of the property `price`.
 
-```ts
-// Code snippet s
-function someFunction(a: number): number {
-	// Do complex operations and return some number
-}
+  * Second case: the lead developer `l` specified that the property `price` returned by the `http` request must be the price including the VAT
 
-// Code snippet t
-function doComplexCalculations(a: number): number {
-	const b: number = someFunction(a);
-	// Do some long calculations using b
-	return b;
-}
-```
-The code snippet `t` is impossible to debug without reading `s`: the *role* of `s` is not understandable in `t`.
+    In this case, `b` is the wrongdoer. He should add the VAT to the value of the property `price`.
 
-So, if you want to debug `t`, you'll read the code of `s`, but in the aim to understand *what* `someFunction` is doing, not *how* `someFunction` runs. The most important for you is the *role* of `s`, not its `significant`. The *role* of `s` will become important for you if and only if the bug is inside `s`.
+  * Third case: the lead developer `l` didn't specify anything about the property `price`.
 
-It is also the justification of the *documentation*: if `someFunction` is correctly documented, you'll not need to understand its implementation :
+    In this case, `l` is maybe the wrongdoer, because he perhaps should specify the role of `price`. We could also think that `f` and `b` are the wrongdoers, because they should discuss together before the creation of the `http` request.
 
-```ts
-// Code snippet s
+  * Fourth case: `l`, `f` and `b` are not the wrongdoers.
 
-// Returns the circumference of a circle of radius a
-function someFunction(a: number): number {
-	// Do complex operations and return some number
-}
-```
+    It is possible that all was clear for `l`, `f` and `b`, and that their implementation of the task was correct. The wrongdoer is perhaps a fourth developer, which used a `POST` request which sent in the database a pre-tax price instead of a price including the VAT.
 
-The comments and the names of the identifiers are probably the most important parameters correlating the cognitive complexity with the understanding of the role of the code snippets, but are not the only ones. Moreover, we could discuss of the real efficiency of the documentation in some specific cases: do we really need documentation for very trivial cases, like for the function `multiplyByTwo` ? Or for the getters and the setters ? If not, in which cases should we add some documentation, and what should we write inside ? We could debate hours and hours about it, without having objective and indiscutable results: we would only have different expert opinions. We need scientific experiments, measures and statistics to be able to say one day: "yes, you should write documentation here, because it is proven that it will reduce the cognitive complexity".
+So, what should do our developer `d` to fix the bug ?
 
-In conclusion, we just need to remember that the understanding of the *role* of the code is important in the aim to understand *other* code snippets (and debug them easier).
+The first three cases are simple to fix: `d` only needs to modify one line in the backend or in the frontend to include the VAT.
+
+The fourth case is the most difficult to solve, because it means that there are in the database some articles which have a price with VAT and others not. It will be extremely long to separate the articles with a price including the VAT from the others, and it will be impossible to do it without the help of the client, which is the only one who knows what is the correct price of each article. The cost of this fix will be very high.
+
+This example is interesting, because it shows that a same apparent bug may take 10 minutes to fix it, or may take 3 weeks... That's why it is so difficult to agree in advance with the client of the price for the maintenance of its code. 
+
+[-> Top](#bugs)
+## Bugs and cognitive complexity
+
+The previous example shows that the core of the cause of the bug was the lack of precision of the *role* of the property `price`. Because of it, the developers using this property may not *understand* its role, and thus create a bug. If this property had been called `preTaxPrice` or `priceWithVat`, it is highly probable that this bug never happened. 
+
+It is a problem of cognitive complexity: a developer will understand easier the role of a property called `preTaxPrice` or `priceWithVat` than a property called `price`. Specifically, it is a problem of *spread* of cognitive complexity: something which was clear in the mind of the first developers was not clear at all for the others. That's why, when we measure the cognitive complexity of a code snippet, we must remember that in the [definition of the cognitive complexity](cognitive-complexity.md), the word *mean developer* is relative to an *external* developer, someone which reads the code snippet without knowing the *roles* of its *imported references*. 
+
 
 ***Work in progress...***
