@@ -190,36 +190,39 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 
 [-> Top](#the-set-of-code-snippets)
-### Features
-
-> **Definition**
->
-> A ***feature*** is a set of functionalities provided by the [system](code-snippets.md) to the users.
-
-> **Definition**
->
-> An ***implementation*** of a feature is a set of code snippets of a given [program](code-snippets.md) which are able to provide this feature to the users.
+### Contractors, features and tasks
 
 > **Definition**
 >
 > A ***prime contractor*** is a natural or legal person which is asking a natural or legal person to program a given set of features.
-> 
+>
 > An ***intermediate contractor*** is a natural or legal person which is working under the orders of a prime contractor or another intermediate contractor in the aim to develop a code snippet, a feature or a set of features wanted by the prime contractor.
 
 **Examples**
 
 Subcontractor companies, product managers, architects and lead developers are intermediate contractors.
 
+> **Definition**
+>
+> The ordered set of natural or legal persons between the prime contractor and a given developer, including them, is called a ***chain of responsibilities***. Each intermediate constructor is a link of this chain having one ***superior*** and one or many ***subordinates***.
+
+**Remark**
+
+We assume that each intermediate contractor has only one superior.
 
 > **Definition**
 >
-> The ordered set of natural or legal persons between the prime contractor and a given developer, including them, is called a ***chain of responsibilities***.
+> We call ***specs*** a set or instructions transmitted by a contractor to its direct subordinates describing the expected [behavior of the system](systems.md) in a specific situation.
+> 
+> When the specs are describing the behavior of the system from a user perspective, they are describing a ***feature***. These specs are specified by the prime contractor. A feature may be divided in a set of ***functionalities***. Each functionality is also seen from the user perspective.
+> 
+> When the subordinates are the developers, the specs are describing a ***task***.
+
+
 
 > **Definition**
 >
-> The ***specs*** are the set or instructions describing the expected [behavior of the system](systems.md) for a given feature, which are transmitted by the prime contractor.  
-
-By extension, we also call ***specs*** the instructions transmitted by an intermediate contractor to one of its subordinates. For example, a lead developer may define some specs and ask a developer to write some code snippet respecting them.
+> An ***implementation*** of a feature or a task is a set of code snippets which are providing a behavior of the system corresponding to the specs of the feature or the task.
 
 [-> Top](#the-set-of-code-snippets)
 ## References, roles and descriptions
