@@ -51,15 +51,15 @@ This definition doesn't mean that a developer understands an imported reference 
 > **Definition**
 >
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
-> 1. he understands the role of each [exported reference](code-snippets-tmp.md#behaviors-roles-and-descriptions) of `s`.
-> 2. he understands the role of each [imported reference](code-snippets-tmp.md#basic-definitions-around-code-snippets) located in `s`.
+> 1. he understands the role of each [exported reference](code-snippets-tmp.md#references) of `s`.
+> 2. he understands the role of each [imported reference](code-snippets-tmp.md#references) located in `s`.
 > 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.
 
 * Example
 
 ```ts
 // Code snippet s
-function getBill(article: Article): number {
+function getPriceWithVat(article: Article): number {
 	const price: number = article.getPrice();
 	const vat: number = VAT_RATE * price;
 	return price + vat;
@@ -70,22 +70,22 @@ A developer *understands* `s` if :
 
 *1. Role of exported references*
 
-- he understands that `s` represents a function called `getBill()` which takes an `Article` in parameter, and that its role is to return the bill of a given article.
+- he understands that `s` represents a function called `getPriceWithVat()` which takes an `Article` in parameter, and that its role is to return the price including VAT of a given article.
     
 *2. Role of imported references*
 
-- he understands that `getPrice()` is a method of the class `Article` which will return the price of the article.
+- he understands that `getPrice()` is a method of the class `Article` which will return the pre-tax price of the article.
 - he understands that `VAT_RATE` is the vat rate to use.
   
 *3. Behavior of the external references*
 
-- he predicts that the behavior of `getBill()` is correct, *i.e.* that its returned value will really be the price of the article including the vat.
+- he predicts that the behavior of `getPriceWithVat()` is correct, *i.e.* that if the external references `getPrice()` and `VAT_RATE` are correctly implemented, the value returned by `getPriceWithVat()` will really be the price of the article including the vat.
 
 **Remark**
 
-With this definition, a developer may understand `s` even if `getBill()` will return a value which will not be correct, *i.e.* which will not be the price including VAT of a given article. He is only able to predict that *if there is no bug in the implementation of the imported references of `s`* (*i.e.* if their behavior corresponds to their role), then `getBill()` will return the correct price including VAT. 
+With this definition, a developer may understand `s` even if `getPriceWithVat()` will return a value which will not be correct. He is only able to predict that *if there is no bug in the implementation of the imported references of `s`* (*i.e.* if their behavior corresponds to their role), then `getPriceWithVat()` will return the correct price including VAT. 
 
-This is not in contradiction with the intuitive notion of code understanding: with the definition above, if a developer understands `s`, he will be able to detect if the real behavior of `s` is correct or not, and finally he will be able to detect if there is a bug or not, which is probably what we mean when we say that a developer understands a code snippet: he is able to debug it.
+This is not in contradiction with the intuitive notion of code understanding: with the definition above, if a developer understands `s`, he will be able to detect if the real behavior of `s` is correct or not, and thus if there is a bug or not. This is probably what we intuitively mean when we say that a developer understands a code snippet: he is able to debug it.
 
 [-> Top](#the-understanding)
 ## Minimal cognitive complexity
