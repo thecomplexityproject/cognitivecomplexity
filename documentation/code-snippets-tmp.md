@@ -190,13 +190,13 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 
 [-> Top](#the-set-of-code-snippets)
-### Contractors, features and tasks
+## Contractors, features and tasks
 
 > **Definition**
 >
 > A ***prime contractor*** is a natural or legal person which is asking a natural or legal person to program a given set of features.
 >
-> An ***intermediate contractor*** is a natural or legal person which is working under the orders of a prime contractor or another intermediate contractor in the aim to develop a code snippet, a feature or a set of features wanted by the prime contractor.
+> A ***contractor*** is a natural or legal person which is working under the orders of a prime contractor or another intermediate contractor in the aim to develop a code snippet, a feature or a set of features wanted by the prime contractor.
 
 **Examples**
 
@@ -210,6 +210,8 @@ Subcontractor companies, product managers, architects and lead developers are in
 
 We assume that each intermediate contractor has only one superior.
 
+## Specs and behaviors
+
 > **Definition**
 >
 > We call ***specs*** a set or instructions transmitted by a contractor to its direct subordinates describing the expected [behavior of the system](systems.md) in a specific situation.
@@ -218,16 +220,16 @@ We assume that each intermediate contractor has only one superior.
 > 
 > When the subordinates are the developers, the specs are describing a ***task***.
 
-
+> **Definition**
+>
+> An ***implementation*** of a feature *-or a task-* is a set of code snippets which are providing a behavior of the system corresponding to the specs of the feature *-or the task-*.
 
 > **Definition**
 >
-> An ***implementation*** of a feature or a task is a set of code snippets which are providing a behavior of the system corresponding to the specs of the feature or the task.
+> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
 
 [-> Top](#the-set-of-code-snippets)
-## References, roles and descriptions
-
-### References
+## References
 
 > **Definition**
 >
@@ -241,15 +243,30 @@ Variables, constants, functions, classes, interfaces, enums, types... may be exp
 
 Assuming that each file may be called by some other part of the program, a [module](#valid-code-snippets) is by definition an exported reference. 
 
-### Behaviors, roles and descriptions
+> **Definition**
+>
+> Let `S` a set of code snippets.
+>
+> An ***exposed reference*** is an exported reference which is accessible from outside `S`.
+>
+> A ***hidden reference*** is an exported reference which is not accessible from outside `S`.
+
+**Example 1**
+
+A library exposes some classes, functions or methods which are accessible from the rest of the world. In contrast, this library has certainly some classes, functions or methods which are exported from some code snippets, but which are accessible o,ly by the other code snippets of the application, not by the rest of the world.
+
+**Remark**
+
+A *public reference* is an exported reference, but may be not an exposed reference. For example, in TypeScript `node_modules`, the exposed references are usually declared in special declaration files, with the extension `.d.ts`. These files expose only the methods which should be called by the user of the `node_module`. The other public references are hidden.
+
+
+## Roles and descriptions
+
+When a task is transmitted to a developer, he will write some code snippets, in the aim to provide the expected behavior of the system, in the conditions given by the specs. For that, he will code some exported references (which may include the code snippets themselves), which will be exposed to the rest of the application, or to the rest of the world in the case of a public library. Each of these external references has a specific *role* to play in the aim to provide the expected behavior of the system in the context specified by the task.
 
 > **Definition**
 >
-> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
-
-> **Definition**
->
-> The ***role of a context-sensitive valid code snippet*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when another code snippet calls one of the exported references of `s`.
+> The ***role of a reference*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when this reference is called by some code snippet.
 
 **Remark**
 
@@ -350,6 +367,14 @@ The quality of the description of a reference `r` is measured by the relation of
 > * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
 > * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
+
+**Persistence over time**
+
+When a program is finished, the specs are usually lost. The developers needed them to write the code, but when their work is finished, it is only the code which is persisting over time, not the specs, which were probably given orally, or written in an external software like JIRA.
+
+So, when a new developer will need to fix bug or add new features, its only information is provided by the code. He doesn't know the original specs. Similarly, he has no information about the *role* of a code snippet, which is something which was *in the mind of the developer which wrote it*. Its only information is the *description* of this role, which was written by the previous developer.
+
+The descriptions and the implementations are the only things persisting over time. They are the only available information to the new developer which wants to *understand* the code.
 
 [-> Top](#the-set-of-code-snippets)
 ## Operations on code snippets
