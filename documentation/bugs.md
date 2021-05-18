@@ -8,7 +8,7 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 
 > **Definition**
 >
-> A program has a ***bug*** when the [behavior of the system](systems.md) does not respect the [specs](code-snippets-tmp.md#features) asked by the [prime contractor](code-snippets-tmp.md#features).
+> A program has a ***bug*** when the [behavior of the system](systems.md) does not respect the [specs](code-snippets-tmp.md#specs-and-behaviors) asked by the [prime contractor](code-snippets-tmp.md#contractors-features-and-tasks).
 
 **Remark**
 
