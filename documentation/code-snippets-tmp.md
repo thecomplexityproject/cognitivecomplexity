@@ -266,7 +266,7 @@ When a task is transmitted to a developer, he will write some code snippets, in 
 
 > **Definition**
 >
-> The ***role of a reference*** `s` is the [behavior of the system](systems.md) expected by the author of `s` when this reference is called by some code snippet.
+> The ***role of an exported reference*** `r` is the [behavior of the system](systems.md) expected by the author of `r` when this reference is called by some code snippet.
 
 **Remark**
 

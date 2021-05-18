@@ -6,17 +6,17 @@ At first, our goal is not to define what is *understanding* in all the situation
 
 ## Table of contents
 
-* [Where is the problem ?](#where-is-the-problem-)
-* [Understanding of imported references](#understanding-of-imported-references)
+* [Role and behavior](#role-and-behavior)
+* [Understanding of references](#understanding-of-references)
 * [Understanding of valid code snippets](#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](#minimal-cognitive-complexity)
 * [Refactoring](#refactoring)
     * [Definition of refactoring](#definition-of-refactoring)
     * [Simplifications](#simplifications)    
 
-## Where is the problem ?
+## Role and behavior
 
-Let's begin by a simple example. 
+Let's start with a simple example. 
 
 ```ts
 // Code snippet s
@@ -26,15 +26,33 @@ function multiplyByTwo(a: number): number {
 }
 ```
 
-What means exactly to *understand* this code snippet ? Is it to understand what is the ***role*** of the function `multiplyByTwo` ? In this case, you only need to look at its name : this function will simply multiply a number by two, that's all. You don't need to look at what is *inside* the function. At the opposite, we could say that you *understand* this method if you understand *how* this method will return `a` multiplied by two. It seems that we could have two different definitions of the word *understand*. 
+To define the word *understand* in the definition of the cognitive complexity, we could simply say: *a developer understands the function `multiplyByTwo()` if he is able to predict that the value returned by this function will be equal to the value of the parameter `a` multiplied by two. In other words, we could say something like *"a developer understands `multiplyByTwo()` if he understands its implementation"*. Unfortunately, this is not enough to describe what we intuitively mean by *"understand"*. Let's look at the example below.
 
-In reality, the two kinds of definitions are interesting. In the first one, we say that a developer understands the ***signified*** of the written instructions, and in the other case we say that he understands the ***significant*** of these instructions, *i.e.* what means every word of the code snippet.
+```ts
+// Code snippet t
 
-## Understanding of imported references
+function multiplyByTwo(a: number): number {
+  return a * 3;
+}
+```
+
+If the developer understands the implementation, *i.e.* that this method will return a number multiplied by 3, but don't understand that there is a contradiction with the *name* of the function, should we say that he really understood this code snippet ? Surely not. A developer understands a function if he is able to predict its *expected behavior* and its *real behavior*.
+
+The name of the function `multiplyByTwo()` clearly indicate that its *role* is to return a number multiplied by two. Its *implementation* is correct, because the *behavior of the system* will be as expected, *i.e.* will return the number multiplied by 2.
+
+A developer really understands this function if he is able to understand its *role*, and if he is able to predict that its *implementation* is correct.  
+
+## Understanding of references
 
 > **Definition**
 >
-> A developer ***understands the role of an imported reference*** `r` located in a code snippet `s` if he is able to predict, when a process calls `r`, the same [behavior of the system](systems.md) than the author of the implementation of `r` would predict.
+> A developer ***understands the role of an external reference*** `r` if he is able to predict, without the help of the implementation of `r`, the [behavior of the system](systems.md) when `r` is called by a given code snippet.
+>
+> A developer ***understands the implementation of an external reference*** `r` if he is able to predict, without the help of the description of `r`, the [behavior of the system](systems.md) when `r` is called by a given code snippet.
+
+> **Definition**
+>
+> A developer ***understands an external reference*** `r` if he is able to predict if there is a bug in the implementation of `r`.
 
 **Remark**
 
