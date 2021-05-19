@@ -1,11 +1,77 @@
 
 # Systems
 
-## Definitions
+## Features, products and tasks
+
+
+> **Definition**
+>
+> A ***feature*** is a functional set imagined by a natural person to provide to the users.
+>
+> The ***product*** is the set of all the features to provide to the users.
+
+> **Definition**
+>
+> The ***prime contractor*** is the natural person which imagines the product.
+>
+> A ***stakeholder*** is a natural person which will participate actively in the concrete realisation of the product.
+
+**Remark**
+
+* A prime contractor is a stakeholder.
+
+> **Definition**
+>
+> The ***specs of a given feature*** are the oral and written instructions specified by a stakeholder in the aim to provide the set of functionalities defined by a given task.
+
+
+> **Definition**
+>
+> A ***task*** is a set of functionalities imagined by a natural person in the aim to provide the expected functionalities of a given feature, or of a given task. In other words, a task is a subdivision of a feature, or of another task.
+
+**Remark**
+
+A feature, a product or a task is something which is *imagined* by a natural person: it is not something concrete which exists in the real world.
+
+## Prime contractor, stakeholders, specs and chain of responsibilities
+
+> **Definition**
+> 
+> The ***specs*** are the oral and written instructions specified by a stakeholder in the aim to provide the set of functionalities defined by a given task.
+
+**Remark**
+
+* We will also call *specs* the instructions mentally specified by a stakeholder to himself in the aim to provide the set of functionalities defined by a given task.
+
+> **Definition**
+> 
+> When the specs are transmitted from a stakeholder to another one, the first stakeholder is called the ***immediate superior*** of the other, which is one of his ***subordinates***.
+
+**Remark**
+
+* We assume that each stakeholder has only one immediate superior.
+
+> **Definition**
+> 
+> Let `S` a set of stakeholders. We say that `S` is a ***chain of responsibilities*** if:
+> * There is a single element of `S` which has no superior in `S`. This element is called the ***top of the chain***.
+> * There is a single element of `S` which has no subordinate in `S`, and which is not the top of the chain. This element is called the ***bottom of the chain***.
+> * All the other elements of `S` have a single superior and a single subordinate in `S`. They are called the ***intermediates of the chain***.
+> 
+> The elements of `S` are called the ***links*** of the chain.
+
+> **Definition**
+> 
+> The ***role of a stakeholder*** is:
+> * To check if the work produced by its subordinates correspond to the *task* 
+
+## Systems
 
 > **Definition**
 >
 > We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, and D some data.
+> 
+> The ***role of a system*** is to provide to the users the features corresponding to an expected product.
 
 
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
