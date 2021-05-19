@@ -8,17 +8,23 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 
 > **Definition**
 >
-> A program has a ***bug*** when the [behavior of the system](systems.md) does not respect the [specs](code-snippets-tmp.md#specs-and-behaviors) asked by the [prime contractor](code-snippets-tmp.md#contractors-features-and-tasks).
+> A feature or a task has a ***bug*** when the [behavior of the system](systems.md) does not respect its [specs](code-snippets-tmp.md#specs-and-behaviors).
 
 **Remark**
 
-Assuming that no one prime contractor will ask to develop a feature which will make crash the app, we will suppose that any program which may crash in a real execution has a bug.
+By extension, we say that a *product* has a bug when one of its features has a bug.
+
+**Remark**
+
+Assuming that no one will ask to develop a feature which will make crash the program, we will suppose that any context-sensitive code snippet which may crash during a real execution has a bug.
 
 **Example**
 
-Assume that the prime contractor asked to display the price of some articles on a web page. Assume now that a lead developer, as intermediate contractor, asks a developer to code a function which will return the price of a given article : 
+Assume that a stakeholder writes the following specs, and transmit them to a developer:
 
-Here is his code snippet: 
+* *Implement a function which will return the price of a given article.* 
+
+Here is the code snippet written by the developer: 
 ```ts
 // Code snippet s
 function getPrice(article: Article): number {
@@ -26,11 +32,19 @@ function getPrice(article: Article): number {
 }
 ```
 
+The code snippet `s` respects the specs, thus the developer didn't introduce a new bug.
+
+
 If it is absolutely sure that the parameter `article` will never be undefined, *and* that the property `price` corresponds to the value expected by the client, there is no bug. If the parameter `article` may be undefined, there is a bug, because the app will crash when `article` will be undefined.
 
 **Remark**
 
 This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
+
+
+> **Definition**
+>
+> A reference has a ***bug*** when the [behavior of the system](systems.md) is not the same as expected by its [role](code-snippets-tmp.md#roles-and-descriptions).
 
 > **Definition**
 >

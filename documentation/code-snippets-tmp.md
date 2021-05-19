@@ -187,38 +187,8 @@ By definition, each line of code of a valid code snippet is a validatable code s
 >
 > Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
 
-
-
 [-> Top](#the-set-of-code-snippets)
-## Contractors, features and tasks
-
-> **Definition**
->
-> A ***prime contractor*** is a natural or legal person which is asking a natural or legal person to program a given set of features.
->
-> A ***contractor*** is a natural or legal person which is working under the orders of a prime contractor or another intermediate contractor in the aim to develop a code snippet, a feature or a set of features wanted by the prime contractor.
-
-**Examples**
-
-Subcontractor companies, product managers, architects and lead developers are intermediate contractors.
-
-> **Definition**
->
-> The ordered set of natural or legal persons between the prime contractor and a given developer, including them, is called a ***chain of responsibilities***. Each intermediate constructor is a link of this chain having one ***superior*** and one or many ***subordinates***.
-
-**Remark**
-
-We assume that each intermediate contractor has only one superior.
-
-## Specs and behaviors
-
-> **Definition**
->
-> We call ***specs*** a set or instructions transmitted by a contractor to its direct subordinates describing the expected [behavior of the system](systems.md) in a specific situation.
-> 
-> When the specs are describing the behavior of the system from a user perspective, they are describing a ***feature***. These specs are specified by the prime contractor. A feature may be divided in a set of ***functionalities***. Each functionality is also seen from the user perspective.
-> 
-> When the subordinates are the developers, the specs are describing a ***task***.
+## Implementation and behaviors
 
 > **Definition**
 >
