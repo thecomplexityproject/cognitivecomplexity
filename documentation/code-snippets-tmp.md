@@ -210,7 +210,7 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> The ***declaration of a reference*** is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. These comments are also called the ***description*** of the reference `r`.
+> The ***declaration of a reference*** `r` is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. These comments are also called the ***description*** of `r`.
 >
 > The ***implementation of a reference*** is the code snippet specifying its initial value or definition.
 
@@ -288,7 +288,9 @@ When a task is transmitted to a developer, he will write some code snippets, in 
 
 > **Definition**
 >
-> The ***role of a reference*** `r` is the behavior of `r` expected by its author when `r` is modified or called by some code snippet.
+> The ***role of a reference*** `r` is the behavior of `r` expected by its author when `r` is used by any code snippet.
+>
+> The ***role of a reference `r` in the context of a valid code snippet `s`*** is the behavior of `r` expected by its author if he had written `s`.
 
 **Remark**
 

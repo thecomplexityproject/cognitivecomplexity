@@ -64,9 +64,11 @@ A developer really understands this function if he is able to understand its *ro
 
 This definition doesn't mean that a developer understands a reference `r` when he is able to predict its behavior, but only if he makes the *same predictions* than the author of `r`. The two predictions may be wrong.
 
-> **Proposition**
->
-> A developer understands the role of a reference `r` if he is able to predict if there is a bug in the implementation of `r`.
+[comment]: <> (> **Proposition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> A developer understands the role of a reference `r` if he is able to predict if there is a bug in the implementation of `r`.)
 
 [comment]: <> (> **Definition**)
 
@@ -109,11 +111,15 @@ The descriptions and the implementations are the only things persisting over tim
 > **Definition**
 >
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
-> 1. he understands the role of each [exported reference](code-snippets-tmp.md#references) of `s`.
-> 2. he understands the role of each [imported reference](code-snippets-tmp.md#references) located in `s`.
-> 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.
+> 1. he understands the role of each [reference](code-snippets-tmp.md#references) declared in `s`.
+> 2. he understands the role of each [reference](code-snippets-tmp.md#references) imported in `s`, in the context of `s`.
+> 3. he understands the behavior of each [reference](code-snippets-tmp.md#references) declared in `s`.
+
+[comment]: <> (> 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.)
 
 * Example
+
+Assume that a developer `d` wrote a code snippet `s` consisting in a function `getPriceWithVat` whose *role* is to return the prive including VAT of a given article.
 
 ```ts
 // Code snippet s
@@ -124,24 +130,34 @@ function getPriceWithVat(article: Article): number {
 }
 ```
 
-A developer *understands* `s` if :
+A developer `d'` *understands* `s` if :
 
-*1. Role of exported references*
+*1. Role of the references declared in `s`*
 
-- he understands that `s` represents a function called `getPriceWithVat()` which takes an `Article` in parameter, and that its role is to return the price including VAT of a given article.
+- he understands that the role of `getPriceWithVat()` is to return the prive including VAT of a given article.
     
-*2. Role of imported references*
+*2. Role of the references imported in `s`*
 
-- he understands that `getPrice()` is a method of the class `Article` which will return the pre-tax price of the article.
-- he understands that `VAT_RATE` is the vat rate to use.
+- he understands that `Article` is a class whose role is to represent the different articles.
+- he understands that `getPrice()` is a method of the class `Article` whose role is to return the pre-tax price of the article.
+- he understands that `VAT_RATE` is a constant whose role is to provide the vat rate to use.
   
-*3. Behavior of the external references*
+*3. Behavior of the references declared in `s`*
 
-- he predicts that the behavior of `getPriceWithVat()` is correct, *i.e.* that if the external references `getPrice()` and `VAT_RATE` are correctly implemented, the value returned by `getPriceWithVat()` will really be the price of the article including the vat.
+- he predicts that `getPriceWithVat()` is correctly implemented, *i.e.* that if he understood well the role of the references declared or imported in `s`, the behavior of `getPriceWithVat()` will really be to return the price including VAT of an article.
+
+> **Proposition**
+> 
+> A developer understands a bugged context-sensitive valid code snippet if and only if he is able to locate any bug transmitted to him.
+
+**Demonstration**
+
+* Let `s` a context-sensitive valid code snippet having a bug. Let `d` the author of `s`, and let `d'` a developer which understands `s` and which is informed that there is a bug `b`. As `d` knows `b`, he knows the state of the system causing a bug to one of the references declared in `s`. Let `r` this reference. 
+  As `d'` understands `s`, he understands the role of each reference declared in `s` (1.). Thus, he knows the role of `r`. 
 
 **Remark**
 
-With this definition, a developer may understand `s` even if `getPriceWithVat()` will return a value which will not be correct. He is only able to predict that *if there is no bug in the implementation of the imported references of `s`* (*i.e.* if their behavior corresponds to their role), then `getPriceWithVat()` will return the correct price including VAT. 
+With the definition above, a developer may understand `s` even if `getPriceWithVat()` will return a value which will not be correct. He is only able to predict that *if there is no bug in the implementation of the imported references of `s`* (*i.e.* if their behavior corresponds to their role), then `getPriceWithVat()` will return the correct price including VAT. 
 
 This is not in contradiction with the intuitive notion of code understanding: with the definition above, if a developer understands `s`, he will be able to detect if the real behavior of `s` is correct or not, and thus if there is a bug or not. This is probably what we intuitively mean when we say that a developer understands a code snippet: he is able to debug it.
 

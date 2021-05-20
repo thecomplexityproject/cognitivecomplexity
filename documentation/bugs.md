@@ -8,11 +8,13 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 
 > **Definition**
 >
-> A feature or a task has a ***bug*** when the [behavior of the system](systems.md) does not respect its [specs](code-snippets-tmp.md#specs-and-behaviors).
+> A feature or a task ***has a bug*** when the [behavior of the system](systems.md) does not respect its [specs](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities). 
+> 
+> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which will cause a behavior of the system not respecting the specs of this feature (or task).
 
 **Remark**
 
-By extension, we say that a *product* has a bug when one of its features has a bug.
+By extension, we say that a *product*, or a *program*, has a bug when one of its features has a bug.
 
 **Remark**
 
@@ -44,11 +46,20 @@ This example clearly demonstrates that we can't say that a code snippet has a bu
 
 > **Definition**
 >
-> A reference has a ***bug*** when the [behavior of the system](systems.md) is not the same as expected by its [role](code-snippets-tmp.md#roles-and-descriptions).
-
-> **Definition**
+> A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#references) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
 >
-> A ***bug fix*** is a [modification](understanding.md#refactoring) which transforms a program `p` having some bug in a program `p'` without bug which respects the specs specified by the prime contractor.
+> A ***bug*** of a reference is a [state of the system](systems.md) which will cause a behavior in contradiction with its role.
+>
+> A context-sensitive code snippet `s` ***has a bug*** when one of the references declared in `s` has a bug.
+> 
+> A ***bug*** of a context-sensitive code snippet `s` is a [state of the system](systems.md) which will cause a bug for one of the references declared in `s`.
+
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> A ***bug fix*** is a [modification]&#40;understanding.md#refactoring&#41; which transforms a program `p` having some bug in a program `p'` respecting the specs specified by the prime contractor.)
 
 
 [Top](#bugs)
