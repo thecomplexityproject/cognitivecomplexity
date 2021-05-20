@@ -6,46 +6,41 @@
 
 > **Definition**
 >
-> A ***feature*** is a functional set imagined by a natural person to provide to the users.
+> A ***feature*** is a set of functionalities imagined by a natural person to provide to the users.
 >
-> The ***product*** is the set of all the features to provide to the users.
+> The ***final product*** is the set of all the features to provide to the users.
+>
+> A ***task*** is a set of functionalities imagined by a natural person in the aim to provide a given behavior to the system in specific situations. In other words, a task may be a subset of a feature, or a subset of another task.
+
+**Remark**
+
+* A feature, a product or a task is something which is *imagined* by a natural person: it is not something concrete which exists in the real world.
+* A feature is a task itself.
 
 > **Definition**
 >
-> The ***prime contractor*** is the natural person which imagines the product.
+> The ***prime contractor*** is the natural person which imagines the final product.
 >
 > A ***stakeholder*** is a natural person which will participate actively in the concrete realisation of the product.
 
 **Remark**
 
 * A prime contractor is a stakeholder.
+* A stakeholder may be in charge of one or multiple tasks, features, or even the final product itself.
 
 > **Definition**
 >
-> The ***specs of a given feature*** are the oral and written instructions specified by a stakeholder in the aim to provide the set of functionalities defined by a given task.
-
-
-> **Definition**
->
-> A ***task*** is a set of functionalities imagined by a natural person in the aim to provide the expected functionalities of a given feature, or of a given task. In other words, a task is a subdivision of a feature, or of another task.
+> The ***specs*** of a given task are the oral and written instruction specified by the author of the task, in the aim to provide the set of functionalities defining this task.
 
 **Remark**
 
-A feature, a product or a task is something which is *imagined* by a natural person: it is not something concrete which exists in the real world.
+* Thereafter, we will always suppose that the specs were written, even if the author of the task is assigning it to himself. Consequently, a spec is formulated in the real world. It is something concrete which is the only source of information available for the stakeholder which will execute the task.
 
 ## Prime contractor, stakeholders, specs and chain of responsibilities
 
 > **Definition**
 > 
-> The ***specs*** are the oral and written instructions specified by a stakeholder in the aim to provide the set of functionalities defined by a given task.
-
-**Remark**
-
-* We will also call *specs* the instructions mentally specified by a stakeholder to himself in the aim to provide the set of functionalities defined by a given task.
-
-> **Definition**
-> 
-> When the specs are transmitted from a stakeholder to another one, the first stakeholder is called the ***immediate superior*** of the other, which is one of his ***subordinates***.
+> When the specs are transmitted from a stakeholder to another one, the first stakeholder is called the ***immediate superior*** of the second stakeholder, which is one of his ***subordinates***.
 
 **Remark**
 
@@ -62,8 +57,13 @@ A feature, a product or a task is something which is *imagined* by a natural per
 
 > **Definition**
 > 
-> The ***role of a stakeholder*** is:
-> * To check if the work produced by its subordinates correspond to the *task* 
+> The ***job of a stakeholder*** is to provide a ***product*** respecting the specs transmitted to him by his superior.
+
+**Remark**
+
+A stakeholder has two responsibilities:
+* Check if the work produced by its subordinates corresponds to the tasks he assigned to them.
+* Produce himself an additional work which will provide, with the help of the works of his subordinates, a product respecting the specs of the tasks assigned to him. 
 
 ## Systems
 

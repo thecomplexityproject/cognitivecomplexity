@@ -46,23 +46,63 @@ A developer really understands this function if he is able to understand its *ro
 
 > **Definition**
 >
-> A developer ***understands the role of an external reference*** `r` if he is able to predict, without the help of the implementation of `r`, the [behavior of the system](systems.md) when `r` is called by a given code snippet.
+> A developer ***understands a reference*** `r` if he is able to predict its [behavior](code-snippets-tmp.md#roles-and-descriptions).
 >
-> A developer ***understands the implementation of an external reference*** `r` if he is able to predict, without the help of the description of `r`, the [behavior of the system](systems.md) when `r` is called by a given code snippet.
+> A developer ***understands a reference `r` in the context of a valid code snippet `s`*** if he is able to predict its [behavior](code-snippets-tmp.md#roles-and-descriptions) when `r` is used by `s`.
 
 > **Definition**
 >
-> A developer ***understands an external reference*** `r` if he is able to predict if there is a bug in the implementation of `r`.
+> A developer ***understands the declaration of a reference*** `r` if he understands its role without the help of its implementation.
+>
+> A developer ***understands the implementation of a reference*** `r` if he understands its role without the help of its declaration.
+
+> **Definition**
+>
+> A developer ***understands the role of a reference*** `r` if he is makes the same predictions about the [behavior](code-snippets-tmp.md#roles-and-descriptions) of `r` than the author of `r`.
 
 **Remark**
 
-This definition doesn't mean that a developer understands an imported reference `r` when he is able to predict the behavior of the system when a process calls `r`, but that he is able to do the *same predictions* that the author of the imported references would do in the same circumstances.
+This definition doesn't mean that a developer understands a reference `r` when he is able to predict its behavior, but only if he makes the *same predictions* than the author of `r`. The two predictions may be wrong.
+
+> **Proposition**
+>
+> A developer understands the role of a reference `r` if he is able to predict if there is a bug in the implementation of `r`.
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference will be called by a given process `p`.)
+
+[comment]: <> (> )
+
+[comment]: <> (> The ***cognitive complexity of an exported reference*** `r` located in a given snippet `s` is the time needed by a mean developer which will import this reference to predict the behavior of the system when this reference will be called by a given process `p`.)
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> The ***cognitive complexity of a reference*** `r` written by a developer `d` is the time needed by a mean developer `d'` to understand its role.)
+
+[comment]: <> (>)
+
+[comment]: <> (> The ***relative cognitive complexity of a reference*** `r` imported in a context-sensitive code snippet `s` is the time needed by a mean developer to predict its role on the context of `s`.)
 
 > **Definition**
 >
-> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference will be called by a given process `p`.
-> 
-> The ***cognitive complexity of an exported reference*** `r` located in a given snippet `s` is the time needed by a mean developer which will import this reference to predict the behavior of the system when this reference will be called by a given process `p`.
+> The ***quality level*** of a description of an exported reference `r` is said to be:
+> * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
+> * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
+> * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
+
+**Persistence over time**
+
+When a program is finished, the specs are usually lost. The developers needed them to write the code, but when their work is finished, it is only the code which is persisting over time, not the specs, which were probably given orally, or written in an external software like JIRA.
+
+So, when a new developer will need to fix bug or add new features, its only information is provided by the code. He doesn't know the original specs. Similarly, he has no information about the *role* of a code snippet, which is something which was *in the mind of the developer which wrote it*. Its only information is the *description* of this role, which was written by the previous developer.
+
+The descriptions and the implementations are the only things persisting over time. They are the only available information to the new developer which wants to *understand* the code.
+
 
 ## Understanding of valid code snippets
 
