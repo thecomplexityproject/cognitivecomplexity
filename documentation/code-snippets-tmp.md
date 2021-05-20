@@ -203,14 +203,58 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> An ***exported reference*** is an object declared in a code snippet `s` which is accessible outside of `s`.
+> An ***identifier*** is a name chosen by a developer which represents a given data of the program: variables, constants, objects, functions, classes, properties, methods, interfaces, enums, types, etc.
 > 
-> An ***imported reference*** located in a code snippet `s` is an object referring to an external reference of another code snippet `t`.
+> The couple made up of an identifier and its value is called a ***reference***.
+
+
+> **Definition**
+>
+> The ***declaration of a reference*** is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. These comments are also called the ***description*** of the reference `r`.
+>
+> The ***implementation of a reference*** is the code snippet specifying its initial value or definition.
+
+
+**Example**
+
+```ts
+// Code snippet s
+
+/**
+ * Returns the price of a given article
+ * @param article
+ */
+function getPrice(article: Article): number {
+	return article.price;
+}
+```
+
+The *declaration* of the reference `getPrice` is:
+
+```ts
+/**
+ * Returns the price of a given article
+ * @param article
+ */
+function getPrice(article: Article): number {
+	
+}
+```
+
+Its *implementation* is:
+
+```ts
+	return article.price;
+```
+
+> **Definition**
+>
+> An ***exported reference*** is a reference declared in a code snippet `s` which is accessible outside of `s`.
+> 
+> An ***imported reference*** located in a code snippet `s` is a reference declared outside of `s`.
 
 **Examples**
   
-Variables, constants, functions, classes, interfaces, enums, types... may be exported or imported references.
-
 Assuming that each file may be called by some other part of the program, a [module](#valid-code-snippets) is by definition an exported reference. 
 
 > **Definition**
@@ -221,130 +265,69 @@ Assuming that each file may be called by some other part of the program, a [modu
 >
 > A ***hidden reference*** is an exported reference which is not accessible from outside `S`.
 
-**Example 1**
+**Example**
 
-A library exposes some classes, functions or methods which are accessible from the rest of the world. In contrast, this library has certainly some classes, functions or methods which are exported from some code snippets, but which are accessible o,ly by the other code snippets of the application, not by the rest of the world.
+* A library exposes some classes, functions or methods which are accessible from the rest of the world. In contrast, this library has certainly some classes, functions or methods which are exported from some code snippets, but which are accessible o,ly by the other code snippets of the application, not by the rest of the world.
+
+**Remarks**
+
+* A *public reference* is an exported reference, but may be not an exposed reference. For example, in TypeScript `node_modules`, the exposed references are usually declared in special declaration files, with the extension `.d.ts`. These files expose only the methods which should be called by the user of the `node_module`. The other public references are hidden.
+* A module may be considered itself as an exported reference.
+
+> **Definition**
+>
+> The ***behavior of a reference*** `r` is the [behavior of the system](systems.md) when `r` is initialized, modified or called.
 
 **Remark**
 
-A *public reference* is an exported reference, but may be not an exposed reference. For example, in TypeScript `node_modules`, the exposed references are usually declared in special declaration files, with the extension `.d.ts`. These files expose only the methods which should be called by the user of the `node_module`. The other public references are hidden.
-
+* The definition of the behavior of a reference includes the variations of its value, and its impact on the rest of the system, *i.e.* its side effects.
 
 ## Roles and descriptions
 
-When a task is transmitted to a developer, he will write some code snippets, in the aim to provide the expected behavior of the system, in the conditions given by the specs. For that, he will code some exported references (which may include the code snippets themselves), which will be exposed to the rest of the application, or to the rest of the world in the case of a public library. Each of these external references has a specific *role* to play in the aim to provide the expected behavior of the system in the context specified by the task.
+When a task is transmitted to a developer, he will write some code snippets, in the aim to provide the expected behavior of the system, in the conditions given by the specs. For that, he will code some references, which will be exposed to the rest of the application, or to the rest of the world in the case of a public library. Each of these external references has a specific *role* to play in the aim to provide the expected behavior of the system in the context specified by the task.
 
 > **Definition**
 >
-> The ***role of an exported reference*** `r` is the [behavior of the system](systems.md) expected by the author of `r` when this reference is called by some code snippet.
+> The ***role of a reference*** `r` is the behavior of `r` expected by its author when `r` is modified or called by some code snippet.
 
 **Remark**
 
-With this definition, a *role* is clearly a subjective notion. It is something which is in the real world, not in the theoretical world. A *role* is in the *world of measurability*, a behavior is in the *world of computability*. The border between these two worlds is located between the concepts of *role* and *behavior*.
-
-
-> **Definition**
->
-> The ***description*** of the role `r` of a code snippet `s` is the set of elements written by the author of `s` which are describing its role.
-
-Examples of kinds of descriptions of a role `r` :
-* the name of `r`
-* the signature relative to `r` (for functions and methods)
-* the comments relative to `r`
+* The role of a reference is a subjective notion. It is something which is in the mind of the author of the code snippet.
 
 **Example**
 
+Here is the code snippet written by a first developer `d`:
+
 ```ts
 // Code snippet s
-interface Profile {
-	address?: string;
-	firstName: string;
-	lastName: string;
-}
 
 /**
- * Returns the profile corresponding to a given id
- * @param id
+ * Returns the price of an article
+ * @param article
  */
-function getProfile(id: number): Profile {
-	const data: ProfileEntity = getProfileFromDataBase(id);
-	const profile = {
-		firstName: data.firstName,
-        lastName: data.lastName
-    };
+function getPrice(article: Article): number {
+	return article.price;
 }
 ```
 
-Let `d` the developer which wrote `s`, and assume that for him, the role of the function `getProfile()` is to return the profile located in database corresponding to the given `id`. The description of this role is specified by the name of the function (`getProfile`) and by the comments above this function.
+In the mind of `d`, it is clear that the parameter `article` will never be undefined, because he knows that the program will never send to `getPrice()` an undefined value. For him, the *role* of the reference `getPrice` is to return the price of a non-undefined article.
 
-Now, let `d'` another developer which will use `getProfile()`. He thinks that the role of this function is to return the profile located in database corresponding to the given `id`.
+Now, assume that 6 months later, a new developer `d'` must develop a new feature which needs to display the price of some article. For that, he will read the description of the function `getPrice` and will reuse it, thinking that its role is to return the price of the parameter `article` if this parameter is defined, and will return `undefined` if not. 
 
 ```ts
 // Code snippet t
-function getProfileAddress(idProfile: number): string {
-	const profile: Profile = getProfile(id);
-	return profile.address;
+
+function logArticlePrice(articleId: number): number {
+	const article: Article = getArticleFromDataBase(articleId);
+	console.log(getPrice(article));
 }
 ```
 
-And... there is a bug ! Why ? Because in the mind of `d`, `getProfile()` returns only the firstname and lastName fields, not the address. On the other side, `d'` thought that the field *address* will be included. Thus, the code snippet written by `d'` will have a behavior which not corresponds to the role ha wants to give to its function `getProfileAddress()`. It is the exact definition of a [bug](bugs.md#definition-of-a-bug).
+`d'` introduced a new bug, because the function `getPrice()` will crash when the value returned from the database will be undefined. This bug is a result of the misunderstanding between `d` and `d'`; the role of `getPrice` is not the same for `d` and `d'`.
 
-But who is guilty ? `d` or `d'` ? It is not so clear.
-
-Assume that `d` wrote its code six months ago, at a time when it was clear for everyone that his function `getProfile()` will return only the firstname and lastName. At that time, the program was running correctly, there was no bug. Today, someone asked `d'` to write a code returning the address of a given profile. At this moment, `d'` will create a bug, because he will write a code snippet with a behavior which does not correspond to the role he wants to give to its function. 
-
-`d'` is he the only one which is guilty ? In reality, `d` has its part of responsibility, because he wrote a *description* which was not exactly describing the behavior of `getProfile()`. He misled `d'`. Consequently, he increased unnecessarily the cognitive complexity of `getProfile()`: with its bad quality definition, `getProfile()` was more difficult to understand. In other words,the cognitive complexity of the exported reference `getProfile()` could be reduced with a refactor `r` like this:
+The wrongdoer is `d'`, because he introduced the new bug: he should have done a unit test checking the case *"undefined"*. However, he introduced this bug because `d` used a bad coding practice: a function which may be imported y another module should never crash. `d'` introduced a *maintainability loophole*. It is a good example of *propagation of cognitive complexity*: if `d` had clarified the description of `getPrice`, `d'` had understood easier that he may introduce a bug. The bad practice of `d` increased the cognitive complexity of `getPrice` *and*, indirectly, the cognitive complexity of `getArticlePrice`.   
 
 
-```ts
-// Code snippet r(s)
-interface Profile {
-	address?: string;
-	firstName: string;
-	lastName: string;
-}
-
-/**
- * Returns the firstName and the lastName of a Profile corresponding to a given id
- * @param id
- */
-function getProfile(id: number): Profile {
-	const data: ProfileEntity = getProfileFromDataBase(id);
-	const profile = {
-		firstName: data.firstName,
-        lastName: data.lastName
-    };
-}
-```
-
-
-> **Definition**
->
-> The ***role of a reference*** `r` is the expected [behavior of the system](systems.md) when a process calls `r`, in terms of the developer which *wrote* the implementation of `r`.
-
-
-**Remark**
-
-When `s` is a module, `s` is considered itself as one of its exported references.
-
-**Remark**
-
-The quality of the description of a reference `r` is measured by the relation of correlation between its role, and the role predicted by other developers calling `r`.
-
-> **Definition**
->
-> The ***quality level*** of a description of an exported reference `r` is said to be:
-> * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
-> * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
-> * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
-
-**Persistence over time**
-
-When a program is finished, the specs are usually lost. The developers needed them to write the code, but when their work is finished, it is only the code which is persisting over time, not the specs, which were probably given orally, or written in an external software like JIRA.
-
-So, when a new developer will need to fix bug or add new features, its only information is provided by the code. He doesn't know the original specs. Similarly, he has no information about the *role* of a code snippet, which is something which was *in the mind of the developer which wrote it*. Its only information is the *description* of this role, which was written by the previous developer.
-
-The descriptions and the implementations are the only things persisting over time. They are the only available information to the new developer which wants to *understand* the code.
 
 [-> Top](#the-set-of-code-snippets)
 ## Operations on code snippets
