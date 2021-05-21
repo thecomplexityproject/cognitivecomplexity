@@ -210,7 +210,8 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> The ***declaration of a reference*** `r` is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. These comments are also called the ***description*** of `r`.
+> The ***declaration of a reference*** `r` is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. 
+> These comments are also called the ***description*** of `r`.
 >
 > The ***implementation of a reference*** is the code snippet specifying its initial value or definition.
 
@@ -330,6 +331,58 @@ function logArticlePrice(articleId: number): number {
 
 The wrongdoer is `d'`, because he introduced the new bug: he should have done a unit test checking the case *"undefined"*. However, he introduced this bug because `d` used a bad coding practice: a function which may be imported y another module should never crash. `d'` introduced a *maintainability loophole*. It is a good example of *propagation of cognitive complexity*: if `d` had clarified the description of `getPrice`, `d'` had understood easier that he may introduce a bug. The bad practice of `d` increased the cognitive complexity of `getPrice` *and*, indirectly, the cognitive complexity of `getArticlePrice`.   
 
+> **Definition**
+>
+> The ***quality level*** of a description of an exported reference `r` is said to be:
+> * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
+> * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
+> * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
+
+## Roles and unit tests
+
+> **Definition**
+>
+> A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of the system during the execution of a given process using `r` with some initial values. 
+
+> **Definition**
+>
+> A ***unit test*** of a reference `r` is a code snippet written by the author of `r` in the aim to check if the behavior of `r` corresponds to its role when `r` is called by a given stub.
+
+**Remarks**
+
+* Stubs are frequently confused with the ***mocks***, which are objects written in the aim to simulate the behavior of complex, real objects, which may be used in unit tests.
+* A unit test checks if `r` have the behavior expected by its author, for the initial values which are simulated by some mocks.
+* Thereafter, we will suppose that if the author of `r` wrote some unit tests, he verified if the behavior of `r` checked by the unit tests really corresponds to the role he gave to `r`. 
+
+> **Proposition**
+> 
+> Let `r` a reference implemented by a given developer `d`. Let `t` a unit test relative to `r`, written by `d`. Let `d'` another developer which is reading `r`.
+> 
+> If `d'` is not able to predict the behavior of `r` specified by a unit test of `r`, `d'` didn't understand the role of `r`.
+
+**Demonstration**
+
+* Assume that `d'` is not able to predict the behavior of `r` specified by `t`. That means that it exists a unit test `t`implemented with a stub which cause a behavior of `r` which is different from the behavior expected by `d'`. As we supposed that the developer `d` verified if the behavior of `r` checked by `t` is corresponding to the role he gave to `r`, we are sure that `d` made a prediction different from the prediction of `d'`. Consequently, by definition, `d'` didn't understand the role of `r`.
+
+**Example**
+
+// TODO
+
+**Remark**
+
+* The assertion *"a developer `d'` understands the role of a reference `r` if he is able to predict the behavior or `r` for each unit test written by the author of `r`"* is not true. `d'` may understand the unit tests actually written by the author of `r`, but may not understand future unit tests written by the author of `r`. If `d'` is able to predict the same behavior as written in a set of unit tests, he is only able to *partially* understand the role of `r`.
+
+> **Proposition**
+>
+> Let `r` a reference implemented by a given developer `d`. Let `d'` another developer which is reading `r`.
+> 
+> `d'` understands the role of `r` if and only if he would be able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write.
+
+**Demonstration**
+
+* Assume that `d'` does not understand the role of `r`. Thus, it exists a behavior of `r` which should be predicted by `d`, but not by `d'`. Consequently, `d` should write a unit test `t` corresponding to this behavior, and `d'` would not be able to predict the same behavior as written in `t`.
+* Conversely, assume that `d'` is not able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write. That means that it exists a unit test `t` of `r` that `d` could write, which make predictions for a given stub which would the same as the predictions that `d'` would do. With the result of the proposition above, we can conclude that `d'` didn't understand the role of `r`.
+
 
 
 [-> Top](#the-set-of-code-snippets)
@@ -338,6 +391,7 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 ### Addition
 
 #### Definition of the addition
+
 > **Definition**
 >
 > We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
