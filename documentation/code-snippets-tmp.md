@@ -9,12 +9,12 @@ In this project, we will specify our own definitions of simple or complex notion
 
 * [Programming language](#programming-language)
 * [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
-* [References, roles, descriptions and features](#references-roles-and-descriptions)
-  * [References](#references)
-  * [Behaviors, roles and descriptions](#behaviors-roles-and-descriptions)
-  * [Features](#features)
+* [Valid code snippets](#valid-code-snippets)
+* [References](#references)
+* [Roles and descriptions](#roles-and-descriptions)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#addition)
+  * [Propositions and conjectures](#propositions-and-conjectures)
 
 
 ## Programming language
@@ -282,6 +282,7 @@ Assuming that each file may be called by some other part of the program, a [modu
 
 * The definition of the behavior of a reference includes the variations of its value, and its impact on the rest of the system, *i.e.* its side effects.
 
+[-> Top](#the-set-of-code-snippets)
 ## Roles and descriptions
 
 When a task is transmitted to a developer, he will write some code snippets, in the aim to provide the expected behavior of the system, in the conditions given by the specs. For that, he will code some references, which will be exposed to the rest of the application, or to the rest of the world in the case of a public library. Each of these external references has a specific *role* to play in the aim to provide the expected behavior of the system in the context specified by the task.

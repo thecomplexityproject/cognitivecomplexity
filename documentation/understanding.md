@@ -113,7 +113,7 @@ The descriptions and the implementations are the only things persisting over tim
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
 > 1. he understands the role of each [reference](code-snippets-tmp.md#references) declared in `s`.
 > 2. he understands the role of each [reference](code-snippets-tmp.md#references) imported in `s`, in the context of `s`.
-> 3. he understands the behavior of each [reference](code-snippets-tmp.md#references) declared in `s`.
+> 3. he is able to predict the behavior of each [reference](code-snippets-tmp.md#references) declared in `s`.
 
 [comment]: <> (> 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.)
 
@@ -146,13 +146,45 @@ A developer `d'` *understands* `s` if :
 
 - he predicts that `getPriceWithVat()` is correctly implemented, *i.e.* that if he understood well the role of the references declared or imported in `s`, the behavior of `getPriceWithVat()` will really be to return the price including VAT of an article.
 
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> A developer ***understands a context-sensitive valid code snippet*** `s` if he is able to predict the behavior of each [reference]&#40;code-snippets-tmp.md#references&#41; declared in `s` or imported in `s`.)
+
+[comment]: <> (* Example)
+
+[comment]: <> (Assume that a developer `d` wrote a code snippet `s` consisting in a function `getPriceWithVat` whose *role* is to return the prive including VAT of a given article.)
+
+[comment]: <> (```ts)
+
+[comment]: <> (// Code snippet s)
+
+[comment]: <> (function getPriceWithVat&#40;article: Article&#41;: number {)
+
+[comment]: <> (	const price: number = article.getPrice&#40;&#41;;)
+
+[comment]: <> (	const vat: number = VAT_RATE * price;)
+
+[comment]: <> (	return price + vat;)
+
+[comment]: <> (})
+
+[comment]: <> (```)
+
+[comment]: <> (A developer `d'` *understands* `s` if :)
+
 > **Proposition**
 > 
-> A developer understands a bugged context-sensitive valid code snippet if and only if he is able to locate any bug transmitted to him.
+> A developer understands a bugged context-sensitive valid code snippet if and only if he is able to locate any bug which would be transmitted to him.
 
 **Demonstration**
 
-* Let `s` a context-sensitive valid code snippet having a bug. Let `d` the author of `s`, and let `d'` a developer which understands `s` and which is informed that there is a bug `b`. As `d` knows `b`, he knows the state of the system causing a bug to one of the references declared in `s`. Let `r` this reference. 
+* Let `s` a context-sensitive valid code snippet having some bugs. Let `d` the author of `s`, and let `d'` a developer which understands `s`. Assume that `d'` is informed of the existence of a bug `b` on a reference `r` declared in `s`. That means that `d'` knows the state of the system causing a wrong behavior to `r`. Thus, `d'` knows two things: 
+    * An initial state of the system, called *s<sub>0</sub>*
+    * A final state of the system, called *s<sub>1</sub>*, which is different from the expected state.
+  
   As `d'` understands `s`, he understands the role of each reference declared in `s` (1.). Thus, he knows the role of `r`. 
 
 **Remark**

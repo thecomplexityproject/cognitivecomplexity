@@ -4,13 +4,13 @@
 
 This documentation is organized by thematics :
 
-* [The definition of Cognitive Complexity](#the-definition-of-cognitive-complexity)
-* [The set of code snippets](#the-set-of-code-snippets)
-* [The notion of *understanding*](#the-notion-of-understanding)
-* [The bugs](#the-bugs)
-* [The mean developer](#the-mean-developer)
-* [The systems](#the-systems)
-* [The experimental protocols](#the-experimental-protocols)
+* [The definition of Cognitive Complexity](#the-definition-of-cognitive-complexitycognitive-complexitymd)
+* [The set of code snippets](#the-set-of-code-snippetscode-snippets-tmpmd)
+* [The notion of *understanding*](#the-notion-of-understandingunderstandingmd)
+* [The bugs](#the-bugsbugsmd)
+* [The mean developer](#the-mean-developermean-developermd)
+* [The systems](#features-and-systemssystemsmd)
+* [The experimental protocols](#the-experimental-protocolsexperimental-protocolsmd)
 
 ## Propositions and conjectures
 
@@ -20,46 +20,57 @@ Other results are probably true, but must be calculated or measured in the real 
 
 ## Table of contents
 
-### The definition of Cognitive Complexity
+### [The definition of Cognitive Complexity](cognitive-complexity.md)
 
 * [Definition of Cognitive Complexity](cognitive-complexity.md#definition-of-the-cognitive-complexity)
 * [Definition of the Cognitive Complexity metric](cognitive-complexity.md#definition-of-the-cognitive-complexity-metric)
 
-### The set of code snippets
+### [The set of code snippets](code-snippets-tmp.md)
 
 * [Programming language](code-snippets-tmp.md#programming-language)
 * [Basic definitions around code snippets](code-snippets-tmp.md#basic-definitions-around-code-snippets)
-* [References, roles, descriptions and features](code-snippets-tmp.md#references-roles-and-descriptions)
-  * [References](code-snippets-tmp.md#references)
-  * [Roles](code-snippets-tmp.md#roles)
-  * [Descriptions](code-snippets-tmp.md#description)
-  * [Features](code-snippets-tmp.md#features)
+* [Valid code snippets](code-snippets-tmp.md#valid-code-snippets)
+* [Implementation and behaviors](code-snippets-tmp.md#implementation-and-behaviors)
+* [References](code-snippets-tmp.md#references)
+* [Roles and descriptions](code-snippets-tmp.md#roles-and-descriptions)
 * [Operations on code snippets](code-snippets-tmp.md#operations-on-code-snippets)
   * [Addition](code-snippets-tmp.md#addition)
+    * [Definition of the addition](code-snippets-tmp.md#definition-of-the-addition)
+    * [Propositions and conjectures](code-snippets-tmp.md#propositions-and-conjectures)
     
-### The notion of *understanding*
+### [The notion of *understanding*](understanding.md)
 
-* [Where is the problem ?](understanding.md#where-is-the-problem-)
-* [Understanding of external references](understanding.md#understanding-of-external-references)
+* [Role and behavior](understanding.md#Role and behavior)
+* [Understanding of references](understanding.md#understanding-of-references)
 * [Understanding of valid code snippets](understanding.md#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](understanding.md#minimal-cognitive-complexity)
 * [Refactoring](understanding.md#refactoring)
   * [Definition of refactoring](understanding.md#definition-of-refactoring)
   * [Refactoring methods to decrease the cognitive complexity](understanding.md#simplifications)
 
-### The bugs
+### [The bugs](bugs.md)
 
 * [Definition of a bug](bugs.md#definition-of-a-bug)
+* [Causes of bugs](bugs.md#causes-of-bugs)
+  * [Misunderstanding](bugs.md#misunderstanding)
+  * [Wrong implementation](bugs.md#wrong-implementation)
+  * [Wrong reuse](bugs.md#wrong-reuse)
+* [Debugging process](bugs.md#debugging-process)
+  * [Bug discovering](bugs.md#bug-discovering)
+  * [Bug understanding](bugs.md#bug-understanding)
+* [Bugs and cognitive complexity](bugs.md#bugs-and-cognitive-complexity)
 
-### The mean developer
+### [The mean developer](mean-developer.md)
 
 * [Definition](mean-developer.md#definition)
 
-### The systems
+### [Features and systems](systems.md)
 
-* [Definitions](systems.md#definitions)
+* [Features, products and tasks](systems.md#features-products-and-tasks)
+* [Prime contractor, stakeholders, specs and chain of responsibilities](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities)
+* [Systems definition](systems.md#systems-definition)
 
 
-### The experimental protocols
+### [The experimental protocols](experimental-protocols.md)
 
 * [Methodology](experimental-protocols.md#methodology)

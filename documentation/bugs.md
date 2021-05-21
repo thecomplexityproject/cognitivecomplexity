@@ -4,6 +4,19 @@ If we are so interested in the concept of cognitive complexity, it's because of 
 
 Bugs may be caused by the program or by the system itself (hardware, connections, etc.). When we will use the word *bug*, it will be supposed that the problem is caused by the program, not by the hardware or something else.
 
+## Table of contents
+
+* [Definition of a bug](#definition-of-a-bug)
+* [Causes of bugs](#causes-of-bugs)
+  * [Misunderstanding](#misunderstanding)
+  * [Wrong implementation](#wrong-implementation)
+  * [Wrong reuse](#wrong-reuse)
+* [Debugging process](#debugging-process)
+  * [Bug discovering](#bug-discovering)
+  * [Bug understanding](#bug-understanding)
+* [Bugs and cognitive complexity](#bugs-and-cognitive-complexity)
+
+
 ## Definition of a bug
 
 > **Definition**
