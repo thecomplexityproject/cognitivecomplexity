@@ -4,14 +4,14 @@
 
 This documentation is organized by thematics :
 
-* [The definition of Cognitive Complexity](#the-definition-of-cognitive-complexitycognitive-complexitymd)
-* [The set of code snippets](#the-set-of-code-snippetscode-snippets-tmpmd)
-* [The notion of *understanding*](#the-notion-of-understandingunderstandingmd)
-* [The bugs](#the-bugsbugsmd)
-* [Simplification technics](#simplification-technicssimplification-technicsmd)
-* [The mean developer](#the-mean-developermean-developermd)
-* [The systems](#features-and-systemssystemsmd)
-* [The experimental protocols](#the-experimental-protocolsexperimental-protocolsmd)
+* The definition of Cognitive Complexity
+* The set of code snippets
+* The notion of *understanding*
+* The bugs
+* Simplification technics
+* The mean developer
+* The systems
+* The experimental protocols
 
 ## Propositions and conjectures
 
@@ -41,7 +41,7 @@ Other results are probably true, but must be calculated or measured in the real 
     
 ### [The notion of *understanding*](understanding.md)
 
-* [Role and behavior](understanding.md#Role and behavior)
+* [Role and behavior](understanding.md#role-and-behavior)
 * [Understanding of references](understanding.md#understanding-of-references)
 * [Understanding of valid code snippets](understanding.md#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](understanding.md#minimal-cognitive-complexity)
