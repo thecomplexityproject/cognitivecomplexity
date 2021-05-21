@@ -8,6 +8,7 @@ This documentation is organized by thematics :
 * [The set of code snippets](#the-set-of-code-snippetscode-snippets-tmpmd)
 * [The notion of *understanding*](#the-notion-of-understandingunderstandingmd)
 * [The bugs](#the-bugsbugsmd)
+* [Simplification technics](#simplification-technicssimplification-technicsmd)
 * [The mean developer](#the-mean-developermean-developermd)
 * [The systems](#features-and-systemssystemsmd)
 * [The experimental protocols](#the-experimental-protocolsexperimental-protocolsmd)
@@ -47,6 +48,15 @@ Other results are probably true, but must be calculated or measured in the real 
 * [Refactoring](understanding.md#refactoring)
   * [Definition of refactoring](understanding.md#definition-of-refactoring)
   * [Refactoring methods to decrease the cognitive complexity](understanding.md#simplifications)
+
+### [Simplification technics](simplification-technics.md)
+
+* [Remove the dead code](simplification-technics.md#remove-the-dead-code)
+* [Clarify identifiers](simplification-technics.md#clarify-identifiers)
+* [Add comments](simplification-technics.md#add-comments)
+* [Typing](simplification-technics.md#typing)
+* [Logic extraction](simplification-technics.md#logic-extraction)
+* [Remove line-breaks](simplification-technics.md#remove-line-breaks)
 
 ### [The bugs](bugs.md)
 
