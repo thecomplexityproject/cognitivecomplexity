@@ -4,7 +4,17 @@ In the aim to increase software maintainability by decreasing cognitive complexi
 
 The aim of this page is to study the impact of the different [refactoring technics](understanding.md#simplifications) on the value of the Cognitive Complexity.
 
-### Remove the dead code
+## Table of contents
+
+* [Remove the dead code](#remove-the-dead-code)
+* [Clarify identifiers](#clarify-identifiers)
+* [Add comments](#add-comments)
+* [Typing](#typing)
+* [Logic extraction](#logic-extraction)
+* [Remove line-breaks](#remove-line-breaks)
+
+
+## Remove the dead code
 
 > **Proposition**
 >
@@ -15,10 +25,10 @@ The aim of this page is to study the impact of the different [refactoring techni
 > Let `s` a context-sensitive valid code snippet.
 > 1. The action consisting of remove the dead code of `s` is a refactoring because it doesn't change its behavior.
 > 2. Any non-empty code snippet has a cognitive complexity strictly higher than 0.
-     > With 1. and 2., we can assert that the removing of the dead code is a simplification.
+> With 1. and 2., we can assert that the removing of the dead code is a simplification.
 
 
-### Clarify identifiers
+## Clarify identifiers
 
 > **Conjecture**
 >
@@ -40,7 +50,7 @@ function multiplyByTwo(a: number): number {
 
 Even if we can't demonstrate this conjecture without experiments, we can say without risks that the cognitive complexity of `s'` is lower than the cognitive complexity of `s`.
 
-### Add comments
+## Add comments
 
 > **Conjecture**
 >
@@ -109,7 +119,7 @@ function multiplyByTwo(a: number): number {
 
 Is `r(s)` easier to understand than `s` ? Probably not. Thus, a refactoring consisting of adding comments to a given code snippet may increase its cognitive complexity.
 
-### Type the code
+## Typing
 
 Some languages, like JavaScript, don't provide the ability to type the variables, or the functions. The language TypeScript is an overcoat layer of JavaScript, which was developed in the aim to fill this gap. The final goal of TypeScript is to limit the risk of bugs due to the lack of typing. Is a typed code snippet simpler to understand than if it was untyped ? Probably yes :
 
@@ -149,7 +159,7 @@ We must specify what is a *non-trivial case*. For now, we can only give a list o
 `Cc("let a: Article = new Article();") > Cc("let a = new Article();")`
 
 
-### Logic extraction
+## Logic extraction
 
 Huge functions, with hundreds of lines and complex operations, are usually regarded as non-readable and incomprehensible. It is probably true. However, is it *always* true ? If not, in which cases is it true ?
 
@@ -251,7 +261,7 @@ In this case, it seems that the extraction of the logic *multiply by two* and *m
 > The efficiency of the *logic extraction* technic is positively correlated with the cognitive complexity of the parts to extract. In other words, it is more relevant to extract a complex code snippet than a simpler one. 
 
 
-### Remove line-breaks
+## Remove line-breaks
 
 
 > **Conjecture**
