@@ -65,7 +65,7 @@ A stakeholder has two responsibilities:
 * Check if the work produced by its subordinates corresponds to the tasks he assigned to them.
 * Produce himself an additional work which will provide, with the help of the works of his subordinates, a product respecting the specs of the tasks assigned to him. 
 
-## Systems
+## Systems definition
 
 > **Definition**
 >
