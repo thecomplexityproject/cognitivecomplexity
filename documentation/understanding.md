@@ -1,6 +1,6 @@
 # The understanding
 
-The definition of the [cognitive complexity](./cognitive-complexity.md) uses the word `understand`. We need to accurate what we mean when we use this term. In other words, we need to precise what are the attributes of what we call *"understanding"*, how they are correlated to the cognitive complexity, and how we could measure them in the real world.
+The definition of the [cognitive complexity](cognitive-complexity.md) uses the word `understand`. We need to accurate what we mean when we use this term. In other words, we need to precise what are the attributes of what we call *"understanding"*, how they are correlated to the cognitive complexity, and how we could measure them in the real world.
 
 At first, our goal is not to define what is *understanding* in all the situations where this word can be used, but only in the context of the *software understanding*. Our aim is to define the *understanding* relatively to a [code snippet](code-snippets.md), not in other situations.
 
@@ -8,6 +8,7 @@ At first, our goal is not to define what is *understanding* in all the situation
 
 * [Role and behavior](#role-and-behavior)
 * [Understanding of references](#understanding-of-references)
+* [Persistence over time](#persistence-over-time)
 * [Understanding of valid code snippets](#understanding-of-valid-code-snippets)
 * [Minimal cognitive complexity](#minimal-cognitive-complexity)
 * [Refactoring](#refactoring)
@@ -46,9 +47,12 @@ A developer really understands this function if he is able to understand its *ro
 
 > **Definition**
 >
-> A developer ***understands a reference*** `r` if he is able to predict its [behavior](code-snippets-tmp.md#roles-and-descriptions).
->
-> A developer ***understands a reference `r` in the context of a valid code snippet `s`*** if he is able to predict its [behavior](code-snippets-tmp.md#roles-and-descriptions) when `r` is used by `s`.
+> A developer `d` ***understands the role of a reference*** `r` if he is able to guess the predictions of the author of `r` about the [behavior](code-snippets-tmp.md#roles-and-descriptions) of `r`.
+
+**Remark**
+
+This definition doesn't mean that a developer understands a reference `r` when he is able to predict its behavior, but only if he is able to guess the *same predictions* than the author of `r`. Moreover, these predictions may be wrong (in this case, `d` introduced a bug).
+
 
 > **Definition**
 >
@@ -56,19 +60,25 @@ A developer really understands this function if he is able to understand its *ro
 >
 > A developer ***understands the implementation of a reference*** `r` if he understands its role without the help of its declaration.
 
+
 > **Definition**
+> 
+> A developer `d` ***understands a reference `r` in the context of a valid code snippet `s`*** if:
+> * `r` is imported in `s`
+> * `d` understands the role of `r`
+> * `d` is able to predict the behavior of `r` when `r` is called by `s`
 >
-> A developer ***understands the role of a reference*** `r` if he is makes the same predictions about the [behavior](code-snippets-tmp.md#roles-and-descriptions) of `r` than the author of `r`.
+> A developer `d` ***understands a reference*** `r` if:
+> * `d` is able to understand `r` in the context of any valid code snippet
+> * `d` understands the implementation of `r`
 
-**Remark**
+> **Proposition**
+>
+> A developer understands the role of a reference `r` if he is able to predict if there is a bug in the implementation of `r`.
 
-This definition doesn't mean that a developer understands a reference `r` when he is able to predict its behavior, but only if he makes the *same predictions* than the author of `r`. The two predictions may be wrong.
+**Demonstration**
 
-[comment]: <> (> **Proposition**)
-
-[comment]: <> (>)
-
-[comment]: <> (> A developer understands the role of a reference `r` if he is able to predict if there is a bug in the implementation of `r`.)
+// TODO
 
 [comment]: <> (> **Definition**)
 
@@ -90,14 +100,7 @@ This definition doesn't mean that a developer understands a reference `r` when h
 
 [comment]: <> (> The ***relative cognitive complexity of a reference*** `r` imported in a context-sensitive code snippet `s` is the time needed by a mean developer to predict its role on the context of `s`.)
 
-> **Definition**
->
-> The ***quality level*** of a description of an exported reference `r` is said to be:
-> * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
-> * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
-> * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
-
-**Persistence over time**
+## Persistence over time
 
 When a program is finished, the specs are usually lost. The developers needed them to write the code, but when their work is finished, it is only the code which is persisting over time, not the specs, which were probably given orally, or written in an external software like JIRA.
 
@@ -112,12 +115,10 @@ The descriptions and the implementations are the only things persisting over tim
 >
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
 > 1. he understands the role of each [reference](code-snippets-tmp.md#references) declared in `s`.
-> 2. he understands the role of each [reference](code-snippets-tmp.md#references) imported in `s`, in the context of `s`.
-> 3. he is able to predict the behavior of each [reference](code-snippets-tmp.md#references) declared in `s`.
+> 2. he understands the role of each reference imported in `s`, in the context of `s`.
+> 3. if the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of each reference declared in `s`.
 
-[comment]: <> (> 3. assuming that the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of the exported references of `s`.)
-
-* Example
+**Example**
 
 Assume that a developer `d` wrote a code snippet `s` consisting in a function `getPriceWithVat` whose *role* is to return the prive including VAT of a given article.
 
@@ -185,7 +186,9 @@ A developer `d'` *understands* `s` if :
     * An initial state of the system, called *s<sub>0</sub>*
     * A final state of the system, called *s<sub>1</sub>*, which is different from the expected state.
   
-  As `d'` understands `s`, he understands the role of each reference declared in `s` (1.). Thus, he knows the role of `r`. 
+  As `d'` understands `s`, he understands the role of each reference declared in `s` (1.). Thus, he knows the role of `r`.
+
+// TODO : finish demonstration
 
 **Remark**
 
