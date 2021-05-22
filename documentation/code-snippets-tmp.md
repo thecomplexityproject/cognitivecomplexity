@@ -210,8 +210,9 @@ By definition, each line of code of a valid code snippet is a validatable code s
 
 > **Definition**
 >
-> The ***declaration of a reference*** `r` is the code snippet specifying its name, its type, its parameters if they exist, and its comments if they exist. 
-> These comments are also called the ***description*** of `r`.
+> The ***description of a reference*** `r` is the set of elements specifying its role. The description of `r` includes its name, its type, and its comments if they exist. 
+> 
+> The ***declaration of a reference*** `r` is the code snippet corresponding to its description.
 >
 > The ***implementation of a reference*** is the code snippet specifying its initial value or definition.
 
@@ -230,7 +231,9 @@ function getPrice(article: Article): number {
 }
 ```
 
-The *declaration* of the reference `getPrice` is:
+The *description* of the reference `getPrice` is the set of elements defined by its name, its signature and its comments.
+
+Its *declaration* is the code snippet below:
 
 ```ts
 /**

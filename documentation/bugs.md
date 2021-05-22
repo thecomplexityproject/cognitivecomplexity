@@ -23,7 +23,7 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 >
 > A feature or a task ***has a bug*** when the [behavior of the system](systems.md) does not respect its [specs](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities). 
 > 
-> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which will cause a behavior of the system not respecting the specs of this feature (or task).
+> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which will cause a behavior not respecting the specs of this feature (or task).
 
 **Remark**
 
@@ -61,7 +61,7 @@ This example clearly demonstrates that we can't say that a code snippet has a bu
 >
 > A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#references) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
 >
-> A ***bug*** of a reference is a [state of the system](systems.md) which will cause a behavior in contradiction with its role.
+> A ***bug*** of a reference `r` is a [state of the system](systems.md) which will cause a behavior of `r` in contradiction with its role.
 >
 > A context-sensitive code snippet `s` ***has a bug*** when one of the references declared in `s` has a bug.
 > 
@@ -76,9 +76,13 @@ This example clearly demonstrates that we can't say that a code snippet has a bu
 
 
 [Top](#bugs)
-## Causes of bugs
+## Sources of bugs
 
 The causes of bugs are multiple, and the "wrongdoer" may not be the developer... Let's try to clarify it :
+
+> **Definition**
+>
+> A reference is a ***source of bugs*** if its description is incorrect or insufficient to be able to guess its precise behavior.
 
 ### Misunderstanding
 
