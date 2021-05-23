@@ -1,5 +1,5 @@
 
-# The set of code snippets
+# Code snippets
 
 In the [cognitive complexity's definition](cognitive-complexity.md), the concept which is the most well-defined seems to be the notion of *code snippet*. That's probably true, but that doesn't mean that we can neglect to define it accurately. To be able to obtain scientific results, we need at first define precisely each word that we use. What is a *code snippet* ? A *valid code snippet* ? A *program* ? A *system* ? The *state of a system* ? All of these notions are defined more or less accurately in many scientific articles, and their definitions are more or less consensual.
 
@@ -8,9 +8,23 @@ In this project, we will specify our own definitions of simple or complex notion
 ## Table of contents
 
 * [Programming language](#programming-language)
-* [Basic definitions around code snippets](#basic-definitions-around-code-snippets)
-* [Valid code snippets](#valid-code-snippets)
+  * [Texts and characters](#--texts-and-characters)
+  * [Programming language, alphabet, word](#--programming-language-alphabet-word)
+  * [Formal language, formal grammar](#--formal-language-formal-grammar)
+  * [Syntax](#--syntax)
+  * [Separator](#--separator)
+  * [String](#--string)
+  * [File](#--file)
+* [The set of code snippets](#the-set-of-code-snippets)
+  * [Code snippet (large definition)](#--code-snippet-large-definition)
+  * [Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet](#--code-snippet-close-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)
+  * [Line of code](#--line-of-code)
+  * [Module](#--module)
+* [Implementation and behavior](#implementation-and-behaviors)
+  * [Implementation](#--implementation)
+  * [Behavior](#--behavior)
 * [References](#references)
+  * [Identifier](#--identifier)
 * [Roles and descriptions](#roles-and-descriptions)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#addition)
@@ -19,17 +33,18 @@ In this project, we will specify our own definitions of simple or complex notion
 
 ## Programming language
 
-In theoretical computer science, we usually start by defining what is a computer language. In our case, it is not enough general. Our aim goal is to measure the time required for a developer to understand a code snippet, but we also have in mind the idea to measure the time that he will need to debug some program.
+In theoretical computer science, we usually start by defining what is a computer language. In our case, it is not enough general, because our goal is to measure the time required for a developer to understand a code snippet, including code snippets having syntactic error, *i.e.* which are not respecting the rules of any language. We may want to measure the time that he will need to find a syntax error. That's why we will need, in the chapters below, to define different kinds of code snippets: *context-sensitive code snippets*, *context-free code snippets* and *non-valid code snippets*.
 
-How to debug a program, in the real world ? At first, simply by opening files, read them, and try to understand them. Each file is a document containing a text which may have different parts written in different languages. For example, a file may include some `html`, `javascript` and `php` code. That's why, when we'll need to define what is a bug and how to measure the debugging time, we will need a concept larger than a *programming language*. 
+What is the doing a developer which wants to understand a program ? At first, he will open some files, read them, and try to understand them. Caution: each file is a document containing a text which may have different parts written in different languages. For example, a file may include some `html`, `javascript` and `php` code. That's why, when we'll need to define what is a bug and how to measure the debugging time, we will need a concept larger than a *programming language*. 
 
-In fact, the reality is simple: when a developer opens a file, we only know he that a *text* to read. 
+In fact, the reality is simple: when a developer opens a file, we only know he that he has a *text* to read, may be written in multiple languages. 
 
+##### -> Texts and characters
 > **Definition**
 >
 > A ***text*** is a finite set of ordered individual elements, which are the ***characters*** of the text.
 
-* Example
+**Example**
 
 In the text below, `a`, `b` and `c` are characters, but not `ab`, which is not individual: it can be split in `a` + `b`.
 
@@ -39,6 +54,7 @@ ab c
 
 Now, let's remind the main concepts of theoretical computer science :
 
+##### -> Programming language, alphabet, word
 > **Definition**
 >
 > A ***programming language*** is a [formal language](https://en.wikipedia.org/wiki/Formal_language) comprising a set of instructions that produce various kinds of output.
@@ -47,12 +63,14 @@ The ***alphabet*** of a formal language consists of symbols, letters, or tokens 
 
 A formal language is often defined by means of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar):
 
+##### -> Formal language, formal grammar
 > **Definition**
 >
 > A ***formal language*** describes how to form strings from a language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form. 
 > 
 > A ***formal grammar*** is defined as a set of production rules for strings in a formal language.
 
+##### -> Syntax
 > **Definition**
 >
 > The ***syntax*** of a computer language is the set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language.
@@ -63,26 +81,62 @@ There is a usual debate about the belonging of the markup languages -like HTML- 
 
 Now, we can define what is a *code snippet*:
 
-
-
-[-> Top](#the-set-of-code-snippets)
-## Basic definitions around code snippets
-
+##### -> Separator
 > **Definition**
 >
-> A ***code snippet*** is a triplet `(s, L, S)` where `s` is a [text](#programming-language), `L` a [programming language](#programming-language) and `S` a given [system](systems.md).
+> A ***separator*** is an invisible character. The characters which are not separators are called the ***visible characters***.
 
-Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L, S)`. It will be implicit that a code snippet refers to some computer language `L` and to the system containing `s`. Furthermore, a code snippet is supposed to be written in a single file.
-
-**Remark**
-
-By convention, if `s` is an empty string, the couple `(s, L)` is considered as a code snippet and noted `''`.
+For example, whitespaces, tabulations and line breaks are separators.
 
 **Remark**
 
-A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`.
+The separators are usually not included in the formal language itself.
 
-* Example
+> **Proposition**
+>
+> The cognitive complexity of a separator may be null or non-null.
+
+**Demonstration**
+
+* *May be null:*
+
+In Javascript, a whitespace at the end of a line of code is not visible and has no effect on the behavior due to the code snippet. Consequently, the developer will not need it to understand the code snippet. Thus, the cognitive complexity of this whitespace is equal to 0.
+
+* *May be non-null:*
+
+The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.
+
+##### -> String
+> **Definition**
+>
+> A ***string*** is an ordered set of visible characters of a given code snippet.
+
+##### -> File
+> **Definition**
+>
+> A ***file*** is a quadruplet (p, n, t, L) where `p` is a string which represents its path, `n` is a string which represents its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
+
+**Remark**
+
+Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
+
+
+[-> Top](#code-snippets)
+## The set of code snippets
+
+##### -> code snippet (large definition)
+> **Definition**
+>
+> A ***code snippet*** is a couple (s, L) where `s` is a [text](#programming-language), `L` a [programming language](#programming-language).
+> 
+> A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`. Thereafter, when we will use the idiom *code snippet*, it will be supposed to be a *[context-sensitive code snippet]()*
+
+**Remarks**
+
+* Thereafter, by abuse of language, we will simply note `s` a code snippet `(s, L)`. It will be implicit that a code snippet refers to some computer language `L` and to the program of a system containing `s`. Furthermore, a code snippet is supposed to be written in a single file.
+* By convention, if `s` is an empty string, the couple `(s, L)` is also considered as a code snippet, and noted `''`.
+
+**Example**
 
 ```ts
 // Code snippet s
@@ -92,56 +146,18 @@ With the definition above, the couple (`s`, `TypeScript`) is a code snippet, eve
 
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
 
+
+ ##### -> code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
 > **Definition**
 >
-> A ***separator*** is an invisible character. Tha characters which are not separators are called the ***visible characters***.
-
-For example, whitespaces, tabulations and line breaks are separators.
-
-**Remark**
-
-The separators are usually not included in the formal language itself.
-
-> **Proposition**
-> 
-> The cognitive complexity of a separator may be null or non-null. 
-
-**Demonstration**
-
-* *May be null:* 
-  
-In Javascript, a whitespace at the end of a line of code is not visible and has no effect on the behavior due to the code snippet. Consequently, the developer will not need it to understand the code snippet. Thus, the cognitive complexity of this whitespace is equal to 0.
-
-* *May be non-null:* 
-  
-The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.  
-
-> **Definition**
+> A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>. Thereafter, when the idiom *code snippet* will be used without other precisions, it is always assumed that we talk about a *context-sensitive valid code snippet*.
 >
-> A ***string*** is an ordered set of visible characters of a given code snippet.
-
-
-> **Definition**
+> A ***context-free valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`. The set of the valid code snippets of a given language `L` is noted **V**.
 >
-> A ***file*** is a quadruplet (p, n, t, L) where `p` is a string which represents its path, `n` is a string which represents its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
+> A ***validatable code snippet*** is a code snippet `(s, L)` which can be concatenated with another code snippet to give a context-sensitive valid code snippet. The set of the validatable code snippets of a given language `L` is noted **V**<sup>-</sup>.
 
-**Remark**
-
-Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
-
-## Valid code snippets
-
-> **Definition**
->
-> A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>.
->
-> A ***valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`. The set of the valid code snippets of a given language `L` is noted **V**.
->
-> A ***validatable code snippet*** is a code snippet `(s, L)` which can be concatenated with another code snippet to give a valid code snippet. The set of the validatable code snippets of a given language `L` is noted **V**<sup>-</sup>.
-
-
-
-* Example 1
+ 
+**Example 1**
 
 ```ts
 // Code snippet s
@@ -160,7 +176,7 @@ if (a > 0) {
 `s` is not a *valid code snippet*, but is a *validatable code snippet*, because the concatenation of `s` with the code snippet `t` below is a valid code snippet.
 
 ```ts
-// Code snippet t
+// Code snippet  t
   a = a + 1;
 }
 ```
@@ -177,30 +193,35 @@ This result ensues directly from the definitions of valid and validatable code s
 
 Assuming that every computer language integrates the concept of "line break", we can give the following definition :
 
+##### -> Line of code
 > **Definition**
 >
 > The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
 
 By definition, each line of code of a valid code snippet is a validatable code snippet.
 
+##### -> Module
 > **Definition**
 >
 > Let (p, n, t, L) a given file. The code snippet (t, L) is called a ***module***.
 
-[-> Top](#the-set-of-code-snippets)
+[-> Top](#code-snippets)
 ## Implementation and behaviors
 
+##### -> Implementation
 > **Definition**
 >
 > An ***implementation*** of a feature *-or a task-* is a set of code snippets which are providing a behavior of the system corresponding to the specs of the feature *-or the task-*.
 
+##### -> Behavior
 > **Definition**
 >
 > The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
 
-[-> Top](#the-set-of-code-snippets)
+[-> Top](#code-snippets)
 ## References
 
+##### -> Identifier
 > **Definition**
 >
 > An ***identifier*** is a name chosen by a developer which represents a given data of the program: variables, constants, objects, functions, classes, properties, methods, interfaces, enums, types, etc.
@@ -208,6 +229,7 @@ By definition, each line of code of a valid code snippet is a validatable code s
 > The couple made up of an identifier and its value is called a ***reference***.
 
 
+##### -> Description, declaration and implementation of a reference
 > **Definition**
 >
 > The ***description of a reference*** `r` is the set of elements specifying its role. The description of `r` includes its name, its type, and its comments if they exist. 
@@ -251,6 +273,7 @@ Its *implementation* is:
 	return article.price;
 ```
 
+##### -> Exported and imported references
 > **Definition**
 >
 > An ***exported reference*** is a reference declared in a code snippet `s` which is accessible outside of `s`.
@@ -261,6 +284,7 @@ Its *implementation* is:
   
 Assuming that each file may be called by some other part of the program, a [module](#valid-code-snippets) is by definition an exported reference. 
 
+##### -> Exposed and hidden references
 > **Definition**
 >
 > Let `S` a set of code snippets.
@@ -278,6 +302,7 @@ Assuming that each file may be called by some other part of the program, a [modu
 * A *public reference* is an exported reference, but may be not an exposed reference. For example, in TypeScript `node_modules`, the exposed references are usually declared in special declaration files, with the extension `.d.ts`. These files expose only the methods which should be called by the user of the `node_module`. The other public references are hidden.
 * A module may be considered itself as an exported reference.
 
+##### -> Behavior of a reference
 > **Definition**
 >
 > The ***behavior of a reference*** `r` is the [behavior of the system](systems.md) when `r` is initialized, modified or called.
@@ -286,11 +311,12 @@ Assuming that each file may be called by some other part of the program, a [modu
 
 * The definition of the behavior of a reference includes the variations of its value, and its impact on the rest of the system, *i.e.* its side effects.
 
-[-> Top](#the-set-of-code-snippets)
+[-> Top](#code-snippets)
 ## Roles and descriptions
 
 When a task is transmitted to a developer, he will write some code snippets, in the aim to provide the expected behavior of the system, in the conditions given by the specs. For that, he will code some references, which will be exposed to the rest of the application, or to the rest of the world in the case of a public library. Each of these external references has a specific *role* to play in the aim to provide the expected behavior of the system in the context specified by the task.
 
+##### -> Role of references
 > **Definition**
 >
 > The ***role of a reference*** `r` is the behavior of `r` expected by its author when `r` is used by any code snippet.
@@ -334,19 +360,22 @@ function logArticlePrice(articleId: number): number {
 
 The wrongdoer is `d'`, because he introduced the new bug: he should have done a unit test checking the case *"undefined"*. However, he introduced this bug because `d` used a bad coding practice: a function which may be imported y another module should never crash. `d'` introduced a *maintainability loophole*. It is a good example of *propagation of cognitive complexity*: if `d` had clarified the description of `getPrice`, `d'` had understood easier that he may introduce a bug. The bad practice of `d` increased the cognitive complexity of `getPrice` *and*, indirectly, the cognitive complexity of `getArticlePrice`.   
 
+##### -> Quality level of descriptions
 > **Definition**
 >
-> The ***quality level*** of a description of an exported reference `r` is said to be:
+> The ***quality level of a description*** of an exported reference `r` is said to be:
 > * ***high*** if a mean developer is able to understand the role of `r` with only the name of `r` (and its signature for functions)
 > * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
 
-## Roles and unit tests
+## Unit tests
 
+##### -> Stub, mock
 > **Definition**
 >
 > A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of the system during the execution of a given process using `r` with some initial values. 
 
+##### -> Unit test
 > **Definition**
 >
 > A ***unit test*** of a reference `r` is a code snippet written by the author of `r` in the aim to check if the behavior of `r` corresponds to its role when `r` is called by a given stub.
@@ -388,13 +417,12 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 
 
 
-[-> Top](#the-set-of-code-snippets)
+[-> Top](#code-snippets)
 ## Operations on code snippets
 
 ### Addition
 
-#### Definition of the addition
-
+##### -> Addition
 > **Definition**
 >
 > We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
@@ -470,7 +498,7 @@ if (a > 0) { a = a + 1; }
 
 
 
-[-> Top](#the-set-of-code-snippets)
+[-> Top](#code-snippets)
 #### Propositions and conjectures
 
 
