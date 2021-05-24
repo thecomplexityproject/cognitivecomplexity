@@ -1,4 +1,4 @@
-
+[<-](README.md)
 # Code snippets
 
 In the [cognitive complexity's definition](cognitive-complexity.md), the concept which is the most well-defined seems to be the notion of *code snippet*. That's probably true, but that doesn't mean that we can neglect to define it accurately. To be able to obtain scientific results, we need at first define precisely each word that we use. What is a *code snippet* ? A *valid code snippet* ? A *program* ? A *system* ? The *state of a system* ? All of these notions are defined more or less accurately in many scientific articles, and their definitions are more or less consensual.
@@ -33,7 +33,8 @@ In this project, we will specify our own definitions of simple or complex notion
   * [Role of references](#--role-of-references)
   * [Quality level of descriptions](#--quality-level-of-descriptions)
 * [Unit tests](#unit-tests)
-  * [Stub, mock](#--stub-mock)
+  * [Stub](#--stub)
+  * [Mock](#--mock)
   * [Unit test](#--unit-test)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#--addition)
@@ -371,13 +372,14 @@ When a task is transmitted to a developer, he will write some code snippets, in 
 ##### -> Role of references
 > **Definition**
 >
-> The ***role of a reference*** `r` is the behavior of `r` expected by its author when `r` is used by any code snippet.
+> The ***role of a reference `r`*** is the behavior of `r` expected by its author when `r` is used by any code snippet.
 >
-> The ***role of a reference `r` in the context of a valid code snippet `s`*** is the behavior of `r` expected by its author if he had written `s`.
+> The ***role of a reference `r` in the context of a code snippet `s`*** is the behavior of `r` expected by its author when `r` is used by `s`.
 
 **Remark**
 
 * The role of a reference is a subjective notion. It is something which is in the mind of the author of the code snippet.
+* The role of a reference `r` in the context of a code snippet `s` is the behavior of `r` expected by the author of `r` is he had written `s`.
 
 **Example**
 

@@ -1,3 +1,4 @@
+[<-](README.md)
 # Bugs
 
 If we are so interested in the concept of cognitive complexity, it's because of its correlation with the software maintainability. A software is easier to maintain if the bugs are easy to fix than if they are difficult to find and to resolve.
@@ -56,16 +57,12 @@ If it is absolutely sure that the parameter `article` will never be undefined, *
 
 This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
 
-
+##### -> Bug of a reference, bug of a code snippet
 > **Definition**
 >
-> A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#references) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
+> A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#--behavior-of-a-reference) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
 >
-> A ***bug*** of a reference `r` is a [state of the system](systems.md) which will cause a behavior of `r` in contradiction with its role.
->
-> A context-sensitive code snippet `s` ***has a bug*** when one of the references declared in `s` has a bug.
-> 
-> A ***bug*** of a context-sensitive code snippet `s` is a [state of the system](systems.md) which will cause a bug for one of the references declared in `s`.
+> A code snippet `s` ***has a bug*** when one of the references declared in `s` has a bug.
 
 
 [comment]: <> (> **Definition**)
@@ -80,9 +77,13 @@ This example clearly demonstrates that we can't say that a code snippet has a bu
 
 The causes of bugs are multiple, and the "wrongdoer" may not be the developer... Let's try to clarify it :
 
-> **Definition**
->
-> A reference is a ***source of bugs*** if its description is incorrect or insufficient to be able to guess its precise behavior.
+// TODO
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> A reference is a ***source of bugs*** if its description is incorrect or insufficient to be able to guess its precise behavior.)
 
 ### Misunderstanding
 
