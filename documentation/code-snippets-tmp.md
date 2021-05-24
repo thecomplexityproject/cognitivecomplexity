@@ -24,17 +24,19 @@ In this project, we will specify our own definitions of simple or complex notion
   * [Implementation](#--implementation)
   * [Behavior](#--behavior)
 * [References](#references)
-  * [Identifier](#--identifier)
+  * [Reference, identifier](#--reference-identifier)
   * [Description, declaration and implementation of a reference](#--description-declaration-and-implementation-of-a-reference)
   * [Exported and imported references](#--exported-and-imported-references)
   * [Exposed and hidden references](#--exposed-and-hidden-references)
   * [Behavior of a reference](#--behavior-of-a-reference)
+  * [Stub](#--stub)
+  * [Mock](#--mock)
+  * [Deterministic stub](#--deterministic-stub)
+  * [Deterministic reference](#--deterministic-reference)
 * [Roles and descriptions](#roles-and-descriptions)
   * [Role of references](#--role-of-references)
   * [Quality level of descriptions](#--quality-level-of-descriptions)
 * [Unit tests](#unit-tests)
-  * [Stub](#--stub)
-  * [Mock](#--mock)
   * [Unit test](#--unit-test)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#--addition)
@@ -134,7 +136,7 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 [-> Top](#code-snippets)
 ## The set of code snippets
 
-##### -> code snippet (large definition)
+##### -> Code snippet (large definition)
 > **Definition**
 >
 > A ***code snippet*** is a couple (s, L) where `s` is a [text](#programming-language), `L` a [programming language](#programming-language).
@@ -157,7 +159,7 @@ With the definition above, the couple (`s`, `TypeScript`) is a code snippet, eve
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
 
 
- ##### -> code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
+ ##### -> Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
 > **Definition**
 >
 > A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>. Thereafter, when the idiom *code snippet* will be used without other precisions, it is always assumed that we talk about a *context-sensitive valid code snippet*.
@@ -226,12 +228,12 @@ By definition, each line of code of a valid code snippet is a validatable code s
 ##### -> Behavior
 > **Definition**
 >
-> The ***behavior*** of a context-sensitive valid code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
+> The ***behavior*** of a code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
 
 [-> Top](#code-snippets)
 ## References
 
-##### -> Identifier
+##### -> Reference, Identifier
 > **Definition**
 >
 > An ***identifier*** is a name chosen by a developer which represents a given data of the program: variables, constants, objects, functions, classes, properties, methods, interfaces, enums, types, etc.

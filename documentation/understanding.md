@@ -9,7 +9,7 @@ At first, our goal is not to define what is *understanding* in all the situation
 
 * [Introduction](#introduction)
 * [Behavior](#behavior)
-  * [Behavior prediction](#--behavior-prediction)
+  * [Behavior prediction and understanding](#--behavior-prediction-and-understanding)
 * [Role](#role)
   * [Role understanding of declared or imported references](#--role-understanding-of-declared-or-imported-references)
   * [Description understanding, implementation understanding](#--description-understanding-implementation-understanding)
@@ -49,10 +49,10 @@ A developer really understands this function if he is able to understand its *ro
 [-> Top](#the-understanding)
 ## Behavior
 
-##### -> Behavior prediction
+##### -> Behavior prediction and understanding
 > **Definition**
 >
-> A developer `d` is able to ***predict the behavior of a reference*** `r` if, for each [deterministic stub](code-snippets-tmp.md#--deterministic-stub) `s` of `r`, he is able to predict the state of the system after the execution of `s`.
+> A developer `d` is able to ***predict the behavior of a reference*** `r` if, for each [deterministic stub](code-snippets-tmp.md#--deterministic-stub) `s` of `r`, he is able to predict the state of the system after the execution of `s`. In this case, we say that `d` ***understands the behavior*** of `r`.
 
 **Remark**
 
