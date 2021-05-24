@@ -1,14 +1,44 @@
 [<-](README.md)
-# Systems
+# Systems and stakeholders
 
-## Features, products and tasks
+## Table of contents
+
+* [Feature, final product, task](#feature-final-product-task)
+  * [Feature](#--feature)
+  * [Final product](#--final-product)
+  * [Task](#--task)
+* [Prime contractor, stakeholders, specs and chain of responsibilities](#prime-contractor-stakeholders-specs-and-chain-of-responsibilities)
+  * [Prime contractor](#--prime-contractor)
+  * [Stakeholders](#--stakeholder)
+  * [Specs](#--specs)
+  * [Immediate superior, subordinates](#--immediate-superior-subordinates)
+  * [Chain of responsibilities](#--chain-of-responsibilities)
+  * [Job, product](#--job-product)
+* [Systems](#systems)
+  * [System, role of a system](#--system-role-of-a-system)
+  * [Hardware](#--hardware)
+  * [Software, program](#--software-program)
+  * [Data](#--data)
+  * [Process](#--process)
+  * [State of the system](#--state-of-the-system)
+  * [Behavior of the system](#--behavior-of-the-system)
+
+[<- Top](#systems-and-stakeholders)
+## Feature, final product, task
 
 
+##### -> Feature
 > **Definition**
 >
 > A ***feature*** is a set of functionalities imagined by a natural person to provide to the users.
+
+##### -> Final product
+> **Definition**
 >
 > The ***final product*** is the set of all the features to provide to the users.
+
+##### -> Task
+> **Definition**
 >
 > A ***task*** is a set of functionalities imagined by a natural person in the aim to provide a given behavior to the system in specific situations. In other words, a task may be a subset of a feature, or a subset of another task.
 
@@ -17,9 +47,15 @@
 * A feature, a product or a task is something which is *imagined* by a natural person: it is not something concrete which exists in the real world.
 * A feature is a task itself.
 
+## Prime contractor, stakeholders, specs and chain of responsibilities
+
+##### -> Prime contractor
 > **Definition**
 >
 > The ***prime contractor*** is the natural person which imagines the final product.
+
+##### -> Stakeholder
+> **Definition**
 >
 > A ***stakeholder*** is a natural person which will participate actively in the concrete realisation of the product.
 
@@ -28,6 +64,7 @@
 * A prime contractor is a stakeholder.
 * A stakeholder may be in charge of one or multiple tasks, features, or even the final product itself.
 
+##### -> Specs
 > **Definition**
 >
 > The ***specs*** of a given task are the oral and written instruction specified by the author of the task, in the aim to provide the set of functionalities defining this task.
@@ -36,8 +73,8 @@
 
 * Thereafter, we will always suppose that the specs were written, even if the author of the task is assigning it to himself. Consequently, a spec is formulated in the real world. It is something concrete which is the only source of information available for the stakeholder which will execute the task.
 
-## Prime contractor, stakeholders, specs and chain of responsibilities
 
+##### -> Immediate superior, subordinates
 > **Definition**
 > 
 > When the specs are transmitted from a stakeholder to another one, the first stakeholder is called the ***immediate superior*** of the second stakeholder, which is one of his ***subordinates***.
@@ -46,6 +83,7 @@
 
 * We assume that each stakeholder has only one immediate superior.
 
+##### -> Chain of responsibilities
 > **Definition**
 > 
 > Let `S` a set of stakeholders. We say that `S` is a ***chain of responsibilities*** if:
@@ -55,6 +93,7 @@
 > 
 > The elements of `S` are called the ***links*** of the chain.
 
+##### -> Job, product
 > **Definition**
 > 
 > The ***job of a stakeholder*** is to provide a ***product*** respecting the specs transmitted to him by his superior.
@@ -65,19 +104,23 @@ A stakeholder has two responsibilities:
 * Check if the work produced by its subordinates corresponds to the tasks he assigned to them.
 * Produce himself an additional work which will provide, with the help of the works of his subordinates, a product respecting the specs of the tasks assigned to him. 
 
-## Systems definition
+[<- Top](#systems-and-stakeholders)
+## Systems
 
+##### -> System, role of a system
 > **Definition**
 >
 > We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, and D some data.
 > 
-> The ***role of a system*** is to provide to the users the features corresponding to an expected product.
+> The ***role of a system*** is to provide to the users the features corresponding to an expected final product.
 
 
+##### -> Hardware
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
 > The term ***hardware*** refers to machinery and equipment. In a modern information system, this category includes the computer itself and all of its support equipment. The support equipment includes input and output devices, storage devices and communications devices.
 
+##### -> Software, program
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
 > The term ***software*** refers to computer programs defined as the machine-readable instructions that direct the circuitry within the hardware parts of the system to function in ways that produce useful information from data.
@@ -88,25 +131,27 @@ A stakeholder has two responsibilities:
 
 In terms of functionalities, we can also say that the aim of a software is to provide a set of [features](code-snippets-tmp.md#features) to the users. 
 
+##### -> Data
 > **Definition [<sup>w</sup>](https://en.wikipedia.org/wiki/Information_system)**
 >
 > ***data*** are facts that are used by systems to produce useful information. In modern information systems, data are generally stored in machine-readable form on disk until the computer needs them.
 
 By nature, a system evolves over time as a result of the current processes running on it, and because of the eventual inputs received from out of the system.
 
+##### -> Process
 > **Definition**
 >
 > A ***process*** is a triplet `(S, l, p)` where `l` is the instruction currently executed by a processor `p` in a given system `S`.
 
-
+##### -> State of the system
 > **Definition**
 >
 > The ***state of the system*** `S` is the couple `(D, P)` where `D` represents the data of the system and `P` the set of processes running at a time `t`.
 
-
+##### -> Behavior of the system
 > **Definition**
 >
-> The ***behavior of a system*** is the evolution of its state during the execution of a given process.
+> The ***behavior of the system*** is the evolution of its state during the execution of a given process.
 
 **Remarks**
 

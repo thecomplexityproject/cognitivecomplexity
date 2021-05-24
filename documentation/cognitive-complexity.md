@@ -9,8 +9,9 @@
     * [Relation between cognitive complexity and debugging](#--relation-between-cognitive-complexity-and-debugging)
     * [Minimal cognitive complexity](#--minimal-cognitive-complexity)
 * [Refactoring](#refactoring)
-    * [Definition of refactoring](#definition-of-refactoring)
-    * [Simplifications](#simplifications)
+    * [Modification](#--modification)
+    * [Refactor](#--refactor)
+    * [Simplification](#--simplification)
 
 [-> Top](#cognitive-complexity)
 ## Definitions
@@ -84,15 +85,16 @@ function getCompanyProfile(id: number): Profile {
 [-> Top](#cognitive-complexity)
 ## Refactoring
 
-### Definition of refactoring
 
+##### -> Modification
 > **Definition**
 >
 > A ***modification*** of a code snippet is an operation from **S** to **S** which assigns to a code snippet `s` a code snippet `t` different from `s`.
 
+##### -> Refactor
 > **Definition**
 >
-> A ***refactoring*** is a *modification* which assigns to a context-sensitive valid code snippet `s` a set of context-sensitive valid code snippets *t<sub>1</sub>, ... t<sub>n</sub>* which collectively have the same behavior as `s`. The refactoring is an operation from **[V<sup>+</sup>](code-snippets-tmp.md#valid-code-snippets)** to **V**<sup>+<sup>n</sup></sup>.
+> A ***refactor*** is a *modification* which assigns to a context-sensitive valid code snippet `s` a set of context-sensitive valid code snippets *t<sub>1</sub>, ... t<sub>n</sub>* which collectively have the same behavior as `s`. The refactoring is an operation from **[V<sup>+</sup>](code-snippets-tmp.md#valid-code-snippets)** to **V**<sup>+<sup>n</sup></sup>.
 >
 > *r: (s ∈ V<sup>+</sup>) -> (t<sub>1</sub>, ... t<sub>n</sub> ∈ V<sup>+<sup>n</sup></sup>)*
 
@@ -100,12 +102,10 @@ By extension, the ***refactoring of a feature*** is the action to transform the 
 
 Same definition for the ***refactoring of a program***.
 
-
-### Simplifications
-
+##### -> Simplification
 > **Definition**
 >
-> A ***simplification*** of a valid code snippet `s` is a refactoring `r` as `c(r(s)) < c(s)`, where `c` is the cognitive complexity metric. We say that `s` was ***simplified***.
+> A ***simplification*** of a valid code snippet `s` is a refactor `r` as `c(r(s)) < c(s)`, where `c` is the cognitive complexity metric. We say that `s` was ***simplified***.
 
 > **Proposition**
 >

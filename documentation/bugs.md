@@ -7,24 +7,27 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 
 ## Table of contents
 
-* [Definition of a bug](#definition-of-a-bug)
-* [Causes of bugs](#causes-of-bugs)
-  * [Misunderstanding](#misunderstanding)
-  * [Wrong implementation](#wrong-implementation)
-  * [Wrong reuse](#wrong-reuse)
+* [Definitions](#definitions)
+  * [Bug of a task or feature](#--bug-of-a-task-or-feature)
+  * [Bug of a reference or code snippet](#--bug-of-a-reference-or-code-snippet)
+* [Sources of bugs](#sources-of-bugs)
+  * [Misunderstanding](#--misunderstanding)
+  * [Wrong implementation](#--wrong-implementation)
+  * [Wrong reuse](#--wrong-reuse)
 * [Debugging process](#debugging-process)
   * [Bug discovering](#bug-discovering)
   * [Bug understanding](#bug-understanding)
 * [Bugs and cognitive complexity](#bugs-and-cognitive-complexity)
 
 
-## Definition of a bug
+## Definitions
 
+##### -> Bug of a task or feature
 > **Definition**
 >
-> A feature or a task ***has a bug*** when the [behavior of the system](systems.md) does not respect its [specs](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities). 
+> A [feature](systems.md#--feature) or a [task](systems.md#--task) ***has a bug*** when the [behavior of the system](systems.md) does not respect its [specs](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities). 
 > 
-> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which will cause a behavior not respecting the specs of this feature (or task).
+> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which is in contradiction with the state expected by the specs after the execution of a given process from some initial state.
 
 **Remark**
 
@@ -57,7 +60,7 @@ If it is absolutely sure that the parameter `article` will never be undefined, *
 
 This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
 
-##### -> Bug of a reference, bug of a code snippet
+##### -> Bug of a reference or code snippet
 > **Definition**
 >
 > A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#--behavior-of-a-reference) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
@@ -85,10 +88,10 @@ The causes of bugs are multiple, and the "wrongdoer" may not be the developer...
 
 [comment]: <> (> A reference is a ***source of bugs*** if its description is incorrect or insufficient to be able to guess its precise behavior.)
 
-### Misunderstanding
 
 The main cause of bugs is probably a misunderstanding between two consecutive links of the [chain of responsibilities](code-snippets-tmp.md#features).
 
+##### -> Misunderstanding
 > **Definition**
 > 
 > A ***misunderstanding*** between two consecutive element of a chain of responsibilities happens when there is a difference between what thinks the superior element and what the inferior element thinks that his superior thinks.
@@ -103,8 +106,7 @@ If it was not explicitly specified that the price must be without VAT, *it is no
 
 Assume now that we add a link to the chain of responsibilities: a lead developer. If the client explicitly specified that the price must be without VAT, and if the lead developer didn't give this information to the developer, there will be a bug, but the wrondoer will be the lead developer.
 
-### Wrong implementation
-
+##### -> Wrong implementation
 > **Definition**
 >
 > A program has a ***wrong implementation*** when there is no misunderstanding, and when the behavior of the system does not respect the specs of the different features asked by the prime contractor.
@@ -117,8 +119,7 @@ In the example above, assume that the client wanted to display the pre-tax price
 
 In case of wrong implementation, the wrongdoer may not be the developer. For example, an architect may ask developers to implement some functionalities. All the code snippets may respect the specs asked by the architect, but the combination of all these code snippets may not provide the behavior expected by the client. In this case, the wrongdoer is the architect.
 
-### Wrong reuse
-
+##### -> Wrong reuse
 > **Definition**
 > 
 > A ***reuse*** of a program, a feature or a code snippet `s`, is the usage of `s` in a context defined by specs which are different from the original specs. 
