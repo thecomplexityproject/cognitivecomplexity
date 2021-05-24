@@ -43,34 +43,62 @@ The name of the function `multiplyByTwo()` clearly indicate that its *role* is t
 
 A developer really understands this function if he is able to understand its *role*, and if he is able to predict that its *implementation* is correct.  
 
-## Understanding of references
+## Behavior prediction
 
 > **Definition**
 >
-> A developer `d` ***understands the role of a reference*** `r` if he is able to guess the predictions of the author of `r` about the [behavior](code-snippets-tmp.md#roles-and-descriptions) of `r`.
+> A developer `d` is able to ***predict the behavior of a reference*** `r` if, for each [deterministic stub](code-snippets-tmp.md#--deterministic-stub) `s` of `r`, he is able to predict the state of the system after the execution of `s`.
 
 **Remark**
 
-This definition doesn't mean that a developer understands a reference `r` when he is able to predict its behavior, but only if he is able to guess the *same predictions* than the author of `r`. Moreover, these predictions may be wrong (in this case, `d` introduced a bug).
+* The stub `s` must be deterministic. Consequently, if `r` uses a non-deterministic external reference `r'`, `r'` must be mocked.
+
+
+## Role understanding
+
+> **Definition**
+>
+> A developer `d` ***understands the role of a reference*** `r` if he is able to guess the behavior of `r` predicted by its author.
+
+**Remark**
+
+This definition doesn't mean that a developer understands the role a reference `r` when he is able to predict its behavior, but only if he is able to guess the *predictions of its author*. Moreover, these predictions may be wrong. In this case, the author of `r` introduced a bug.
 
 
 > **Definition**
 >
-> A developer ***understands the declaration of a reference*** `r` if he understands its role without the help of its implementation.
+> A developer ***understands the description of a reference*** `r` if he understands its role without the help of its implementation.
 >
-> A developer ***understands the implementation of a reference*** `r` if he understands its role without the help of its declaration.
+> A developer ***understands the implementation of a reference*** `r` if he understands its role without the help of its description.
 
 
 > **Definition**
 > 
-> A developer `d` ***understands a reference `r` in the context of a valid code snippet `s`*** if:
-> * `r` is imported in `s`
+> A developer `d` ***understands a reference `r` imported in a code snippet `s`*** if:
 > * `d` understands the role of `r`
 > * `d` is able to predict the behavior of `r` when `r` is called by `s`
 >
-> A developer `d` ***understands a reference*** `r` if:
-> * `d` is able to understand `r` in the context of any valid code snippet
-> * `d` understands the implementation of `r`
+> A developer `d` ***understands a reference `r` declared in a code snippet `s`*** if he is able to check if `r` has a [bug](bugs.md#definition-of-a-bug) or not.
+
+
+[comment]: <> (> **Definition**)
+
+[comment]: <> (>)
+
+[comment]: <> (> A developer `d` ***understands a reference `r` imported in a code snippet `s`*** if:)
+
+[comment]: <> (> * `d` understands the role of `r`)
+
+[comment]: <> (> * `d` is able to predict the behavior of `r` when `r` is called by `s`)
+
+[comment]: <> (>)
+
+[comment]: <> (> A developer `d` ***understands a reference*** `r` declared in a code snippet `s` if:)
+
+[comment]: <> (> * `d` is able to understand `r` in the context of any valid code snippet importing `r`)
+
+[comment]: <> (> * `d` understands the implementation of `r`)
+
 
 > **Proposition**
 >
@@ -116,7 +144,7 @@ The descriptions and the implementations are the only things persisting over tim
 > A developer ***understands a context-sensitive valid code snippet*** `s` if :
 > 1. he understands the role of each [reference](code-snippets-tmp.md#references) declared in `s`.
 > 2. he understands the role of each reference imported in `s`, in the context of `s`.
-> 3. if the behavior of the imported references of `s` corresponds to their roles, he is able to predict the behavior of each reference declared in `s`.
+> 3. assuming that the imported references of `s` hav no bugs, he is able to predict the behavior of each reference declared in `s`.
 
 **Example**
 
