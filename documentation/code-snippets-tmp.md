@@ -17,7 +17,7 @@ In this project, we will specify our own definitions of simple or complex notion
   * [File](#--file)
 * [The set of code snippets](#the-set-of-code-snippets)
   * [Code snippet (large definition)](#--code-snippet-large-definition)
-  * [Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet](#--code-snippet-close-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)
+  * [Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)
   * [Line of code](#--line-of-code)
   * [Module](#--module)
 * [Implementation and behavior](#implementation-and-behaviors)
@@ -141,7 +141,7 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 >
 > A ***code snippet*** is a couple (s, L) where `s` is a [text](#programming-language), `L` a [programming language](#programming-language).
 > 
-> A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`. Thereafter, when we will use the idiom *code snippet*, it will be supposed to be a *[context-sensitive code snippet]()*
+> A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`. Thereafter, when we will use the idiom *code snippet*, it will be supposed to be a *[context-sensitive code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)*
 
 **Remarks**
 
@@ -159,7 +159,7 @@ With the definition above, the couple (`s`, `TypeScript`) is a code snippet, eve
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
 
 
- ##### -> Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
+ ##### -> Code snippet (strict definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
 > **Definition**
 >
 > A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>. Thereafter, when the idiom *code snippet* will be used without other precisions, it is always assumed that we talk about a *context-sensitive valid code snippet*.
@@ -168,6 +168,11 @@ Why do we need to have a so large definition of a *code snippet* ? Because we wa
 >
 > A ***validatable code snippet*** is a code snippet `(s, L)` which can be concatenated with another code snippet to give a context-sensitive valid code snippet. The set of the validatable code snippets of a given language `L` is noted **V**<sup>-</sup>.
 
+**Remarks**
+
+* A *context-sensitive valid code snippet* is a context-free valid code snippet.
+* A *context-free valid code snippet* is a validatable code snippet.
+* We will frequently call ***valid code snippet*** a *context-free valid code snippet*
  
 **Example 1**
 
