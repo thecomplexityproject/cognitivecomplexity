@@ -55,7 +55,7 @@ The definition of the [cognitive complexity](cognitive-complexity.md) uses the t
 ##### -> Skill
 > **Definition**
 >
-> We call ***skill*** a technical aptitude that can be acquired by a human being in the aim to master a competence. 
+> We call ***skill*** of a human being `h` a technical aptitude that can be acquired by `h` in the aim to master a competence. 
 > 
 > A skill may be *quantified*, *measured* or *estimated*. This quantification, measure or estimation is called a ***level of skill***. 
 
@@ -130,14 +130,14 @@ The definition of the [cognitive complexity](cognitive-complexity.md) uses the t
 
 **Example**
 
-* The stack MEAN (MongoDB, Express, Angular, NodeJs) is a stack of Angular webapps. However, other elements are undertones, like the languages which must be mastered by the developers: JavaScript, TypeScript, HTML, CSS, SQL, and probably other tools, like Mongoose or TypeORM, for example. 
+* The stack MEAN (MongoDB, Express, Angular, NodeJs), understood as *the set of competences needed to master these technologies*, is a stack of Angular webapps. However, other elements are undertones, like the languages which must be mastered by the developers: JavaScript, TypeScript, HTML, CSS, SQL, and probably other tools, like Mongoose or TypeORM, for example. 
 * When some parts of a program `p` may be completely decoupled, a developer may master only some parts of the stack of `p` to understand a given code snippet. It is true for web apps: the front-end developer does not need to master SQL, MongoDB or TypeORM, for example. The stack of the front-end part of `p` is: TypeScript, HTML, CSS, Angular.
 
 
 ##### -> Minimal experience
 > **Definition**
 >
-> The ***minimal experience*** in a competence `f` is an arbitrary couple of numbers `(t, p)` which represents the recent experience that a human being must spend to learn the basics of `f`.
+> The ***minimal experience*** in a competence `f` is an arbitrary recent experience that a human being must spend to learn the basics of `f`.
 > 
 > In the same way, the ***minimal experience in a stack*** `s` is the set of minimal experiences relative to each competence of `s`.
 
@@ -209,7 +209,7 @@ At first, we should assume that the developer has the minimal programming skills
 ##### -> Mean developer
 > **Definition**
 >
-> Let `D` the set of all developers having an experience in computer programming which is higher than the minimal experience of computer programming. 
+> Let `D` the set of all the developers. 
 > 
 > The ***mean developer*** is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
 
