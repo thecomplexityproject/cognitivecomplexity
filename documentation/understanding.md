@@ -15,7 +15,7 @@ At first, our goal is not to define what is *understanding* in all the situation
   * [Description understanding, implementation understanding](#--description-understanding-implementation-understanding)
   * [Reference understanding](#--reference-understanding)
 * [Code snippets](#code-snippets)
-  * [Understanding of code snippets](#--reference-understanding)
+  * [Understanding of code snippets](#--understanding-of-code-snippets)
 
 [-> Top](#the-understanding)
 ## Introduction
