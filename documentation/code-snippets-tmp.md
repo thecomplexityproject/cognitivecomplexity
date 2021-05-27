@@ -17,7 +17,9 @@ In this project, we will specify our own definitions of simple or complex notion
   * [File](#--file)
 * [The set of code snippets](#the-set-of-code-snippets)
   * [Code snippet (large definition)](#--code-snippet-large-definition)
-  * [Code snippet (close definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)
+  * [Code snippet (close definition), context-sensitive valid code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet)
+  * [Context-free code snippet](#--context-free-code-snippet)
+  * [Validatable code snippet](#--validatable-code-snippet)
   * [Line of code](#--line-of-code)
   * [Module](#--module)
 * [Implementation and behavior](#implementation-and-behaviors)
@@ -141,7 +143,7 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 >
 > A ***code snippet*** is a couple (s, L) where `s` is a [text](#programming-language), `L` a [programming language](#programming-language).
 > 
-> A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`. Thereafter, when we will use the idiom *code snippet*, it will be supposed to be a *[context-sensitive code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet-context-free-code-snippet-validatable-code-snippet)*
+> A code snippet may be valid or not. It even may contains characters which are not included in the alphabet of `L`. Thereafter, when we will use the idiom *code snippet*, it will be supposed to be a *[context-sensitive code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet)*
 
 **Remarks**
 
@@ -159,12 +161,18 @@ With the definition above, the couple (`s`, `TypeScript`) is a code snippet, eve
 Why do we need to have a so large definition of a *code snippet* ? Because we want to know what time will need a developer to understand some code, valid or not. When he will try to debug a TypeScript file, a developer can find a character which is not admitted by this language (and which will cause a syntax error).
 
 
- ##### -> Code snippet (strict definition), context-sensitive valid code snippet, context-free code snippet, validatable code snippet
+##### -> Code snippet (strict definition), context-sensitive valid code snippet
 > **Definition**
 >
 > A ***context-sensitive valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-sensitive grammar](https://en.wikipedia.org/wiki/Context-sensitive_grammar) of `L`. The set of the context-sensitive valid code snippets of a given language `L` is noted **V**<sup>+</sup>. Thereafter, when the idiom *code snippet* will be used without other precisions, it is always assumed that we talk about a *context-sensitive valid code snippet*.
+
+##### -> Context-free code snippet
+> **Definition**
 >
 > A ***context-free valid code snippet*** is a code snippet `(s, L)` where `s` respects the [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `L`. The set of the valid code snippets of a given language `L` is noted **V**.
+
+##### -> Validatable code snippet
+> **Definition**
 >
 > A ***validatable code snippet*** is a code snippet `(s, L)` which can be concatenated with another code snippet to give a context-sensitive valid code snippet. The set of the validatable code snippets of a given language `L` is noted **V**<sup>-</sup>.
 
@@ -478,17 +486,21 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 ##### -> Addition
 > **Definition**
 >
-> We call **S<sub>L</sub>** the set of the *code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We note **S<sub>L</sub>** the set of the *code snippets* (large definition, including non-valid code snippets) of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>**<sup>-</sup> the subset of **S<sub>L</sub>** defined by the set of the *validatable code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We note **V<sub>L</sub>**<sup>-</sup> the set of the [validatable code snippets](#--validatable-code-snippet) of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>** the subset of **V<sub>L</sub>**<sup>-</sup> defined by the set of the *valid code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We note **V<sub>L</sub>** the set of the  of a given formal language `L`, with the concatenation operation noted `+`.
 >
-> We call **V<sub>L</sub>**<sup>+</sup> the subset of **V<sub>L</sub>** defined by the set of the *context-sensitive code snippets* of a given formal language `L`, with the concatenation operation noted `+`.
+> We note **V<sub>L</sub>**<sup>+</sup> the set of the [code snippets](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet) (strict definition, *i.e.* context-sensitive code snippets) of a given formal language `L`, with the concatenation operation noted `+`.
+
+**Remark**
+
+* By definition, we have **V<sub>L</sub>**<sup>+</sup> ⊂ **V<sub>L</sub>** ⊂ **V<sub>L</sub>**<sup>-</sup> ⊂ **S<sub>L</sub>**
 
 **Notation**
 
-For the sake of simplification, when the specification of the language is not needed, we will simply note **S**, **V**<sup>-</sup>, **V** and **V**<sup>+</sup> the sets of code snippets, validatable code snippets, valid code snippets and context-sensitive code snippets of an implicit programming language **L**. 
+For the sake of simplification, when the specification of the language is not needed, we will simply note **S**, **V**<sup>-</sup>, **V** and **V**<sup>+</sup> the sets of code snippets, validatable code snippets, context-free code snippets and context-sensitive code snippets of an implicit programming language **L**. 
 
 **Remark**
 
@@ -555,10 +567,8 @@ if (a > 0) { a = a + 1; }
 
 > **Conjecture**
 >
-> The cognitive complexity of the sum of two code snippets is strictly higher than the sum of the cognitive complexity of each of them.
-> ```ts
-> Cc(s + t) > c(s) + c(t)
-> ```
+> The cognitive complexity of the sum of two [code snippets](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet) is strictly higher than the sum of the cognitive complexity of each of them.
+<pre><code>C<sub>c</sub>(s + t) > C<sub>c</sub>(s) + C<sub>c</sub>(t)</code></pre>
 
 The main reason of this result is that when the developer reads the second snippet, he must remember what happened in the first one, so the time that he needs to understand it is strictly higher than the time that he would need if this code snippet was alone.
 
@@ -583,9 +593,9 @@ if (a < 5) {
 	return 1 / a;
 }
 ```
-In the example above, when you read the code snippet `s + t`, the cognitive complexity of the three first lines is the same as the complexity of `s`, because you have exactly the same information to understand. At the opposite, the three last lines will take more time to understand than the code snippet `t` alone, because you also must remember that `a` can't be equal to 0, and so you can be sure that the expression `1 / a` will not crash. The cognitive complexity of the three first lines is equal to `Cc(s)`, but the cognitive complexity of the three last lines is strictly higher than `Cc(t)`. So, in this example, we have `Cc(s + t) > Cc(s) + Cc(t)`.
+In the example above, when you read the code snippet `s + t`, the cognitive complexity of the three first lines is the same as the complexity of `s`, because you have exactly the same information to understand. At the opposite, the three last lines will take more time to understand than the code snippet `t` alone, because you also must remember that `a` can't be equal to 0, and so you can be sure that the expression `1 / a` will not crash. The cognitive complexity of the three first lines is equal to ***C<sub>c</sub>(s)***, but the cognitive complexity of the three last lines is strictly higher than ***C<sub>c</sub>(t)***. So, in this example, we have ***C<sub>c</sub>(s + t) > C<sub>c</sub>(s) + C<sub>c</sub>(t)***.
 
-Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have `Cc(s + t) = Cc(s) + Cc(t)`.
+Of course, that's not because this result is true for this example that it will be true for all the possible code snippets. For example, we may think that when the two code snippets are independent, we will have ***C<sub>c</sub>(s + t) = C<sub>c</sub>(s) + C<sub>c</sub>(t)***.
 
 
 * Example
@@ -602,7 +612,7 @@ let a = 2;
 let b = 3;
 ```
 
-In this case, the second line is independent of the first one, so we maybe have `Cc(s + t) = Cc(s) + Cc(t)`, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have `Cc(s + t) > Cc(s) + Cc(t)`.
+In this case, the second line is independent of the first one, so we maybe have ***C<sub>c</sub>(s + t) = C<sub>c</sub>(s) + C<sub>c</sub>(t)***, but we could also think that when you read the second line, even if there is no dependence with the first one, you must *remember* that there is no dependence... So, we could again have ***C<sub>c</sub>(s + t) > C<sub>c</sub>(s) + C<sub>c</sub>(t)***.
 
 This result is probably non-demonstrable without experiences in the real world, with enough statistical data to obtain a highly accurate result. It is a *conjecture* and not a *proposition*.
 
