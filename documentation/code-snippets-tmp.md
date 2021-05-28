@@ -53,10 +53,10 @@ What is the doing a developer which wants to understand a program ? At first, he
 
 In fact, the reality is simple: when a developer opens a file, we only know he that he has a *text* to read, may be written in multiple languages. 
 
-##### -> Texts and characters
+##### -> Strings and characters
 > **Definition**
 >
-> A ***text*** is a finite set of ordered individual elements, which are the ***characters*** of the text.
+> A ***string*** is a finite set of ordered individual elements, which are the ***characters*** of the text.
 
 **Example**
 
@@ -93,7 +93,6 @@ A formal language is often defined by means of a [formal grammar](https://en.wik
 
 There is a usual debate about the belonging of the markup languages -like HTML- in the set of the formal languages. We will not enter this debate, but as the markup files must be red and understood by developers, they are relevant for the cognitive complexity theory. Thus, we will include them in this set.
 
-Now, we can define what is a *code snippet*:
 
 ##### -> Separator
 > **Definition**
@@ -120,10 +119,6 @@ In Javascript, a whitespace at the end of a line of code is not visible and has 
 
 The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.
 
-##### -> String
-> **Definition**
->
-> A ***string*** is an ordered set of visible characters of a given code snippet.
 
 ##### -> File
 > **Definition**
@@ -137,6 +132,8 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 
 [-> Top](#code-snippets)
 ## The set of code snippets
+
+Now, we can define what is a *code snippet*:
 
 ##### -> Code snippet (large definition)
 > **Definition**
@@ -241,7 +238,7 @@ By definition, each line of code of a valid code snippet is a validatable code s
 ##### -> Behavior
 > **Definition**
 >
-> The ***behavior*** of a code snippet `s` is the [behavior of the system](systems.md) when an external process calls one of the exported references of `s`. We say that `s` is an ***implementation*** of its behavior.
+> The ***behavior*** of a code snippet `s` is the [behavior of the system](systems.md#--behavior-of-the-system) when an external process calls one of the exported references of `s`, or executes the module where `s` is located. We say that `s` is an ***implementation*** of its behavior.
 
 [-> Top](#code-snippets)
 ## References
@@ -343,18 +340,15 @@ Assuming that each file may be called by some other part of the program, a [modu
 >
 > A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of the system during the execution of a given process using `r` with some initial state of the system.
 
-**Remark**
-
-* Stubs are frequently confused with the ***mocks***, which are defined below:
-
 ##### -> Deterministic stub
 > **Definition**
 >
 > A stub `s` is ***deterministic*** if it is possible to predict the exact values of the data defining the state of the system after the execution of `s`.
 
-**Remark**
+**Remarks**
 
 * In the definition above, the process executing the stub `s` is supposed to have a limited duration.
+* Stubs are frequently confused with the *mocks*, which are defined below:
 
 ##### -> Mock
 > **Definition**
