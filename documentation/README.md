@@ -228,7 +228,6 @@ Other results are probably true, but must be calculated or measured in the real 
 * [Reference](code-snippets-tmp.md#--description-declaration-and-implementation-of-a-reference) (implementation of)
 * [Reference](understanding.md#--role-understanding-of-declared-or-imported-references) (role understanding)
 * [Role](code-snippets-tmp.md#--role-of-references) (of a reference)
-* [Role](systems.md#--system-role-of-a-system) (of a system)
 * [Role](code-snippets-tmp.md#--role-of-references) (in the context of a given code snippet)
 * [Role](understanding.md#--role-understanding-of-declared-or-imported-references) (understanding)
 * [Separator](code-snippets-tmp.md#--separator)

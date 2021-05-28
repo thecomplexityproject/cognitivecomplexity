@@ -60,11 +60,14 @@ If it is absolutely sure that the parameter `article` will never be undefined, *
 
 This example clearly demonstrates that we can't say that a code snippet has a bug in absolute terms, without specifying the specs expected by the prime contractor. 
 
-##### -> Bug of a reference or code snippet
+##### -> Bug of a reference 
 > **Definition**
 >
 > A reference `r` ***has a bug*** when its [behavior](code-snippets-tmp.md#--behavior-of-a-reference) differs from its [role](code-snippets-tmp.md#roles-and-descriptions).
->
+
+##### -> Bug of a code snippet
+> **Definition**
+
 > A code snippet `s` ***has a bug*** when one of the references declared in `s` has a bug.
 
 
