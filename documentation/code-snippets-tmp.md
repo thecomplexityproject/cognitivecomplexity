@@ -8,19 +8,18 @@ In this project, we will specify our own definitions of simple or complex notion
 ## Table of contents
 
 * [Programming language](#programming-language)
-  * [Texts and characters](#--texts-and-characters)
-  * [Programming language, alphabet, word](#--programming-language-alphabet-word)
-  * [Formal language, formal grammar](#--formal-language-formal-grammar)
+  * [Alphabet, character](#--alphabet-character)
+  * [Formal grammar](#--formal-grammar)
+  * [Formal language](#--formal-language)
   * [Syntax](#--syntax)
-  * [Separator](#--separator)
-  * [String](#--string)
-  * [File](#--file)
+  * [Programming language](#--programming-language)
+  * [String](#--strings)
 * [The set of code snippets](#the-set-of-code-snippets)
   * [Code snippet (large definition)](#--code-snippet-large-definition)
   * [Code snippet (close definition), context-sensitive valid code snippet](#--code-snippet-strict-definition-context-sensitive-valid-code-snippet)
   * [Context-free code snippet](#--context-free-code-snippet)
   * [Validatable code snippet](#--validatable-code-snippet)
-  * [Line of code](#--line-of-code)
+  * [File](#--file)
   * [Module](#--module)
 * [Implementation and behavior](#implementation-and-behaviors)
   * [Implementation](#--implementation)
@@ -38,7 +37,9 @@ In this project, we will specify our own definitions of simple or complex notion
 * [Roles and descriptions](#roles-and-descriptions)
   * [Role of references](#--role-of-references)
   * [Quality level of descriptions](#--quality-level-of-descriptions)
-* [Unit tests](#unit-tests)
+* [Related definitions](#related-definitions)
+  * [Separator](#--separator)
+  * [Line of code](#--line-of-code)
   * [Unit test](#--unit-test)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#--addition)
@@ -53,81 +54,43 @@ What is the doing a developer which wants to understand a program ? At first, he
 
 In fact, the reality is simple: when a developer opens a file, we only know he that he has a *text* to read, may be written in multiple languages. 
 
-##### -> Strings and characters
+
+##### -> Alphabet, character
+> **Definition**
+> An ***alphabet*** is a set of symbols, letters, or tokens different from each other. The elements of this set are called the ***characters*** of the alphabet.
+
+##### -> Strings
 > **Definition**
 >
-> A ***string*** is a finite set of ordered individual elements, which are the ***characters*** of the text.
+> A ***string*** is a finite set of ordered individual elements of a given alphabet.
 
-**Example**
-
-In the text below, `a`, `b` and `c` are characters, but not `ab`, which is not individual: it can be split in `a` + `b`.
-
-```ts
-ab c
-```
-
-Now, let's remind the main concepts of theoretical computer science :
-
-##### -> Programming language, alphabet, word
+##### -> Formal grammar
 > **Definition**
 >
-> A ***programming language*** is a [formal language](https://en.wikipedia.org/wiki/Formal_language) comprising a set of instructions that produce various kinds of output.
+> A ***formal grammar*** is defined as a set of production rules for strings.
 
-The ***alphabet*** of a formal language consists of symbols, letters, or tokens that concatenate into strings of the language. Each string concatenated from symbols of this alphabet is called a ***word***, and the words that belong to a particular formal language are sometimes called ***well-formed words*** or well-formed formulas. 
+**Remark**
 
-A formal language is often defined by means of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar):
-
-##### -> Formal language, formal grammar
-> **Definition**
->
-> A ***formal language*** describes how to form strings from a language's alphabet that are valid according to the language's syntax. A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form. 
-> 
-> A ***formal grammar*** is defined as a set of production rules for strings in a formal language.
+A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form.
 
 ##### -> Syntax
 > **Definition**
 >
-> The ***syntax*** of a computer language is the set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language.
+> The ***syntax*** of a computer language is the set of rules of a formal grammar which defines the combinations of symbols that are considered to be correctly structured statements or expressions.
+
+##### -> Formal language
+> **Definition**
+>
+> A ***formal language*** describes how to form strings from a given alphabet that are valid according to the language's syntax. 
 
 **Remark**
 
 There is a usual debate about the belonging of the markup languages -like HTML- in the set of the formal languages. We will not enter this debate, but as the markup files must be red and understood by developers, they are relevant for the cognitive complexity theory. Thus, we will include them in this set.
 
-
-##### -> Separator
+##### -> Programming language
 > **Definition**
 >
-> A ***separator*** is an invisible character. The characters which are not separators are called the ***visible characters***.
-
-For example, whitespaces, tabulations and line breaks are separators.
-
-**Remark**
-
-The separators are usually not included in the formal language itself.
-
-> **Proposition**
->
-> The cognitive complexity of a separator may be null or non-null.
-
-**Demonstration**
-
-* *May be null:*
-
-In Javascript, a whitespace at the end of a line of code is not visible and has no effect on the behavior due to the code snippet. Consequently, the developer will not need it to understand the code snippet. Thus, the cognitive complexity of this whitespace is equal to 0.
-
-* *May be non-null:*
-
-The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.
-
-
-##### -> File
-> **Definition**
->
-> A ***file*** is a quadruplet (p, n, t, L) where `p` is a string which represents its path, `n` is a string which represents its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
-
-**Remark**
-
-Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
+> A ***programming language*** is a formal language comprising a set of instructions that produce various kinds of output.
 
 
 [-> Top](#code-snippets)
@@ -213,14 +176,14 @@ The concatenation of the two code snippets must not have a letter on the both si
 
 This result ensues directly from the definitions of valid and validatable code snippets.
 
-Assuming that every computer language integrates the concept of "line break", we can give the following definition :
-
-##### -> Line of code
+##### -> File
 > **Definition**
 >
-> The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
+> A ***file*** is a quadruplet (p, n, t, L) where `p` is a string which represents its path, `n` is a string which represents its name, `t` its content (*i.e.* the *text* of the file), and `L` is a given programming language.
 
-By definition, each line of code of a valid code snippet is a validatable code snippet.
+**Remark**
+
+Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
 
 ##### -> Module
 > **Definition**
@@ -233,7 +196,7 @@ By definition, each line of code of a valid code snippet is a validatable code s
 ##### -> Implementation
 > **Definition**
 >
-> An ***implementation*** of a feature *-or a task-* is a set of code snippets which are providing a behavior of the system corresponding to the specs of the feature *-or the task-*.
+> An ***implementation*** of a feature *-or a task-* is a set of code snippets which are providing a [behavior of the system](systems.md#--behavior-of-the-system) corresponding to the specs of the feature *-or the task-*.
 
 ##### -> Behavior
 > **Definition**
@@ -327,7 +290,7 @@ Assuming that each file may be called by some other part of the program, a [modu
 ##### -> Behavior of a reference
 > **Definition**
 >
-> The ***behavior of a reference*** `r` is the evolution of the state of the system due to the usage of `r` during the execution of a given process.
+> The ***behavior of a reference*** `r` is the behavior of the system due to the usage of `r` during the execution of a given process.
 
 **Remarks**
 
@@ -338,7 +301,7 @@ Assuming that each file may be called by some other part of the program, a [modu
 ##### -> Stub
 > **Definition**
 >
-> A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of the system during the execution of a given process using `r` with some initial state of the system.
+> A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of `r` during the execution of a given process using `r` with some initial state of the system.
 
 ##### -> Deterministic stub
 > **Definition**
@@ -431,8 +394,46 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 > * ***medium*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature and its comments
 > * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
 
+
 [-> Top](#code-snippets)
-## Unit tests
+## Related definitions
+
+
+##### -> Separator
+> **Definition**
+>
+> A ***separator*** is an invisible character. The characters which are not separators are called the ***visible characters***.
+
+For example, whitespaces, tabulations and line breaks are separators.
+
+**Remark**
+
+The separators are usually not included in the formal language itself.
+
+> **Proposition**
+>
+> The cognitive complexity of a separator may be null or non-null.
+
+**Demonstration**
+
+* *May be null:*
+
+In Javascript, a whitespace at the end of a line of code is not visible and has no effect on the behavior due to the code snippet. Consequently, the developer will not need it to understand the code snippet. Thus, the cognitive complexity of this whitespace is equal to 0.
+
+* *May be non-null:*
+
+The tabulations are visually not distinguishable with a set of whitespaces (usually 2 or 4), but may be interpreted differently by a compiler or a browser, for example. Consequently, a developer may need some time to find a bug relative to a confusion between tabulations and whitespaces. In other words, he will need some time to understand the code snippet, which means that the cognitive complexity of whitespaces and tabulations may be strictly higher than zero.
+
+
+
+Assuming that every computer language integrates the concept of "line break", we can give the following definition :
+
+##### -> Line of code
+> **Definition**
+>
+> The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
+
+By definition, each line of code of a valid code snippet is a validatable code snippet.
 
 ##### -> Unit test
 > **Definition**
@@ -442,12 +443,12 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 **Remarks**
 
 * A unit test checks if `r` have the behavior expected by its author, for the initial values which are simulated by some mocks.
-* Thereafter, we will suppose that if the author of `r` wrote some unit tests, he verified if the behavior of `r` checked by the unit tests really corresponds to the role he gave to `r`. 
+* Thereafter, we will suppose that if the author of `r` wrote some unit tests, he verified if the behavior of `r` checked by the unit tests really corresponds to the role he gave to `r`.
 
 > **Proposition**
-> 
+>
 > Let `r` a reference implemented by a given developer `d`. Let `t` a unit test relative to `r`, written by `d`. Let `d'` another developer which is reading `r`.
-> 
+>
 > If `d'` is not able to predict the behavior of `r` specified by a unit test of `r`, `d'` didn't understand the role of `r`.
 
 **Demonstration**
@@ -465,13 +466,14 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 > **Proposition**
 >
 > Let `r` a reference implemented by a given developer `d`. Let `d'` another developer which is reading `r`.
-> 
+>
 > `d'` understands the role of `r` if and only if he would be able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write.
 
 **Demonstration**
 
 * Assume that `d'` does not understand the role of `r`. Thus, it exists a behavior of `r` which should be predicted by `d`, but not by `d'`. Consequently, `d` should write a unit test `t` corresponding to this behavior, and `d'` would not be able to predict the same behavior as written in `t`.
 * Conversely, assume that `d'` is not able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write. That means that it exists a unit test `t` of `r` that `d` could write, which make predictions for a given stub which would the same as the predictions that `d'` would do. With the result of the proposition above, we can conclude that `d'` didn't understand the role of `r`.
+
 
 
 [-> Top](#code-snippets)

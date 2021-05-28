@@ -94,27 +94,7 @@ A developer really understands this function if he is able to understand its *ro
 
 **Demonstration**
 
-* The demonstration is trivial with the definition of a [bug of a reference](bugs.md#--bug-of-a-reference-bug-of-a-code-snippet).
-
-[comment]: <> (> **Definition**)
-
-[comment]: <> (>)
-
-[comment]: <> (> The ***cognitive complexity of an imported reference*** `r` located in a given snippet `s` is the time needed by a mean developer to predict the behavior of the system when this reference will be called by a given process `p`.)
-
-[comment]: <> (> )
-
-[comment]: <> (> The ***cognitive complexity of an exported reference*** `r` located in a given snippet `s` is the time needed by a mean developer which will import this reference to predict the behavior of the system when this reference will be called by a given process `p`.)
-
-[comment]: <> (> **Definition**)
-
-[comment]: <> (>)
-
-[comment]: <> (> The ***cognitive complexity of a reference*** `r` written by a developer `d` is the time needed by a mean developer `d'` to understand its role.)
-
-[comment]: <> (>)
-
-[comment]: <> (> The ***relative cognitive complexity of a reference*** `r` imported in a context-sensitive code snippet `s` is the time needed by a mean developer to predict its role on the context of `s`.)
+* The demonstration is trivial with the definition of a [bug of a reference](bugs.md#--bug-of-a-reference).
 
 **Remark**
 
@@ -131,11 +111,21 @@ The descriptions and the implementations are the only things persisting over tim
 ##### -> Understanding of code snippets
 > **Definition**
 >
-> A developer ***understands a code snippet*** `s` if he is able to predict if, for each reference `r` declared in `s`, `r` has a bug or not.
+> A developer ***understands a code snippet*** `s` if he understands each reference declared in `s`.
 
 **Remark**
 
-* In other words, a developer understands a code snippet `s` if, for each reference `r` declared in `s`, `r` has a bug or not, *i.e.* has a behavior in contradiction with its role.
+* In other words, a developer understands a code snippet `s` if, for each reference `r` declared in `s`, `r` has a behavior in contradiction with its role.
+
+
+> **Proposition**
+> 
+> A developer ***understands a code snippet*** `s` if and only if he is able to predict, for each reference `r` declared in `s`, if `r` has a bug or not.
+
+
+**Demonstration**
+
+* The demonstration is trivial with the definition of a [bug of a code snippet](bugs.md#--bug-of-a-code-snippet).
 
 [comment]: <> (> **Definition**)
 
