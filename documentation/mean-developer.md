@@ -204,8 +204,16 @@ At first, we should assume that the developer has the minimal programming skills
 > **Definition**
 >
 > Let `c` a competence, and `D` the set of all developers having an experience in `c` higher or equal to the minimal experience in `c`.
-> 
+>
 > The ***mean developer relative to the competence*** `c` is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
+
+
+##### -> Mean developer relative to a code snippet
+> **Definition**
+>
+> Let `s` a code snippet and `C` the set of competences needed to understand `s`. Let `D` the set of all developers having an experience in each element `c` of `C` higher or equal to the minimal experience in `c`.
+>
+> The ***mean developer relative to `s`*** is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
 
 [<- Top](#mean-developer)
 ## The understanding speed
