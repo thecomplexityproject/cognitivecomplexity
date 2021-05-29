@@ -5,7 +5,7 @@
 
 * [Feature, final product, task](#feature-final-product-task)
   * [Feature](#--feature)
-  * [Final product](#--final-product)
+  * [Product](#--product)
   * [Task](#--task)
 * [Prime contractor, stakeholders, specs and chain of responsibilities](#prime-contractor-stakeholders-specs-and-chain-of-responsibilities)
   * [Prime contractor](#--prime-contractor)
@@ -168,5 +168,29 @@ By nature, a system evolves over time as a result of the current processes runni
 
 * *system* and *hardware* are in the *world of measurability*, *i.e.* are referring to objects located in the real world.
 * *software*, *data*, *process*, *state of the system*, *behavior of a system* are in the *world of the computability*, *i.e.* are referring to theoretical objects.
+
+## Stacks
+
+##### -> Software component
+> **Definition**
+>
+> A ***software component*** is a part of a software intended to be embedded in other softwares.
+
+##### -> Framework
+> **Definition**
+>
+> A ***framework*** is a set of software components developed in the aim to provide generic functionalities which may be used by the developers to create some software.
+
+##### -> Stack
+> **Definition**
+>
+> A ***stack*** is a set of frameworks and programming languages.
+
+##### -> Stack of a code snippet
+> **Definition**
+>
+> A ***stack of a code snippet*** `s` is the stack necessary to the correct operation of `s`.
+
+
 
 ***Work in progress...***

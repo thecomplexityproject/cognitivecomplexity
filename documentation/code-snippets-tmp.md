@@ -258,6 +258,11 @@ Its *implementation* is:
 	return article.price;
 ```
 
+##### -> Reference of a code snippet
+> **Definition**
+>
+> A ***reference of a code snippet*** `s` is a reference declared in `s`.
+
 ##### -> Exported and imported references
 > **Definition**
 >
