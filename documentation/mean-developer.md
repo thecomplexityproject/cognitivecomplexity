@@ -36,11 +36,15 @@ The definition of the [cognitive complexity](cognitive-complexity.md) uses the t
 >
 > A ***competence*** is a set of knowledge which may be mastered by a human being.
 
-**Examples**
+##### -> Competence in programming
+> **Definition**
+>
+> The ***competence in programming*** is the competence relative to the ability to write machine-readable instructions.
+
+**Other examples of competences**
 
 * A foreign language
 * Algorithmic
-* The computer programming (generally speaking)
 * The computer programming (in a specific language)
 * A framework
 * Design patterns
@@ -162,7 +166,8 @@ For any code snippet `s`, the set of minimal skills must include the skills rela
 > **Definition**
 >
 > The ***minimal experience*** in a competence `c` is an arbitrary couple of numbers `(t, p)` which represents the recent experience that a human being must have to master the minimal skills related to `c`.
-
+>
+> We say that a developer ***has a minimal experience*** in a competence `c` if his recent experience in `c` is equal or higher than the minimal competence in `c`.
 
 **Remarks**
 
@@ -175,6 +180,13 @@ We could say that the minimal experience in the competence "JavaScript" is :
   - 1 month of programming in JavaScript during the last 6 months 
     
 With this definition of the *minimal experience in JavaScript*, we can be sure that a developer having this minimal experience will not need days or weeks to understand a JavaScript code snippet of medium difficulty. This threshold will help us to make average calculations avoiding extreme cases which could distort the result.
+
+
+##### -> Minimal experience relative to a stack
+> **Definition**
+>
+> The ***minimal experience relative to a stack*** is the set of the minimal experiences in the competences relatives to the programming languages and frameworks of this stack.
+
 
 [<- Top](#mean-developer)
 ## The mean developer
@@ -191,7 +203,7 @@ At first, we should assume that the developer has the minimal programming skills
 ##### -> Mean developer
 > **Definition**
 >
-> Let `D` the set of all developers having an experience in computer programming which is higher than the minimal experience of computer programming. 
+> Let `D` the set of all developers having a minimal experience in computer programming. 
 > 
 > The ***mean developer*** is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
 
@@ -203,7 +215,7 @@ At first, we should assume that the developer has the minimal programming skills
 ##### -> Mean developer relative to a competence
 > **Definition**
 >
-> Let `c` a competence, and `D` the set of all developers having an experience in `c` higher or equal to the minimal experience in `c`.
+> Let `c` a competence, and `D` the set of all developers having a minimal experience in `c`.
 >
 > The ***mean developer relative to the competence*** `c` is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
 
@@ -211,7 +223,7 @@ At first, we should assume that the developer has the minimal programming skills
 ##### -> Mean developer relative to a code snippet
 > **Definition**
 >
-> Let `s` a code snippet and `C` the set of competences needed to understand `s`. Let `D` the set of all developers having an experience in each element `c` of `C` higher or equal to the minimal experience in `c`.
+> Let `s` a code snippet and let `D` the set of all developers having a minimal experience relative to the stack of `s`.
 >
 > The ***mean developer relative to `s`*** is a theoretical developer `(h, E)` whose set of experiences `E` is calculated by taking the average of the experiences of the elements of `D`.
 
