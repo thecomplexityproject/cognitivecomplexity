@@ -76,12 +76,12 @@ A grammar does not describe the meaning of the strings or what can be done with 
 ##### -> Syntax
 > **Definition**
 >
-> The ***syntax*** of a computer language is the set of rules of a formal grammar which defines the combinations of symbols that are considered to be correctly structured statements or expressions.
+> A ***syntax*** is a set of rules of a formal grammar which defines the combinations of strings that are considered to be correctly structured statements or expressions.
 
 ##### -> Formal language
 > **Definition**
 >
-> A ***formal language*** describes how to form strings from a given alphabet that are valid according to the language's syntax. 
+> A ***formal language*** is a couple `(A, S)` where `A` is an alphabet and `S` a syntax relative to the strings formed with the elements of the alphabet `A`. 
 
 **Remark**
 
@@ -90,7 +90,7 @@ There is a usual debate about the belonging of the markup languages -like HTML- 
 ##### -> Programming language
 > **Definition**
 >
-> A ***programming language*** is a formal language comprising a set of instructions that produce various kinds of output.
+> A ***programming language*** is a formal language comprising a set of machine-readable instructions that produce various kinds of output.
 
 
 [-> Top](#code-snippets)
@@ -301,7 +301,7 @@ Assuming that each file may be called by some other part of the program, a [modu
 ##### -> Stub
 > **Definition**
 >
-> A ***stub*** of a reference `r` is a code snippet which is written in the aim to simulate the behavior of `r` during the execution of a given process using `r` with some initial state of the system.
+> A ***stub*** of a declared reference `r` is a code snippet which is written in the aim to simulate the behavior of `r` during the execution of a given process using `r` with some initial state of the system.
 
 ##### -> Deterministic stub
 > **Definition**

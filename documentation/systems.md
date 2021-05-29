@@ -24,18 +24,18 @@
   * [Behavior of the system](#--behavior-of-the-system)
 
 [<- Top](#systems-and-stakeholders)
-## Feature, final product, task
+## Feature, product, task
 
 
 ##### -> Feature
 > **Definition**
 >
-> A ***feature*** is a set of functionalities imagined by a natural person to provide to the users.
+> A ***feature*** is a set of functionalities.
 
-##### -> Final product
+##### -> Product
 > **Definition**
 >
-> The ***final product*** is the set of all the features to provide to the users.
+> A ***product*** is a set of features accessible to a human being or to a machine. This human being or machine is called a ***user***.
 
 ##### -> Task
 > **Definition**
@@ -93,10 +93,10 @@
 > 
 > The elements of `S` are called the ***links*** of the chain.
 
-##### -> Job, product
+##### -> Job
 > **Definition**
 > 
-> The ***job of a stakeholder*** is to provide a ***product*** respecting the specs transmitted to him by his superior.
+> The ***job of a stakeholder*** is to provide something respecting the specs transmitted to him by his superior.
 
 **Remark**
 
@@ -118,10 +118,6 @@ A stakeholder has two responsibilities:
 >
 > A ***file*** is a document containing machine-readable instructions, recorded in some part of a hardware.
 
-**Remark**
-
-Of course, in the real world, a file can't be defined with only these 4 elements, but for our purpose, we only need them.
-
 ##### -> Module
 > **Definition**
 >
@@ -130,12 +126,12 @@ Of course, in the real world, a file can't be defined with only these 4 elements
 ##### -> Software
 > **Definition**
 >
-> A ***software*** is a set of files that direct the circuitry within the hardware parts of the system in the aim to provide some features to the users.
+> A ***software*** is a set of files that direct the circuitry within the hardware parts in the aim to provide some features to the users.
 
 ##### -> Program
 > **Definition**
 >
-> A ***program*** is the set of modules of a given software.
+> A ***program*** is the set of the modules of a given software.
 
 **Remark**
 
@@ -144,21 +140,19 @@ In terms of functionalities, we can also say that the aim of a software is to pr
 ##### -> System
 > **Definition**
 >
-> We call ***system*** the triplet (H, S, D) corresponding to a functional set, where H is a hardware, S is a software, and D some data.
->
-> The role of a system is to provide to the users the features corresponding to an expected final product.
+> We call ***system*** the triplet (H, S, P) where H is a hardware and S a software which should provide the features of a product P.
 
 ##### -> Data
 > **Definition**
 >
-> ***data*** are facts that are used by a system to produce useful information. They are generally stored in machine-readable form on disk until the computer needs them.
+> ***data*** are facts that are used by a system to produce useful information.
 
 By nature, a system evolves over time as a result of the current processes running on it, and because of the eventual inputs received from out of the system.
 
 ##### -> Process
 > **Definition**
 >
-> A ***process*** of a program `P` is a couple `(l, p)` where `l` is the instruction of `P` currently executed by a processor `p`.
+> A ***process*** of a program `P` is a couple `(i, p)` where `i` is the machine-readable instruction of `P` currently executed by a processor `p`.
 
 ##### -> State of the system
 > **Definition**
