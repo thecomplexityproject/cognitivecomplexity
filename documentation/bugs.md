@@ -9,7 +9,8 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 
 * [Definitions](#definitions)
   * [Bug of a task or feature](#--bug-of-a-task-or-feature)
-  * [Bug of a reference or code snippet](#--bug-of-a-reference-or-code-snippet)
+  * [Bug of a reference](#--bug-of-a-reference)
+  * [Bug of a code snippet](#--bug-of-a-code-snippet)
 * [Sources of bugs](#sources-of-bugs)
   * [Misunderstanding](#--misunderstanding)
   * [Wrong implementation](#--wrong-implementation)
@@ -25,9 +26,9 @@ Bugs may be caused by the program or by the system itself (hardware, connections
 ##### -> Bug of a task or feature
 > **Definition**
 >
-> A [feature](systems.md#--feature) or a [task](systems.md#--task) ***has a bug*** when the [behavior of the system](systems.md) does not respect its [specs](systems.md#prime-contractor-stakeholders-specs-and-chain-of-responsibilities). 
+> A feature or a task ***has a bug*** when the behavior of the system does not respect its specs. 
 > 
-> A ***bug*** of a feature (or task) is a [state of the system](systems.md) which is in contradiction with the state expected by the specs after the execution of a given process from some initial state.
+> A ***bug*** of a feature (or task) is a state of the system which is in contradiction with the state expected by the specs after the execution of a given process from some initial state.
 
 **Remark**
 
