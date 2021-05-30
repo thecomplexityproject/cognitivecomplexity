@@ -30,17 +30,18 @@ In this project, we will specify our own definitions of simple or complex notion
   * [Exported and imported references](#--exported-and-imported-references)
   * [Exposed and hidden references](#--exposed-and-hidden-references)
   * [Behavior of a reference](#--behavior-of-a-reference)
+* [Roles and descriptions](#roles-and-descriptions)
+  * [Role of references](#--role-of-references)
+  * [Quality level of descriptions](#--quality-level-of-descriptions)
+* [Unit tests](#unit-tests)
   * [Stub](#--stub)
   * [Mock](#--mock)
   * [Deterministic stub](#--deterministic-stub)
   * [Deterministic reference](#--deterministic-reference)
-* [Roles and descriptions](#roles-and-descriptions)
-  * [Role of references](#--role-of-references)
-  * [Quality level of descriptions](#--quality-level-of-descriptions)
+  * [Unit test](#--unit-test)
 * [Related definitions](#related-definitions)
   * [Separator](#--separator)
   * [Line of code](#--line-of-code)
-  * [Unit test](#--unit-test)
 * [Operations on code snippets](#operations-on-code-snippets)
   * [Addition](#--addition)
   * [Propositions and conjectures](#propositions-and-conjectures)
@@ -303,44 +304,6 @@ Assuming that each file may be called by some other part of the program, a [modu
 * If `r` is a function or a method, its behavior is defined by the variations of the state of the system when `r` is called, including its side effects.
 * If `r` is a class, an interface, an enum or a type, its behavior is defined by the behavior of all the variables which are instantiated with the help of `r`.
 
-##### -> Stub
-> **Definition**
->
-> A ***stub*** of a declared reference `r` is a code snippet which is written in the aim to simulate the behavior of `r` during the execution of a given process using `r` with some initial state of the system.
-
-##### -> Deterministic stub
-> **Definition**
->
-> A stub `s` is ***deterministic*** if it is possible to predict the exact values of the data defining the state of the system after the execution of `s`.
-
-**Remarks**
-
-* In the definition above, the process executing the stub `s` is supposed to have a limited duration.
-* Stubs are frequently confused with the *mocks*, which are defined below:
-
-##### -> Mock
-> **Definition**
->
-> A ***mock*** is an object written in the aim to simulate the behavior of a given reference during the execution of a given stub.
-
-**Remark**
-
-* A mock is an *object*, which may have a value. A stub is a *code snippet*, which may use mocks.
-
-##### -> Deterministic reference
-> **Definition**
->
-> A reference `r` is ***deterministic*** if each stub `s` of `r`is deterministic.
-
-> **Proposition**
-> 
-> For each reference `r`, it exists a deterministic stub of `r`.
-
-**Demonstration**
-
-* If `r` is deterministic, the result is trivial.
-* If `r` is non-deterministic, it exists a non-deterministic stub `s` of `r`. Let `N` the set of non-deterministic external references of `s`. Each element of `N` may be replaced by a mock value, which is, by definition, deterministic. Let `s'` the sub obtained by a refactor of `s` consisting in replacing all the non-deterministic references of `s` by mocked values. `s'` is a deterministic stub of `r`.
-
 [-> Top](#code-snippets)
 ## Roles and descriptions
 
@@ -400,6 +363,88 @@ The wrongdoer is `d'`, because he introduced the new bug: he should have done a 
 > * ***low*** if a mean developer is able to understand the role of `r` with the name of `r`, its signature, its comments and its implementation
 
 
+[<- Top](#code-snippets)
+## Unit tests
+
+##### -> Stub
+> **Definition**
+>
+> A ***stub*** of a declared reference `r` is a code snippet which is written in the aim to simulate the behavior of `r` during the execution of a given process using `r` with some initial state of the system.
+
+##### -> Deterministic stub
+> **Definition**
+>
+> A stub `s` is ***deterministic*** if it is possible to predict the exact values of the data defining the state of the system after the execution of `s`.
+
+**Remarks**
+
+* In the definition above, the process executing the stub `s` is supposed to have a limited duration.
+* Stubs are frequently confused with the *mocks*, which are defined below:
+
+##### -> Mock
+> **Definition**
+>
+> A ***mock*** is an object written in the aim to simulate the behavior of a given reference during the execution of a given stub.
+
+**Remark**
+
+* A mock is an *object*, which may have a value. A stub is a *code snippet*, which may use mocks.
+
+##### -> Deterministic reference
+> **Definition**
+>
+> A reference `r` is ***deterministic*** if each stub `s` of `r`is deterministic.
+
+> **Proposition**
+>
+> For each reference `r`, it exists a deterministic stub of `r`.
+
+**Demonstration**
+
+* If `r` is deterministic, the result is trivial.
+* If `r` is non-deterministic, it exists a non-deterministic stub `s` of `r`. Let `N` the set of non-deterministic external references of `s`. Each element of `N` may be replaced by a mock value, which is, by definition, deterministic. Let `s'` the sub obtained by a refactor of `s` consisting in replacing all the non-deterministic references of `s` by mocked values. `s'` is a deterministic stub of `r`.
+
+##### -> Unit test
+> **Definition**
+>
+> A ***unit test*** of a reference `r` is a code snippet written by the author of `r` in the aim to check if the behavior of `r` corresponds to its role when `r` is called by a given stub.
+> 
+> In other words, a unit test of a reference `r` is a code snippet written by the author of `r` in the aim to check if `r` has a bug.
+
+**Remarks**
+
+* A unit test checks if `r` have the behavior expected by its author, for the initial values which are simulated by some mocks.
+* Thereafter, we will suppose that if the author of `r` wrote some unit tests, he verified if the behavior of `r` checked by the unit tests really corresponds to the role he gave to `r`.
+
+> **Proposition**
+>
+> Let `r` a reference implemented by an author `a`. Let `t` a unit test relative to `r`, written by `a`. Let `d` a developer which is reading `r`.
+>
+> If `d` is not able to predict the behavior of `r` specified by `t`, `d` didn't understand the role of `r`.
+
+**Demonstration**
+
+* Assume that `d'` is not able to predict the behavior of `r` specified by `t`. That means that it exists a unit test `t`implemented with a stub which cause a behavior of `r` which is different from the behavior expected by `d'`. As we supposed that the developer `d` verified if the behavior of `r` checked by `t` is corresponding to the role he gave to `r`, we are sure that `d` made a prediction different from the prediction of `d'`. Consequently, by definition, `d'` didn't understand the role of `r`.
+
+**Example**
+
+// TODO
+
+**Remark**
+
+* The assertion *"a developer `d'` understands the role of a reference `r` if he is able to predict the behavior or `r` for each unit test written by the author of `r`"* is not true. `d'` may understand the unit tests actually written by the author of `r`, but may not understand future unit tests written by the author of `r`. If `d'` is able to predict the same behavior as written in a set of unit tests, he is only able to *partially* understand the role of `r`.
+
+> **Proposition**
+>
+> Let `r` a reference implemented by a given developer `d`. Let `d'` another developer which is reading `r`.
+>
+> `d'` understands the role of `r` if and only if he would be able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write.
+
+**Demonstration**
+
+* Assume that `d'` does not understand the role of `r`. Thus, it exists a behavior of `r` which should be predicted by `d`, but not by `d'`. Consequently, `d` should write a unit test `t` corresponding to this behavior, and `d'` would not be able to predict the same behavior as written in `t`.
+* Conversely, assume that `d'` is not able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write. That means that it exists a unit test `t` of `r` that `d` could write, which make predictions for a given stub which would the same as the predictions that `d'` would do. With the result of the proposition above, we can conclude that `d'` didn't understand the role of `r`.
+
 [-> Top](#code-snippets)
 ## Related definitions
 
@@ -439,45 +484,6 @@ Assuming that every computer language integrates the concept of "line break", we
 > The subset of a code snippet defined by the ordered characters between two consecutive line breaks is called a ***line of code***. If the code snippet has no line break, it has only one line of code which is the code snippet itself.
 
 By definition, each line of code of a valid code snippet is a validatable code snippet.
-
-##### -> Unit test
-> **Definition**
->
-> A ***unit test*** of a reference `r` is a code snippet written by the author of `r` in the aim to check if the behavior of `r` corresponds to its role when `r` is called by a given stub.
-
-**Remarks**
-
-* A unit test checks if `r` have the behavior expected by its author, for the initial values which are simulated by some mocks.
-* Thereafter, we will suppose that if the author of `r` wrote some unit tests, he verified if the behavior of `r` checked by the unit tests really corresponds to the role he gave to `r`.
-
-> **Proposition**
->
-> Let `r` a reference implemented by a given developer `d`. Let `t` a unit test relative to `r`, written by `d`. Let `d'` another developer which is reading `r`.
->
-> If `d'` is not able to predict the behavior of `r` specified by a unit test of `r`, `d'` didn't understand the role of `r`.
-
-**Demonstration**
-
-* Assume that `d'` is not able to predict the behavior of `r` specified by `t`. That means that it exists a unit test `t`implemented with a stub which cause a behavior of `r` which is different from the behavior expected by `d'`. As we supposed that the developer `d` verified if the behavior of `r` checked by `t` is corresponding to the role he gave to `r`, we are sure that `d` made a prediction different from the prediction of `d'`. Consequently, by definition, `d'` didn't understand the role of `r`.
-
-**Example**
-
-// TODO
-
-**Remark**
-
-* The assertion *"a developer `d'` understands the role of a reference `r` if he is able to predict the behavior or `r` for each unit test written by the author of `r`"* is not true. `d'` may understand the unit tests actually written by the author of `r`, but may not understand future unit tests written by the author of `r`. If `d'` is able to predict the same behavior as written in a set of unit tests, he is only able to *partially* understand the role of `r`.
-
-> **Proposition**
->
-> Let `r` a reference implemented by a given developer `d`. Let `d'` another developer which is reading `r`.
->
-> `d'` understands the role of `r` if and only if he would be able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write.
-
-**Demonstration**
-
-* Assume that `d'` does not understand the role of `r`. Thus, it exists a behavior of `r` which should be predicted by `d`, but not by `d'`. Consequently, `d` should write a unit test `t` corresponding to this behavior, and `d'` would not be able to predict the same behavior as written in `t`.
-* Conversely, assume that `d'` is not able to predict the behavior of `r` specified by all the unit tests of `r` that `d` could write. That means that it exists a unit test `t` of `r` that `d` could write, which make predictions for a given stub which would the same as the predictions that `d'` would do. With the result of the proposition above, we can conclude that `d'` didn't understand the role of `r`.
 
 
 
