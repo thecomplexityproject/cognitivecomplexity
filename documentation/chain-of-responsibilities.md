@@ -67,7 +67,6 @@
 >
 > A ***flow chart*** is a set of chain of responsibilities having the same top of the chain.
 
-
 ##### -> Role of a functionality
 > **Definition**
 >
