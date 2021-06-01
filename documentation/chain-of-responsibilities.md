@@ -62,6 +62,7 @@
 >
 > The elements of `S` are called the ***links*** of the chain.
 
+
 ##### -> Flow chart
 > **Definition**
 >
