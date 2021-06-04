@@ -82,6 +82,7 @@
 > 
 > A ***task*** is an order given by `s` to one of his subordinates in the aim to provide a behavior of the system corresponding to the role of `f`.
 
+
 ##### -> Specs
 > **Definition**
 >
