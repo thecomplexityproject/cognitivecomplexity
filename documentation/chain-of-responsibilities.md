@@ -90,7 +90,6 @@
 > 
 > The ***specs*** of `f` are the oral and written instructions specified by `s` to `s'` in the aim to perform this task.
 
-
 ##### -> Job
 > **Definition**
 > 
