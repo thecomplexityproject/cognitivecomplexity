@@ -75,6 +75,7 @@
 > 
 > The ***role of the functionality `f`*** is the behavior of the system expected by `s` which corresponds to this functionality .
 
+
 ##### -> Task
 > **Definition**
 >
