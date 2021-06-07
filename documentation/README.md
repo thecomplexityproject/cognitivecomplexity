@@ -4,6 +4,7 @@
 
 This documentation is organized by thematics :
 
+
 * The definition of Cognitive Complexity
 * The set of code snippets
 * The notion of *understanding*
