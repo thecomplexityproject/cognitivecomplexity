@@ -32,7 +32,7 @@
 > Let `S` a set of entities having some attribute `a`.
 > A ***metric*** is a measurement function which associates to each element of `S` the measure relative to `a`.
 
-gSCap1911710
+
 [-> Top](#cognitive-complexity)
 ## Definitions
 
