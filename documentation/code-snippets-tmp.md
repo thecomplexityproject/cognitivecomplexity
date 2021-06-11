@@ -74,6 +74,7 @@ In fact, the reality is simple: when a developer opens a file, we only know he t
 
 A grammar does not describe the meaning of the strings or what can be done with them in whatever context—only their form.
 
+
 ##### -> Syntax
 > **Definition**
 >
