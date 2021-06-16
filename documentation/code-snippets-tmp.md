@@ -65,7 +65,6 @@ In fact, the reality is simple: when a developer opens a file, we only know he t
 >
 > A ***string*** is a finite set of ordered individual elements of a given alphabet.
 
-
 ##### -> Formal grammar
 > **Definition**
 >
